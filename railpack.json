@@ -4,7 +4,25 @@
     "php": "8.4"
   },
   "buildAptPackages": [
+    "autoconf",
     "bison",
+    "build-essential",
+    "libargon2-dev",
+    "libcurl4-openssl-dev",
+    "libfreetype6-dev",
+    "libicu-dev",
+    "libjpeg-dev",
+    "libonig-dev",
+    "libpng-dev",
+    "libreadline-dev",
+    "libsodium-dev",
+    "libsqlite3-dev",
+    "libssl-dev",
+    "libwebp-dev",
+    "libxml2-dev",
+    "libzip-dev",
+    "pkg-config",
+    "zlib1g-dev",
     "re2c"
   ]
 }
