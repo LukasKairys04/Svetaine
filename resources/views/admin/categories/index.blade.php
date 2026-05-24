@@ -16,6 +16,31 @@
 
     </div>
 
+    <form method="GET" class="card p-3 mb-3 shadow-sm">
+        <div class="row g-2">
+            <div class="col-lg-4 col-md-6"><input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Ieškoti kategorijos..."></div>
+            <div class="col-lg-3 col-md-6">
+                <select name="type" class="form-select">
+                    <option value="">Visi tipai</option>
+                    <option value="product" @selected(request('type') === 'product')>Prekės</option>
+                    <option value="nutrition" @selected(request('type') === 'nutrition')>Mityba</option>
+                    <option value="sport" @selected(request('type') === 'sport')>Sportas</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <select name="status" class="form-select">
+                    <option value="">Visos būsenos</option>
+                    <option value="active" @selected(request('status') === 'active')>Aktyvios</option>
+                    <option value="inactive" @selected(request('status') === 'inactive')>Neaktyvios</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-6 d-flex gap-2">
+                <button class="btn btn-primary flex-fill">Filtruoti</button>
+                <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-secondary">Valyti</a>
+            </div>
+        </div>
+    </form>
+
 
 
     <div class="card shadow-sm">
@@ -73,6 +98,8 @@
         </div>
 
     </div>
+
+    <div class="mt-3">{{ $categories->links() }}</div>
 
 @endsection
 

@@ -8,14 +8,38 @@
 
     <form method="GET" class="card p-3 mb-3 shadow-sm">
         <div class="row g-2">
-            <div class="col-md-5"><input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Paieška pagal pavadinimą / brand"></div>
-            <div class="col-md-4">
+            <div class="col-lg-3 col-md-6"><input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Ieškoti pagal pavadinimą, brand, slug..."></div>
+            <div class="col-lg-2 col-md-6">
                 <select name="category_id" class="form-select">
                     <option value="">Visos kategorijos</option>
                     @foreach($categories as $c)<option value="{{ $c->id }}" @selected(request('category_id') == $c->id)>{{ $c->name }}</option>@endforeach
                 </select>
             </div>
-            <div class="col-md-3"><button class="btn btn-primary w-100">Filtruoti</button></div>
+            <div class="col-lg-2 col-md-4">
+                <select name="status" class="form-select">
+                    <option value="">Visos būsenos</option>
+                    <option value="active" @selected(request('status') === 'active')>Aktyvūs</option>
+                    <option value="inactive" @selected(request('status') === 'inactive')>Neaktyvūs</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-4">
+                <select name="featured" class="form-select">
+                    <option value="">Visi produktai</option>
+                    <option value="1" @selected(request('featured') === '1')>Rekomenduojami</option>
+                    <option value="0" @selected(request('featured') === '0')>Nerekomenduojami</option>
+                </select>
+            </div>
+            <div class="col-lg-1 col-md-4">
+                <select name="stock" class="form-select">
+                    <option value="">Likutis</option>
+                    <option value="in" @selected(request('stock') === 'in')>Yra</option>
+                    <option value="out" @selected(request('stock') === 'out')>Nėra</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-12 d-flex gap-2">
+                <button class="btn btn-primary flex-fill">Filtruoti</button>
+                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Valyti</a>
+            </div>
         </div>
     </form>
 
@@ -26,7 +50,7 @@
                 <tbody>
                 @forelse($products as $p)
                     <tr>
-                        <td><img src="{{ $p->image }}" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td>
+                        <td>@if($p->image)<img src="{{ $p->image }}" style="width:50px;height:50px;object-fit:cover;border-radius:4px">@endif</td>
                         <td>
                             <strong>{{ $p->name }}</strong>
                             <div class="small text-muted">{{ $p->brand }}</div>

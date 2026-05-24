@@ -4,14 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Support\AdminImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::withCount('products')->orderBy('type')->orderBy('sort_order')->get();
+        $query = Category::withCount('products');
+
+        if ($q = $request->input('q')) {
+            $query->where(fn($w) => $w
+                ->where('name', 'like', "%{$q}%")
+                ->orWhere('slug', 'like', "%{$q}%")
+                ->orWhere('description', 'like', "%{$q}%"));
+        }
+        if ($request->filled('type')) $query->where('type', $request->input('type'));
+        if ($request->filled('status')) $query->where('is_active', $request->input('status') === 'active');
+
+        $categories = $query->orderBy('type')->orderBy('sort_order')->paginate(20)->withQueryString();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -55,12 +67,17 @@ class CategoryController extends Controller
             'type' => 'required|in:product,sport,nutrition',
             'description' => 'nullable|string|max:1000',
             'image' => 'nullable|string|max:500',
+            'image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
         $data['is_active'] = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
+        if ($request->hasFile('image_file')) {
+            $data['image'] = AdminImage::store($request->file('image_file'), 'categories', 900, 600);
+        }
+        unset($data['image_file']);
         return $data;
     }
 }

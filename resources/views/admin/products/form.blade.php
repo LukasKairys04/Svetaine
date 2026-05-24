@@ -18,7 +18,7 @@
 
 
 
-    <form method="POST" action="{{ $isNew ? route('admin.products.store') : route('admin.products.update', $product) }}">
+    <form method="POST" action="{{ $isNew ? route('admin.products.store') : route('admin.products.update', $product) }}" enctype="multipart/form-data">
 
         @csrf
 
@@ -62,13 +62,7 @@
 
                             </div>
 
-                            <div class="col-md-6">
-
-                                <label class="form-label small">Slug (URL dalis)</label>
-
-                                <input type="text" name="slug" value="{{ old('slug', $product->slug) }}" class="form-control" placeholder="automatinis pagal pavadinimą">
-
-                            </div>
+                            <input type="hidden" name="slug" value="{{ old('slug', $product->slug) }}">
 
                             <div class="col-md-6">
 
@@ -95,11 +89,14 @@
                             </div>
 
                             <div class="col-12">
-
-                                <label class="form-label small">Paveikslėlio URL</label>
-
-                                <input type="text" name="image" value="{{ old('image', $product->image) }}" class="form-control" placeholder="https://...">
-
+                                <label class="form-label small">Produkto nuotrauka</label>
+                                @if($product->image)
+                                    <div class="mb-2"><img src="{{ $product->image }}" alt="{{ $product->name }}" style="width:120px;height:120px;object-fit:cover;border-radius:10px"></div>
+                                @endif
+                                <input type="hidden" name="image" value="{{ old('image', $product->image) }}">
+                                <input type="file" name="image_file" accept="image/*" class="form-control @error('image_file') is-invalid @enderror">
+                                <div class="form-text">Rekomenduojama kvadratinė nuotrauka. Sistema automatiškai suspaus į WebP 800×800.</div>
+                                @error('image_file')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
 
                         </div>

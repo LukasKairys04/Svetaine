@@ -8,13 +8,13 @@
         <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Atgal</a>
     </div>
 
-    <form method="POST" action="{{ $isNew ? route('admin.categories.store') : route('admin.categories.update', $category) }}" class="admin-form-shell admin-form-card">
+    <form method="POST" action="{{ $isNew ? route('admin.categories.store') : route('admin.categories.update', $category) }}" class="admin-form-shell admin-form-card" enctype="multipart/form-data">
         @csrf @unless($isNew) @method('PUT') @endunless
         <div class="card-body">
             <div class="row g-3">
-                <div class="col-md-6"><label class="form-label small">Pavadinimas *</label><input type="text" name="name" value="{{ old('name', $category->name) }}" class="form-control @error('name') is-invalid @enderror" required>@error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
-                <div class="col-md-4"><label class="form-label small">Slug</label><input type="text" name="slug" value="{{ old('slug', $category->slug) }}" class="form-control"></div>
-                <div class="col-md-2"><label class="form-label small">Tipas *</label>
+                <div class="col-md-7"><label class="form-label small">Pavadinimas *</label><input type="text" name="name" value="{{ old('name', $category->name) }}" class="form-control @error('name') is-invalid @enderror" required>@error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+                <input type="hidden" name="slug" value="{{ old('slug', $category->slug) }}">
+                <div class="col-md-5"><label class="form-label small">Tipas *</label>
                     <select name="type" class="form-select">
                         @foreach(['product' => 'Prekės', 'nutrition' => 'Mityba', 'sport' => 'Sportas'] as $k => $v)
                             <option value="{{ $k }}" @selected(old('type', $category->type) === $k)>{{ $v }}</option>
@@ -22,7 +22,16 @@
                     </select>
                 </div>
                 <div class="col-12"><label class="form-label small">Aprašymas</label><textarea name="description" rows="2" class="form-control">{{ old('description', $category->description) }}</textarea></div>
-                <div class="col-md-6"><label class="form-label small">Paveikslėlio URL</label><input type="text" name="image" value="{{ old('image', $category->image) }}" class="form-control"></div>
+                <div class="col-md-6">
+                    <label class="form-label small">Kategorijos nuotrauka</label>
+                    @if($category->image)
+                        <div class="mb-2"><img src="{{ $category->image }}" alt="{{ $category->name }}" style="width:150px;height:100px;object-fit:cover;border-radius:10px"></div>
+                    @endif
+                    <input type="hidden" name="image" value="{{ old('image', $category->image) }}">
+                    <input type="file" name="image_file" accept="image/*" class="form-control @error('image_file') is-invalid @enderror">
+                    <div class="form-text">Sistema automatiškai suspaus į WebP 900×600.</div>
+                    @error('image_file')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
                 <div class="col-md-3"><label class="form-label small">Tvarka</label><input type="number" name="sort_order" value="{{ old('sort_order', $category->sort_order ?? 0) }}" class="form-control"></div>
                 <div class="col-md-3 d-flex align-items-end">
                     <div class="form-check form-switch"><input type="checkbox" name="is_active" value="1" class="form-check-input" id="is_active" @checked(old('is_active', $category->is_active ?? true))><label class="form-check-label" for="is_active">Aktyvi</label></div>

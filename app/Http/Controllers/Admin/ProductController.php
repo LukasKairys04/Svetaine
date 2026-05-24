@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Support\AdminImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -14,9 +15,20 @@ class ProductController extends Controller
     {
         $query = Product::with('category');
         if ($q = $request->input('q')) {
-            $query->where(fn($w) => $w->where('name', 'like', "%{$q}%")->orWhere('brand', 'like', "%{$q}%"));
+            $query->where(fn($w) => $w
+                ->where('name', 'like', "%{$q}%")
+                ->orWhere('brand', 'like', "%{$q}%")
+                ->orWhere('slug', 'like', "%{$q}%")
+                ->orWhere('short_description', 'like', "%{$q}%"));
         }
         if ($cat = $request->input('category_id')) $query->where('category_id', $cat);
+        if ($request->filled('status')) $query->where('is_active', $request->input('status') === 'active');
+        if ($request->filled('featured')) $query->where('featured', $request->input('featured') === '1');
+        if ($request->filled('stock')) {
+            $request->input('stock') === 'in'
+                ? $query->where('stock', '>', 0)
+                : $query->where('stock', '<=', 0);
+        }
         $products = $query->latest()->paginate(20)->withQueryString();
         $categories = Category::orderBy('name')->get();
         return view('admin.products.index', compact('products', 'categories'));
@@ -72,6 +84,7 @@ class ProductController extends Controller
             'sale_price' => 'nullable|numeric|min:0|lt:price',
             'stock' => 'required|integer|min:0',
             'image' => 'nullable|string|max:500',
+            'image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'rating' => 'nullable|numeric|min:0|max:5',
             'rating_count' => 'nullable|integer|min:0',
             'serving_size' => 'nullable|string|max:50',
@@ -88,8 +101,15 @@ class ProductController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
+        $data['rating'] = $data['rating'] ?? 0;
+        $data['rating_count'] = $data['rating_count'] ?? 0;
+        $data['stock'] = $data['stock'] ?? 0;
         $data['featured'] = $request->boolean('featured');
         $data['is_active'] = $request->boolean('is_active');
+        if ($request->hasFile('image_file')) {
+            $data['image'] = AdminImage::store($request->file('image_file'), 'products', 800, 800);
+        }
+        unset($data['image_file']);
         return $data;
     }
 }
