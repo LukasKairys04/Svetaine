@@ -6,7 +6,8 @@
 
 @section('content')
 
-<section class="container my-4 checkout-shell">
+<section class="checkout-stripe-page">
+<div class="container checkout-shell">
 
     <form method="POST" action="{{ route('checkout.place') }}" class="checkout-card-split">
 
@@ -16,13 +17,15 @@
 
         <aside class="checkout-aside">
 
-            <div class="eyebrow">Užsakymo suvestinė</div>
+            <a href="{{ route('cart.index') }}" class="checkout-back"><i class="bi bi-arrow-left"></i> Grįžti į krepšelį</a>
 
-            <h2>Užbaigti pirkimą</h2>
+            <div class="eyebrow">FitShop checkout</div>
+
+            <h2>Užbaigti apmokėjimą</h2>
 
             <div class="checkout-total">€{{ number_format($summary['total'], 2) }}</div>
 
-            <p>Užsakymas bus patvirtintas iškart po pateikimo. Mokėjimo integracija demonstracinė.</p>
+            <p>Saugus demonstracinis atsiskaitymas Stripe stiliaus lange su tavo FitShop spalvomis.</p>
 
 
 
@@ -32,7 +35,12 @@
 
                     <div class="item-row">
 
-                        <span>{{ $it->product->name }} × {{ $it->qty }}</span>
+                        <span>
+                            @if($it->product->image)
+                                <img src="{{ $it->product->image }}" alt="{{ $it->product->name }}">
+                            @endif
+                            <span>{{ $it->product->name }} <small>× {{ $it->qty }}</small></span>
+                        </span>
 
                         <strong>€{{ number_format($it->subtotal, 2) }}</strong>
 
@@ -66,13 +74,17 @@
 
         <div class="checkout-main">
 
-            <h1>Apmokėjimas</h1>
+            <div class="checkout-heading">
+                <span class="checkout-step">1 iš 2</span>
+                <h1>Apmokėjimas</h1>
+                <p>Įvesk kontaktinius duomenis ir pasirink mokėjimo būdą.</p>
+            </div>
 
 
 
             <div class="checkout-section">
 
-                <h5>Atsiskaitymo informacija</h5>
+                <h5><i class="bi bi-person-lines-fill"></i> Atsiskaitymo informacija</h5>
 
                 <div class="row g-3">
 
@@ -154,7 +166,7 @@
 
             <div class="checkout-section">
 
-                <h5>Mokėjimo būdas</h5>
+                <h5><i class="bi bi-credit-card"></i> Mokėjimo būdas</h5>
 
                 <div class="payment-options">
 
@@ -172,7 +184,7 @@
 
                 </div>
 
-                <div class="alert alert-info small m-0 mt-3">
+                <div class="alert checkout-demo small m-0 mt-3">
 
                     <i class="bi bi-info-circle"></i> Demonstracinis režimas — realus mokėjimas nevyksta, užsakymas bus pažymėtas kaip apmokėtas.
 
@@ -184,7 +196,7 @@
 
             <button type="submit" class="btn btn-primary w-100 btn-lg checkout-submit">
 
-                Patvirtinti užsakymą <i class="bi bi-arrow-right"></i>
+                Apmokėti €{{ number_format($summary['total'], 2) }} <i class="bi bi-lock-fill"></i>
 
             </button>
 
@@ -192,6 +204,7 @@
 
     </form>
 
+</div>
 </section>
 
 @endsection

@@ -3016,8 +3016,36 @@ body.large-text .medical-hero h1 {
 .shop-pagination > nav > div:first-child {
     display: none;
 }
+.shop-pagination nav,
+.shop-pagination > nav > div,
+.shop-pagination > nav > div:last-child {
+    width: 100%;
+}
+.shop-pagination > nav > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
 .shop-pagination .pagination {
     justify-content: center;
+    gap: .55rem;
+    margin: 0;
+}
+.shop-pagination .page-link {
+    min-width: 50px;
+    height: 50px;
+    padding: 0 .95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px !important;
+}
+.shop-pagination p {
+    margin: 0;
+    color: #6b7280;
+    white-space: nowrap;
 }
 
 .diet-card .cover {
@@ -3456,25 +3484,43 @@ body {
 }
 
 /* Checkout visual redesign */
+.checkout-stripe-page {
+    padding: 2.2rem 0 3rem;
+    background:
+        radial-gradient(900px 360px at 0% 0%, rgba(47, 172, 86, .12), transparent 60%),
+        linear-gradient(180deg, #f7fbf8 0%, #ffffff 42%, #f7fbf8 100%);
+}
 .checkout-shell {
     max-width: 1180px;
 }
 .checkout-card-split {
     display: grid;
-    grid-template-columns: 390px 1fr;
+    grid-template-columns: minmax(330px, 430px) 1fr;
     background: #fff;
-    border: 1px solid #dce6df;
-    border-radius: 16px;
+    border: 1px solid #dce8e0;
+    border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 14px 30px rgba(12, 35, 22, .08);
+    box-shadow: 0 26px 70px rgba(12, 35, 22, .12);
 }
 .checkout-aside {
-    padding: 2rem 1.6rem;
+    padding: 2rem;
     color: #fff;
     background:
-        radial-gradient(1200px 320px at -20% 100%, rgba(139, 230, 170, .36) 0%, rgba(139, 230, 170, 0) 60%),
-        radial-gradient(900px 280px at 100% 0%, rgba(255, 255, 255, .15) 0%, rgba(255, 255, 255, 0) 50%),
-        linear-gradient(165deg, #1c9d50 0%, #188a47 45%, #11723a 100%);
+        radial-gradient(900px 320px at -20% 100%, rgba(154, 236, 181, .34), transparent 62%),
+        radial-gradient(720px 260px at 110% -10%, rgba(255, 255, 255, .20), transparent 54%),
+        linear-gradient(155deg, #22a85a 0%, #178846 52%, #0e6535 100%);
+}
+.checkout-back {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: rgba(255, 255, 255, .88);
+    text-decoration: none;
+    font-size: .88rem;
+    margin-bottom: 1.35rem;
+}
+.checkout-back:hover {
+    color: #fff;
 }
 .checkout-aside .eyebrow {
     text-transform: uppercase;
@@ -3484,13 +3530,16 @@ body {
     opacity: .88;
 }
 .checkout-aside h2 {
-    font-size: 1.6rem;
-    margin: .25rem 0 .7rem;
+    font-size: 1.75rem;
+    margin: .3rem 0 .75rem;
+    letter-spacing: -.03em;
 }
 .checkout-total {
-    font-size: 2rem;
+    font-size: 2.45rem;
     font-weight: 700;
-    letter-spacing: -.02em;
+    letter-spacing: -.045em;
+    line-height: 1;
+    margin-bottom: .8rem;
 }
 .checkout-aside p {
     color: rgba(255, 255, 255, .88);
@@ -3498,18 +3547,36 @@ body {
     line-height: 1.55;
 }
 .checkout-items {
-    margin-top: 1.2rem;
-    padding: .9rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, .12);
+    margin-top: 1.4rem;
+    padding: .95rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .13);
     border: 1px solid rgba(255, 255, 255, .22);
+    backdrop-filter: blur(12px);
 }
 .checkout-items .item-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: .75rem;
     font-size: .85rem;
-    margin-bottom: .5rem;
+    margin-bottom: .75rem;
+}
+.checkout-items .item-row > span {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: .65rem;
+}
+.checkout-items .item-row img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .22);
+}
+.checkout-items .item-row small {
+    color: rgba(255, 255, 255, .72);
 }
 .checkout-items .item-row:last-child {
     margin-bottom: 0;
@@ -3534,24 +3601,49 @@ body {
 }
 
 .checkout-main {
-    padding: 1.9rem;
+    padding: 2.2rem;
     background: #fff;
 }
-.checkout-main h1 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+.checkout-heading {
+    margin-bottom: 1.2rem;
+}
+.checkout-step {
+    display: inline-flex;
+    align-items: center;
+    padding: .28rem .62rem;
+    border-radius: 999px;
+    background: #eef9f1;
+    color: #178846;
+    font-size: .75rem;
     font-weight: 700;
+    margin-bottom: .6rem;
+}
+.checkout-main h1 {
+    margin-bottom: .25rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -.035em;
+}
+.checkout-heading p {
+    margin: 0;
+    color: #69766d;
+    font-size: .93rem;
 }
 .checkout-section {
     border: 1px solid #e1e9e3;
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: 16px;
+    padding: 1.15rem;
     margin-bottom: 1rem;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(20, 55, 34, .04);
 }
 .checkout-section h5 {
     margin-bottom: .85rem;
-    font-size: .98rem;
+    font-size: 1rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: .45rem;
 }
 .checkout-main .form-label.small {
     color: #42524a;
@@ -3559,7 +3651,8 @@ body {
 }
 .checkout-main .form-control {
     border-color: #d3ddd6;
-    border-radius: 8px;
+    border-radius: 10px;
+    padding: .72rem .85rem;
 }
 .checkout-main .form-control:focus {
     border-color: #57b572;
@@ -3583,8 +3676,8 @@ body {
 .pay-option span {
     display: block;
     border: 1px solid #d4ded7;
-    border-radius: 9px;
-    padding: .58rem .7rem;
+    border-radius: 12px;
+    padding: .78rem .8rem;
     font-size: .87rem;
     text-align: center;
     font-weight: 600;
@@ -3610,10 +3703,12 @@ body {
 }
 
 .checkout-submit {
-    border-radius: 10px;
-    font-weight: 600;
+    border-radius: 12px;
+    font-weight: 700;
+    padding: .9rem 1rem;
     background: #1b944d;
     border-color: #1b944d;
+    box-shadow: 0 12px 24px rgba(27, 148, 77, .24);
 }
 .checkout-submit:hover,
 .checkout-submit:focus {
