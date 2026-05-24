@@ -9,6 +9,17 @@ class AdminImage
 {
     public static function store(UploadedFile $file, string $folder, int $width, int $height): string
     {
+        $directory = public_path('uploads/' . trim($folder, '/'));
+        if (! is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        if (! function_exists('imagecreatetruecolor') || ! function_exists('imagewebp')) {
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            return '/uploads/' . trim($folder, '/') . '/' . $filename;
+        }
+
         $source = self::createImage($file->getPathname(), (string) $file->getMimeType());
         $target = imagecreatetruecolor($width, $height);
 
@@ -33,11 +44,6 @@ class AdminImage
         }
 
         imagecopyresampled($target, $source, 0, 0, $srcX, $srcY, $width, $height, $cropWidth, $cropHeight);
-
-        $directory = public_path('uploads/' . trim($folder, '/'));
-        if (! is_dir($directory)) {
-            mkdir($directory, 0755, true);
-        }
 
         $filename = Str::uuid() . '.webp';
         $path = $directory . DIRECTORY_SEPARATOR . $filename;
