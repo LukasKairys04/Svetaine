@@ -1,0 +1,3636 @@
+/* ============================================================
+   Dizaino sistema — „Flawless" inspired, švarus minimalus look'as.
+   Balti / beveik balti fonai, rožinis akcentas, ploni šrifto
+   svoriai ir didelės tarpų zonos. Visos spalvos apibrėžtos čia,
+   kad visi senesni komponentai (jie naudoja `--fs-*`) automatiškai
+   atsinaujintų.
+   ============================================================ */
+:root {
+    /* Light Green Theme */
+    --fs-primary: #34a853;
+    --fs-primary-dark: #2d8f47;
+    --fs-primary-soft: #eaf7ee;
+    --fs-accent: #34a853;
+    --fs-accent-2: #b8e6c4;
+    --fs-medical-teal: #34a853;
+    --fs-medical-dark: #153823;
+
+    /* Neutralūs tonai — beveik juoda tekstui, švelnūs pilkumai fonams. */
+    --fs-dark: #111111;
+    --fs-ink: #1a1a1a;
+    --fs-muted: #8a8a8e;
+    --fs-subtle: #b8b8bd;
+
+    /* Fonai — balta pagrindinė, subtilus pilkas sekcijoms, pilkesnis produktams. */
+    --fs-bg: #ffffff;
+    --fs-bg-soft: #f7f7fa;
+    --fs-bg-alt: #f4f5f7;           /* produktų plytelės, kortelės */
+    --fs-tint: #f8f4f6;             /* labai subtilus rožinis tonas testimonial sekcijoms */
+    --fs-border: #ececee;
+
+    --fs-radius: 4px;
+    --fs-radius-lg: 8px;
+    --fs-radius-pill: 999px;
+
+    --fs-shadow-sm: 0 1px 2px rgba(0, 0, 0, .03);
+    --fs-shadow-md: 0 4px 14px rgba(0, 0, 0, .06);
+    --fs-shadow-lg: 0 20px 60px rgba(0, 0, 0, .12);
+
+    /* Tipografija — Inter pagrindinė, su plonesniu svoriu antraštėms. */
+    --fs-font-sans: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+    --fs-font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
+body {
+    font-family: var(--fs-font-sans);
+    color: var(--fs-ink);
+    background: var(--fs-bg);
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 1.6;
+}
+/* Bootstrap `bg-light` ant <body> būna — perrašom į balta. */
+body.bg-light { background: var(--fs-bg) !important; }
+
+/* Antraštės — ploni svoriai, dideli tarpai, minimal letter-spacing. */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--fs-dark);
+    letter-spacing: -0.01em;
+    font-weight: 400;
+}
+h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); line-height: 1.15; font-weight: 300; }
+h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; font-weight: 300; }
+h3 { font-size: clamp(1.35rem, 2vw, 1.75rem); line-height: 1.3; font-weight: 400; }
+h4 { font-size: 1.2rem; font-weight: 500; }
+h5, h6 { font-weight: 600; }
+
+a { color: var(--fs-dark); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--fs-primary); }
+
+.text-muted { color: var(--fs-muted) !important; }
+
+/* „Eyebrow" — smulkus uppercase tekstas virš antraščių. */
+.eyebrow, .section-label {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--fs-muted);
+    margin-bottom: 1rem;
+}
+
+/* Didelės centruotos sekcijos antraštės (kaip reference). */
+.section-title {
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin-bottom: .5rem;
+}
+.section-subtitle {
+    text-align: center;
+    color: var(--fs-muted);
+    font-size: .95rem;
+    max-width: 640px;
+    margin: 0 auto 3rem;
+}
+.section-heading { text-align: center; margin-bottom: 3rem; }
+.section-heading .section-title { margin-bottom: .75rem; }
+
+/* ============================================================
+   MYGTUKAI — minimalūs, kampuoti, su uppercase tekstu.
+   ============================================================ */
+.btn {
+    font-weight: 500;
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    border-radius: var(--fs-radius);
+    padding: .85rem 1.75rem;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+}
+.btn-sm { padding: .55rem 1.1rem; font-size: .7rem; }
+.btn-lg { padding: 1rem 2.2rem; font-size: .82rem; }
+
+.btn-primary {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+    color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus {
+    background: var(--fs-primary-dark);
+    border-color: var(--fs-primary-dark);
+    color: #fff;
+}
+
+.btn-outline-primary {
+    background: transparent;
+    border-color: var(--fs-primary);
+    color: var(--fs-primary);
+}
+.btn-outline-primary:hover {
+    background: var(--fs-primary);
+    color: #fff;
+}
+
+.btn-light, .btn-white {
+    background: #fff;
+    color: var(--fs-primary);
+    border-color: #fff;
+}
+.btn-light:hover, .btn-white:hover {
+    background: var(--fs-bg-alt);
+    color: var(--fs-primary-dark);
+}
+
+.btn-outline-light {
+    border-color: rgba(255,255,255,.7);
+    color: #fff;
+}
+.btn-outline-light:hover { background: #fff; color: var(--fs-dark); }
+
+.btn-success { background: var(--fs-primary); border-color: var(--fs-primary); }
+.btn-success:hover { background: var(--fs-primary-dark); border-color: var(--fs-primary-dark); }
+
+.btn-outline-secondary {
+    border-color: var(--fs-border);
+    color: var(--fs-muted);
+    background: transparent;
+}
+.btn-outline-secondary:hover {
+    border-color: var(--fs-dark);
+    color: var(--fs-dark);
+    background: transparent;
+}
+
+.btn-outline-danger { border-color: var(--fs-border); color: var(--fs-muted); }
+.btn-outline-danger:hover { background: #fee; color: #c00; border-color: #fcc; }
+
+/* ============================================================
+   NAVBAR — minimalus, baltas, su uppercase link'ais.
+   ============================================================ */
+.navbar {
+    border-bottom: 1px solid var(--fs-border);
+    box-shadow: none !important;
+    background: #fff !important;
+    padding: 1.1rem 0;
+}
+.navbar-brand {
+    font-family: var(--fs-font-sans);
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    color: var(--fs-dark);
+}
+.navbar-brand .brand-accent { color: var(--fs-primary); }
+.navbar .nav-link {
+    color: var(--fs-dark) !important;
+    text-transform: uppercase;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .18em;
+    padding: .5rem .9rem !important;
+    position: relative;
+}
+.navbar .nav-link:hover { color: var(--fs-primary) !important; }
+.navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: .9rem; right: .9rem; bottom: .2rem;
+    height: 1px;
+    background: var(--fs-primary);
+}
+.navbar .dropdown-toggle::after { margin-left: .35rem; border-top-color: currentColor; }
+.navbar .dropdown-menu {
+    border: 1px solid var(--fs-border);
+    border-radius: 12px;
+    box-shadow: var(--fs-shadow-md);
+    padding: .45rem;
+    font-size: .85rem;
+}
+.navbar .dropdown-item {
+    padding: .52rem .85rem;
+    border-radius: 8px;
+    color: var(--fs-dark);
+    font-size: .82rem;
+    font-weight: 500;
+}
+.navbar .dropdown-item:hover { background: var(--fs-bg-soft); color: var(--fs-primary); }
+.navbar .dropdown-item-text { padding: .55rem 1.1rem; font-size: .8rem; }
+
+/* „Ikonos" juosta dešinėje — person, cart. */
+.nav-icons { display: flex; align-items: center; gap: .4rem; }
+.nav-icon-btn {
+    width: 40px; height: 40px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    color: var(--fs-dark);
+    position: relative;
+    transition: background .15s, color .15s;
+    border: 0;
+    background: transparent;
+}
+.nav-icon-btn:hover { background: var(--fs-bg-soft); color: var(--fs-primary); }
+.nav-icon-btn i { font-size: 1.15rem; }
+.nav-icon-badge {
+    position: absolute;
+    top: 2px; right: 2px;
+    min-width: 18px; height: 18px;
+    background: var(--fs-primary);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4px;
+}
+
+/* Paieška navbar'e — pakeičiam į inline minimal. */
+.navbar form.d-flex .input-group { background: var(--fs-bg-soft); border-radius: var(--fs-radius-pill); overflow: hidden; }
+.navbar form.d-flex .form-control {
+    border: 0; background: transparent;
+    font-size: .85rem; padding-left: 1rem;
+}
+.navbar form.d-flex .form-control:focus { box-shadow: none; background: transparent; }
+.navbar form.d-flex .btn {
+    background: transparent; border: 0; color: var(--fs-muted);
+    padding: .5rem 1rem;
+}
+.navbar form.d-flex .btn:hover { color: var(--fs-primary); background: transparent; }
+
+/* ============================================================
+   HERO — didelis paveikslėlis su tamsiu gradient'u ir elegantiška antrašte.
+   Hero'ą darom pilnam pločiui (full-bleed), be container wrap'erio.
+   ============================================================ */
+.hero-wrap {
+    position: relative;
+    min-height: 560px;
+    color: #fff;
+    overflow: hidden;
+    /* Tamsus overlay ant fitness treniruotės nuotraukos. */
+    background:
+        linear-gradient(120deg, rgba(40,40,45,.7) 0%, rgba(60,60,70,.55) 50%, rgba(80,80,90,.35) 100%),
+        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+.hero-inner {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+}
+.hero-content { max-width: 640px; }
+.hero-content .eyebrow { color: rgba(255,255,255,.85); }
+.hero-content h1 {
+    color: #fff;
+    font-weight: 300;
+    font-size: clamp(2.25rem, 4.8vw, 3.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+}
+.hero-content .lead {
+    color: rgba(255,255,255,.88);
+    font-weight: 400;
+    font-size: 1rem;
+    max-width: 520px;
+    margin-bottom: 2rem;
+}
+.hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+/* Sena `.hero` klasė — paliekam tam atveju, jei kiti puslapiai ja naudojasi.
+   Dabar ji irgi atitinka naują aesthetic'ą. */
+.hero {
+    position: relative;
+    background: linear-gradient(135deg, #2b2b30 0%, #55555c 100%);
+    color: #fff;
+    border-radius: 0;
+    overflow: hidden;
+    padding: 4rem 2rem;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+}
+.hero::after { display: none; }
+.hero .eyebrow { color: rgba(255,255,255,.8); }
+.hero h1 { color: #fff; font-weight: 300; }
+.hero .lead { color: rgba(255,255,255,.85); font-weight: 400; }
+
+/* ============================================================
+   PRODUKTO KORTELĖ — pilka kvadratinė plytelė, minimalus tekstas po ja.
+   ============================================================ */
+.product-card {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    transition: none;
+    box-shadow: none;
+}
+.product-card:hover { transform: none; box-shadow: none; }
+.product-card .product-image {
+    display: block;
+    background: var(--fs-bg-alt);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    transition: background .2s;
+}
+.product-card .product-image img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 1.5rem;
+    transition: transform .4s ease;
+    mix-blend-mode: multiply;
+}
+.product-card:hover .product-image img { transform: scale(1.04); }
+.product-card .card-body, .product-card-body {
+    padding: 1rem .2rem;
+    background: transparent;
+}
+.product-card .category-label {
+    font-size: .7rem;
+    color: var(--fs-muted);
+    text-transform: capitalize;
+    margin-bottom: .2rem;
+    font-weight: 400;
+}
+.product-card .card-title, .product-card-title {
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--fs-dark);
+    margin: 0 0 .35rem;
+    line-height: 1.4;
+}
+.product-card .card-title a { color: inherit; }
+.product-card .card-title a:hover { color: var(--fs-primary); }
+.product-card .price-line {
+    font-size: .9rem;
+    color: var(--fs-dark);
+    font-weight: 500;
+}
+.product-card .price-old { text-decoration: line-through; color: var(--fs-subtle); font-weight: 400; margin-right: .4rem; font-size: .85rem; }
+.product-card .price-new { color: var(--fs-primary); font-weight: 500; }
+.product-card .rating { display: none; } /* paliekam švarų look'ą — reitingas detaliame puslapyje */
+
+/* Akcijos ženklas */
+.product-badge {
+    position: absolute;
+    top: .75rem; left: .75rem;
+    background: var(--fs-primary);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding: .35rem .6rem;
+    border-radius: var(--fs-radius);
+    z-index: 2;
+}
+
+/* „Add to cart" mini mygtukas viršuj — hover'yje (kaip reference). */
+.product-card .quick-add {
+    position: absolute;
+    top: .75rem; right: .75rem;
+    width: 36px; height: 36px;
+    background: #fff;
+    border: 0;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fs-dark);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .2s, transform .2s;
+    box-shadow: var(--fs-shadow-md);
+    z-index: 2;
+    cursor: pointer;
+}
+.product-card:hover .quick-add { opacity: 1; transform: translateY(0); }
+.product-card .quick-add:hover { background: var(--fs-primary); color: #fff; }
+.product-card .quick-add i { font-size: 1rem; }
+
+/* Old rating styling perrašyta detaliam puslapiui */
+.rating { color: var(--fs-primary); font-size: .85rem; }
+.price-old { text-decoration: line-through; color: var(--fs-subtle); font-size: .9em; }
+.price-new { color: var(--fs-primary); font-weight: 600; }
+
+/* Kategorijų kortelės (home) — tas pats kvadratinis stilius. */
+.category-card {
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+    transition: transform .3s ease;
+    background: var(--fs-bg-alt);
+}
+.category-card:hover { transform: none; }
+.category-card img { height: 280px; object-fit: cover; transition: transform .5s ease; width: 100%; }
+.category-card:hover img { transform: scale(1.03); }
+.category-card .card-img-overlay {
+    background: linear-gradient(transparent 40%, rgba(0,0,0,.55) 100%) !important;
+    padding: 1.5rem;
+}
+.category-card h4 { font-weight: 400; color: #fff; font-size: 1.35rem; }
+
+.filter-sidebar {
+    position: sticky;
+    top: 1rem;
+}
+
+.nutrition-facts { font-size: .95rem; }
+.nutrition-facts dt { font-weight: 600; }
+
+.plan-pros li::marker { color: var(--fs-primary); }
+.plan-cons li::marker { color: var(--fs-muted); }
+
+/* ============================================================
+   TESTIMONIALS SEKCIJA — subtilus rožinis fonas, centruotos citatos.
+   ============================================================ */
+.testimonials-section {
+    background: var(--fs-tint);
+    padding: 5rem 0;
+    margin: 0;
+}
+.testimonial-item {
+    text-align: center;
+    padding: 0 1rem;
+}
+.testimonial-stars {
+    color: var(--fs-primary);
+    font-size: .9rem;
+    letter-spacing: .15em;
+    margin-bottom: 1rem;
+}
+.testimonial-text {
+    color: var(--fs-dark);
+    font-size: .95rem;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 340px;
+    margin: 0 auto 1.5rem;
+}
+.testimonial-author {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--fs-dark);
+    font-weight: 500;
+    margin-top: .75rem;
+}
+.testimonial-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   FLOATING CART BUTTON — apatinis dešinysis rožinis burbulas.
+   ============================================================ */
+.floating-cart {
+    position: fixed;
+    right: 1.75rem;
+    bottom: 1.75rem;
+    width: 56px; height: 56px;
+    background: var(--fs-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(255, 51, 102, .35);
+    z-index: 1050;
+    transition: transform .2s, box-shadow .2s, background .2s;
+    text-decoration: none;
+}
+.floating-cart:hover {
+    background: var(--fs-primary-dark);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(255, 51, 102, .45);
+}
+.floating-cart i { font-size: 1.3rem; }
+.floating-cart .floating-cart-count {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: #22c55e;
+    color: #fff;
+    min-width: 22px; height: 22px;
+    border-radius: 50%;
+    font-size: .7rem;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 5px;
+    border: 2px solid #fff;
+}
+
+/* ============================================================
+   FOOTER — tamsus, bet mažiau dominuojantis.
+   ============================================================ */
+.footer-dark {
+    background: #1a1a1a;
+    color: #9a9a9f;
+    padding: 4rem 0 2rem !important;
+    margin-top: 6rem !important;
+    border-top: 0;
+}
+.footer-dark h4, .footer-dark h6 {
+    color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    font-size: .8rem;
+    margin-bottom: 1.25rem;
+}
+.footer-dark h4 {
+    font-size: 1.25rem;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+}
+.footer-dark ul li { margin-bottom: .5rem; }
+.footer-dark ul li a, .footer-dark p, .footer-dark .small {
+    font-size: .82rem;
+    color: #9a9a9f;
+}
+.footer-dark ul li a:hover { color: #fff; }
+.footer-dark hr { border-color: #2a2a2a !important; }
+
+/* ============================================================
+   FORMOS — switch į kampuotą minimal style.
+   ============================================================ */
+.form-control, .form-select {
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: .65rem .9rem;
+    font-size: .9rem;
+    color: var(--fs-dark);
+    background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--fs-primary);
+    box-shadow: 0 0 0 3px rgba(255, 51, 102, .12);
+}
+.form-label { font-size: .8rem; font-weight: 500; color: var(--fs-dark); margin-bottom: .4rem; }
+.form-check-input:checked { background-color: var(--fs-primary); border-color: var(--fs-primary); }
+
+/* Breadcrumb — minimal. */
+.breadcrumb {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--fs-muted);
+    margin-bottom: 2rem;
+}
+.breadcrumb-item a { color: var(--fs-muted); }
+.breadcrumb-item a:hover { color: var(--fs-primary); }
+.breadcrumb-item.active { color: var(--fs-dark); }
+.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--fs-subtle); }
+
+/* Alerts — švelnesni. */
+.alert {
+    border-radius: var(--fs-radius);
+    border: 1px solid var(--fs-border);
+    background: var(--fs-bg-soft);
+    color: var(--fs-dark);
+    font-size: .88rem;
+}
+.alert-success { background: #f0f9f0; border-color: #d4edd4; color: #2a6a2a; }
+.alert-info { background: var(--fs-tint); border-color: var(--fs-accent-2); color: var(--fs-dark); }
+.alert-danger { background: #fdf2f4; border-color: #f5c6cf; color: #8b1d2d; }
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    letter-spacing: .08em;
+    border-radius: var(--fs-radius);
+}
+.badge.bg-primary { background: var(--fs-primary) !important; }
+.badge.bg-danger { background: var(--fs-primary) !important; }
+.badge.bg-primary-subtle { background: var(--fs-primary-soft) !important; color: var(--fs-primary) !important; }
+
+/* Tables */
+.table { color: var(--fs-dark); font-size: .88rem; }
+.table thead th {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--fs-muted);
+    font-weight: 500;
+    border-bottom-color: var(--fs-border);
+}
+.table tbody tr { border-color: var(--fs-border); }
+
+/* Cards (bendros) */
+.card {
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    box-shadow: none;
+}
+.card.shadow-sm { box-shadow: var(--fs-shadow-sm) !important; }
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid var(--fs-border);
+    font-weight: 500;
+}
+
+/* Pagination — minimal. */
+.pagination .page-link {
+    color: var(--fs-dark);
+    border-color: var(--fs-border);
+    font-size: .85rem;
+    padding: .5rem .85rem;
+}
+.pagination .page-item.active .page-link {
+    background: var(--fs-dark);
+    border-color: var(--fs-dark);
+    color: #fff;
+}
+.pagination .page-link:hover { background: var(--fs-bg-soft); color: var(--fs-primary); border-color: var(--fs-border); }
+
+.filter-sidebar {
+    position: sticky;
+    top: 1rem;
+}
+
+.nutrition-facts { font-size: .95rem; }
+.nutrition-facts dt { font-weight: 600; }
+
+.plan-pros li::marker { color: #198754; }
+.plan-cons li::marker { color: #dc3545; }
+
+.footer-dark {
+    background: var(--fs-dark);
+    color: #d1d5db;
+}
+.footer-dark a { color: #d1d5db; text-decoration: none; }
+.footer-dark a:hover { color: #fff; }
+
+/* ===== Sports page ===== */
+.sports-hero {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
+    color: #fff;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    padding: 3rem 2.5rem;
+}
+.sports-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(15,23,42,.92) 0%, rgba(15,23,42,.72) 55%, rgba(15,23,42,.2) 100%),
+                url('https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=1600&q=80') center/cover;
+}
+.sports-hero > * { position: relative; z-index: 1; }
+.sports-hero .eyebrow { color: var(--fs-accent); text-transform: uppercase; letter-spacing: .15em; font-size: .75rem; font-weight: 700; margin-bottom: .75rem; }
+.sports-hero h1 { color: #fff; font-weight: 800; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; }
+.sports-hero p { color: #cbd5e1; font-size: 1.1rem; max-width: 560px; }
+
+.sport-nav {
+    display: flex;
+    gap: .5rem;
+    overflow-x: auto;
+    padding: .5rem 0 1rem;
+    scrollbar-width: thin;
+    border-bottom: 1px solid var(--fs-border);
+    margin-bottom: 2rem;
+}
+.sport-nav::-webkit-scrollbar { height: 4px; }
+.sport-nav::-webkit-scrollbar-thumb { background: var(--fs-border); border-radius: 2px; }
+
+.sport-nav .sport-chip {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--fs-border);
+    color: var(--fs-ink);
+    padding: .55rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: .925rem;
+    transition: all .15s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    white-space: nowrap;
+}
+.sport-nav .sport-chip:hover { border-color: var(--fs-dark); color: var(--fs-dark); }
+.sport-nav .sport-chip.active {
+    background: var(--fs-dark);
+    border-color: var(--fs-dark);
+    color: #fff;
+}
+/* Custom sport tab pane switcher (pakeičia Bootstrap .tab-pane naudojimą). */
+.sport-pane { display: none; }
+.sport-pane.active { display: block; animation: fadeIn .25s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+.sport-nav .sport-chip .count {
+    font-size: .75rem;
+    opacity: .6;
+    padding-left: .35rem;
+    border-left: 1px solid currentColor;
+    margin-left: .15rem;
+    padding-left: .5rem;
+    font-weight: 400;
+}
+
+.sport-overview {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+@media (max-width: 768px) {
+    .sport-overview { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+.sport-overview-img {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: var(--fs-radius);
+    box-shadow: var(--fs-shadow-lg);
+    width: 100%;
+}
+.sport-overview h2 { font-size: 2.25rem; font-weight: 800; margin-bottom: .75rem; }
+.sport-overview .lead { color: var(--fs-muted); font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.6; }
+.sport-stats { display: flex; gap: 2rem; margin-top: 1.5rem; }
+.sport-stats .stat-num { font-size: 1.75rem; font-weight: 700; color: var(--fs-dark); line-height: 1; }
+.sport-stats .stat-label { font-size: .8rem; color: var(--fs-muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .25rem; }
+
+.section-block { margin: 3.5rem 0; }
+.section-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .15em; color: var(--fs-accent); font-weight: 700; margin-bottom: .5rem; }
+.section-block h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; }
+
+.card-clean {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    transition: all .2s ease;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.card-clean:hover { border-color: var(--fs-dark); box-shadow: var(--fs-shadow-md); transform: translateY(-2px); }
+
+.exercise-card { padding: 1.25rem; }
+.exercise-card .name { font-weight: 600; font-size: 1rem; color: var(--fs-dark); margin-bottom: .5rem; }
+.exercise-card .muscles { display: flex; flex-wrap: wrap; gap: .25rem; margin-bottom: .75rem; }
+.exercise-card .muscle-tag {
+    background: var(--fs-bg-soft);
+    color: var(--fs-muted);
+    padding: .15rem .55rem;
+    border-radius: 6px;
+    font-size: .75rem;
+    font-weight: 500;
+}
+.exercise-card .difficulty {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .75rem;
+    color: var(--fs-muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 600;
+}
+.exercise-card .difficulty::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--fs-accent); }
+.exercise-card .difficulty.beginner::before { background: #10b981; }
+.exercise-card .difficulty.intermediate::before { background: #f59e0b; }
+.exercise-card .difficulty.advanced::before { background: #ef4444; }
+
+.plan-card {
+    padding: 1.5rem;
+    position: relative;
+}
+.plan-card .meta { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.plan-card .meta-pill {
+    background: var(--fs-bg-soft);
+    color: var(--fs-dark);
+    padding: .2rem .6rem;
+    border-radius: 6px;
+    font-size: .75rem;
+    font-weight: 600;
+}
+.plan-card .meta-pill.level { background: #fef2f2; color: #b91c1c; }
+.plan-card h5 { font-size: 1.15rem; margin-bottom: .5rem; }
+.plan-card p { color: var(--fs-muted); font-size: .9rem; margin-bottom: 1.25rem; line-height: 1.5; flex: 1; }
+.plan-card .plan-link {
+    color: var(--fs-dark);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: .9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-top: auto;
+}
+.plan-card .plan-link:hover { color: var(--fs-accent); }
+.compact-plan-card {
+    padding: 1.05rem;
+}
+.compact-plan-card h5 {
+    font-size: 1.02rem;
+}
+.compact-plan-card p {
+    font-size: .84rem;
+    margin-bottom: .8rem;
+}
+
+/* Split cards */
+.split-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+@media (max-width: 1100px) {
+    .split-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+    .split-grid { grid-template-columns: 1fr; }
+}
+.split-card-v2 {
+    background: #fff;
+    border: 1.5px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all .2s ease;
+    position: relative;
+}
+.split-card-v2:hover { border-color: var(--fs-dark); }
+.split-card-v2.selected { border-color: var(--fs-accent); background: #fffbfb; }
+.split-card-v2.selected::after {
+    content: '✓'; position: absolute; top: 1rem; right: 1rem;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--fs-accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .85rem;
+}
+.split-card-v2 .tag {
+    display: inline-block;
+    background: var(--fs-bg-soft);
+    color: var(--fs-muted);
+    padding: .2rem .6rem;
+    border-radius: 6px;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 1rem;
+}
+.split-card-v2 h5 { font-size: 1.15rem; margin-bottom: .4rem; font-weight: 700; }
+.split-card-v2 p { color: var(--fs-muted); font-size: .875rem; line-height: 1.5; margin-bottom: 1rem; }
+.split-card-v2 .days-preview { display: flex; gap: .25rem; flex-wrap: wrap; }
+.split-card-v2 .days-preview span {
+    background: var(--fs-bg-soft);
+    color: var(--fs-ink);
+    padding: .2rem .55rem;
+    border-radius: 6px;
+    font-size: .7rem;
+    font-weight: 600;
+}
+
+/* Days picker v2 */
+.days-picker-v2 {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: 2rem;
+}
+.days-selector { display: flex; gap: .5rem; flex-wrap: wrap; }
+.days-selector button {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fs-border);
+    background: #fff;
+    color: var(--fs-ink);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+.days-selector button:hover { border-color: var(--fs-dark); }
+.days-selector button.active {
+    background: var(--fs-dark);
+    color: #fff;
+    border-color: var(--fs-dark);
+}
+
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; margin-top: 1.5rem; }
+.week-day {
+    padding: .85rem .5rem;
+    border-radius: 10px;
+    background: var(--fs-bg-soft);
+    text-align: center;
+    border: 1px solid var(--fs-border);
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.week-day.workout { background: #fff; border-color: var(--fs-dark); }
+.week-day .dow { font-size: .7rem; color: var(--fs-muted); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+.week-day .wk { font-size: .85rem; font-weight: 700; margin-top: .5rem; color: var(--fs-dark); }
+.week-day.rest .wk { color: var(--fs-muted); font-weight: 500; }
+
+.cta-builder {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #fff;
+    border-radius: var(--fs-radius);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+.cta-builder h4 { color: #fff; font-weight: 700; margin-bottom: .25rem; }
+.cta-builder p { color: #cbd5e1; margin: 0; }
+.cta-builder .btn-cta {
+    background: var(--fs-accent);
+    color: #fff;
+    border: 0;
+    padding: .8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    transition: all .15s ease;
+    white-space: nowrap;
+}
+.cta-builder .btn-cta:hover { background: #dc2626; transform: translateX(2px); }
+
+/* ===== Builder page ===== */
+.builder-wrapper { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
+
+/* Mokslinio generatoriaus panelė — vizualiai išryškinta spalvingu borderiu. */
+.generator-panel {
+    background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: 1.75rem 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+.deep-search .search-suggest,
+.search-wrap .search-suggest {
+    z-index: 120;
+}
+.generator-panel::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--fs-primary), #6366f1);
+}
+.generator-panel .gen-header { margin-bottom: 1.25rem; }
+.generator-panel .gen-header h3 { font-weight: 700; font-size: 1.4rem; letter-spacing: -.01em; }
+
+.gen-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 1rem;
+    align-items: end;
+}
+.gen-field label {
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 700;
+    color: var(--fs-dark);
+    margin-bottom: .35rem;
+}
+.gen-field select {
+    width: 100%;
+    padding: .6rem .8rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    background: #fff;
+    font-size: .9rem;
+    color: var(--fs-dark);
+}
+.gen-field select:focus { outline: none; border-color: var(--fs-primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, .12); }
+.gen-actions .btn-generate {
+    padding: .65rem 1.25rem;
+    font-weight: 600;
+    font-size: .9rem;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .gen-grid { grid-template-columns: repeat(2, 1fr); }
+    .gen-actions { grid-column: 1 / -1; }
+    .gen-actions .btn-generate { width: 100%; justify-content: center; display: flex; align-items: center; gap: .5rem; }
+}
+
+/* Sugeneruoto plano gairės po spustelėjimo */
+.gen-summary {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--fs-border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .75rem;
+}
+.gen-summary .summary-item {
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: .75rem 1rem;
+}
+.gen-summary .summary-item .k {
+    display: block;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--fs-muted);
+    font-weight: 600;
+    margin-bottom: .2rem;
+}
+.gen-summary .summary-item strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--fs-dark);
+    font-weight: 700;
+}
+@media (max-width: 700px) {
+    .gen-summary { grid-template-columns: repeat(2, 1fr); }
+}
+.builder-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+.builder-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: .25rem; }
+.builder-header p { color: var(--fs-muted); margin: 0; }
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    overflow: hidden;
+}
+.panel-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--fs-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.panel-header h5 { margin: 0; font-weight: 700; }
+.panel-body { padding: 1.5rem; }
+.panel-body-flush { padding: 0; }
+
+.lib-search .form-control,
+.lib-search .form-select {
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    padding: .6rem .85rem;
+    font-size: .9rem;
+}
+.lib-list { max-height: 60vh; overflow-y: auto; padding: .5rem; }
+.lib-item {
+    padding: .75rem .85rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .12s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+.lib-item:hover { background: var(--fs-bg-soft); border-color: var(--fs-border); }
+.lib-item .name { font-size: .9rem; font-weight: 600; color: var(--fs-dark); margin-bottom: .25rem; }
+.lib-item .muscles { display: flex; gap: .25rem; flex-wrap: wrap; }
+.lib-item .mus { background: #f1f5f9; color: var(--fs-muted); font-size: .68rem; padding: .1rem .45rem; border-radius: 5px; font-weight: 500; }
+.lib-add { background: var(--fs-dark); color: #fff; border: 0; width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .1s; }
+.lib-add:hover { background: var(--fs-accent); }
+
+.day-tabs { display: flex; gap: .5rem; flex-wrap: wrap; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--fs-border); background: var(--fs-bg-soft); }
+.day-tab-v2 {
+    padding: .55rem 1rem;
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .875rem;
+    cursor: pointer;
+    color: var(--fs-ink);
+    transition: all .12s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+}
+.day-tab-v2:hover { border-color: var(--fs-dark); }
+.day-tab-v2.active { background: var(--fs-dark); color: #fff; border-color: var(--fs-dark); }
+.day-tab-v2 .count { opacity: .6; font-weight: 400; font-size: .8rem; }
+
+.ex-row {
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    background: #fff;
+    margin-bottom: .75rem;
+    transition: border-color .15s;
+}
+.ex-row:hover { border-color: #cbd5e1; }
+.ex-row .ex-title { font-weight: 600; font-size: .95rem; color: var(--fs-dark); }
+.ex-row .ex-actions { display: flex; gap: .25rem; }
+.ex-row .ex-actions button {
+    background: transparent;
+    border: 1px solid var(--fs-border);
+    border-radius: 6px;
+    width: 30px; height: 30px;
+    color: var(--fs-muted);
+    cursor: pointer;
+    transition: all .1s;
+    display: inline-flex; align-items: center; justify-content: center;
+}
+.ex-row .ex-actions button:hover { background: var(--fs-bg-soft); color: var(--fs-dark); }
+.ex-row .ex-actions button.danger:hover { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+
+.ex-inputs { display: grid; grid-template-columns: repeat(5, 1fr); gap: .5rem; margin-top: .75rem; }
+@media (max-width: 768px) { .ex-inputs { grid-template-columns: repeat(2, 1fr); } }
+.ex-field label { font-size: .7rem; color: var(--fs-muted); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; margin-bottom: .25rem; display: block; }
+.ex-field input, .ex-field select {
+    width: 100%;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    padding: .45rem .6rem;
+    font-size: .9rem;
+    text-align: center;
+    background: #fff;
+}
+.ex-field input:focus, .ex-field select:focus { outline: none; border-color: var(--fs-dark); }
+.ex-notes input {
+    margin-top: .75rem;
+    width: 100%;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    padding: .45rem .75rem;
+    font-size: .85rem;
+    background: var(--fs-bg-soft);
+}
+
+.empty-state {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--fs-muted);
+}
+.empty-state i { font-size: 2.5rem; color: var(--fs-border); margin-bottom: .75rem; display: block; }
+
+/* Explanation grid — 3 columns on desktop, 2 on tablet, 1 on mobile. */
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+@media (max-width: 992px) { .help-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .help-grid { grid-template-columns: 1fr; } }
+
+.help-card {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.help-card .icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: var(--fs-bg-soft);
+    color: var(--fs-dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: .85rem;
+    flex-shrink: 0;
+}
+.help-card h6 { font-weight: 700; margin-bottom: .45rem; font-size: .975rem; }
+.help-card p { color: var(--fs-muted); font-size: .875rem; line-height: 1.55; margin: 0; }
+
+/* Print styles — the user wanted printing to only output the plan content. */
+@media print {
+    @page { margin: 12mm; }
+    body { background: #fff !important; }
+    .navbar, .footer-dark, .cta-builder, #exportBtn, #resetBtn,
+    .builder-header .d-flex.gap-2, .lib-search, .lib-list, .panel-header .days-selector,
+    .help-grid, .section-block:has(.help-grid), .alert, .breadcrumb, button[onclick*="print"],
+    .col-lg-4:has(.lib-list) { display: none !important; }
+    .col-lg-8 { width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; }
+    .panel { border: 0 !important; }
+    .panel-header { border-bottom: 2px solid var(--fs-dark) !important; padding: .5rem 0 !important; background: transparent !important; }
+    .day-tabs { display: none !important; }
+    .ex-row { page-break-inside: avoid; border: 1px solid #ccc !important; box-shadow: none !important; margin-bottom: .5rem !important; }
+    .ex-row .ex-actions { display: none !important; }
+    .ex-inputs { display: grid !important; grid-template-columns: repeat(5, 1fr) !important; }
+    .ex-field input, .ex-field select { border: 0 !important; padding: 0 !important; font-weight: 600; background: transparent !important; }
+    .ex-notes input { border: 0 !important; background: transparent !important; padding: 0 !important; font-style: italic; }
+    .builder-header h1 { font-size: 1.5rem; }
+    .builder-header .section-label { color: #555 !important; }
+    .print-only { display: block !important; }
+    .print-day-block { page-break-inside: avoid; }
+}
+.print-only { display: none; }
+
+/* ===== Nutrition page ===== */
+.nutrition-hero {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
+    color: #fff;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    padding: 3rem 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.nutrition-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(15,23,42,.92) 0%, rgba(15,23,42,.72) 55%, rgba(15,23,42,.2) 100%),
+                url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1600&q=80') center/cover;
+}
+.nutrition-hero > * { position: relative; z-index: 1; }
+.nutrition-hero .eyebrow { color: #10b981; }
+.nutrition-hero h1 { color: #fff; font-weight: 800; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; }
+.nutrition-hero p { color: #cbd5e1; font-size: 1.1rem; max-width: 580px; margin-bottom: 0; }
+
+/* Intro benefits */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+@media (max-width: 992px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .benefits-grid { grid-template-columns: 1fr; } }
+.benefit-item {
+    padding: 1.25rem;
+    border-left: 3px solid #10b981;
+    background: #fff;
+}
+.benefit-item .num { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #10b981; font-weight: 700; margin-bottom: .5rem; }
+.benefit-item h6 { font-weight: 700; margin-bottom: .35rem; }
+.benefit-item p { color: var(--fs-muted); font-size: .875rem; line-height: 1.5; margin: 0; }
+
+/* Diet cards (expandable) */
+.diet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+@media (max-width: 992px) { .diet-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .diet-grid { grid-template-columns: 1fr; } }
+
+/* Sporto tipų grid — 3 kolonos desktop'e (6 elementai = 2 eilutės po 3). */
+.sports-grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1024px) { .sports-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .sports-grid { grid-template-columns: 1fr; } }
+
+.diet-card {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all .2s ease;
+}
+.diet-card:hover { border-color: #94a3b8; box-shadow: var(--fs-shadow-md); }
+.diet-card .cover {
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.diet-card .cover::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,.75));
+}
+.diet-card .cover-title {
+    position: absolute;
+    bottom: 1rem;
+    left: 1.25rem;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    z-index: 1;
+}
+.diet-card .cover-title-plain {
+    padding: 1.1rem 1.5rem .9rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--fs-primary-dark);
+    border-bottom: 2px solid var(--fs-primary-soft);
+    background: var(--fs-primary-soft);
+}
+.diet-card .body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.diet-card .short { color: var(--fs-muted); font-size: .925rem; line-height: 1.55; margin-bottom: 1rem; }
+.diet-card details { margin-bottom: 1rem; }
+.diet-card details > summary {
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--fs-dark);
+    padding: .6rem 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    user-select: none;
+}
+.diet-card details > summary::-webkit-details-marker { display: none; }
+.diet-card details > summary::after {
+    content: '\F282'; /* bi-chevron-down */
+    font-family: 'bootstrap-icons';
+    margin-left: auto;
+    transition: transform .2s;
+    font-size: .9rem;
+    color: var(--fs-muted);
+}
+.diet-card details[open] > summary::after { transform: rotate(180deg); }
+.diet-card .proscons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+    padding-top: .5rem;
+    border-top: 1px solid var(--fs-border);
+    margin-top: .25rem;
+}
+@media (max-width: 480px) { .diet-card .proscons { grid-template-columns: 1fr; } }
+.diet-card .pc-col h6 {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+.diet-card .pc-col.pros h6 { color: #059669; }
+.diet-card .pc-col.cons h6 { color: #dc2626; }
+.diet-card .pc-col ul { list-style: none; padding: 0; margin: 0; }
+.diet-card .pc-col li {
+    font-size: .825rem;
+    color: var(--fs-ink);
+    padding: .2rem 0 .2rem 1.1rem;
+    position: relative;
+    line-height: 1.4;
+}
+.diet-card .pc-col.pros li::before { content: '+'; position: absolute; left: 0; color: #059669; font-weight: 700; }
+.diet-card .pc-col.cons li::before { content: '−'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+
+/* Sport tab: Pros / Cons — rodomi tiesiogiai, tokiu pat stiliumi kaip mitybos kortelėse. */
+.sport-proscons {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 2rem;
+}
+.sport-proscons .proscons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+@media (max-width: 640px) { .sport-proscons .proscons { grid-template-columns: 1fr; gap: 1rem; } }
+.sport-proscons .pc-col h6 {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    margin-bottom: .6rem;
+}
+.sport-proscons .pc-col.pros h6 { color: #059669; }
+.sport-proscons .pc-col.cons h6 { color: #dc2626; }
+.sport-proscons .pc-col ul { list-style: none; padding: 0; margin: 0; }
+.sport-proscons .pc-col li {
+    font-size: .925rem;
+    color: var(--fs-ink);
+    padding: .25rem 0 .25rem 1.25rem;
+    position: relative;
+    line-height: 1.5;
+}
+.sport-proscons .pc-col.pros li::before { content: '+'; position: absolute; left: 0; color: #059669; font-weight: 700; }
+.sport-proscons .pc-col.cons li::before { content: '−'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+
+.diet-card .actions { display: flex; gap: .5rem; margin-top: auto; }
+.diet-card .btn-outline { flex: 1; padding: .55rem .9rem; border: 1px solid var(--fs-border); background: #fff; color: var(--fs-dark); font-weight: 600; font-size: .875rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all .12s; }
+.diet-card .btn-outline:hover { border-color: var(--fs-dark); background: var(--fs-bg-soft); }
+.diet-card .btn-solid { flex: 1; padding: .55rem .9rem; background: #10b981; color: #fff; font-weight: 600; font-size: .875rem; border-radius: 8px; text-decoration: none; text-align: center; border: 1px solid #10b981; transition: all .12s; }
+.diet-card .btn-solid:hover { background: #059669; border-color: #059669; }
+
+/* BMI calculator */
+.bmi-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: 2rem;
+}
+@media (max-width: 768px) { .bmi-panel { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; } }
+.bmi-panel h3 { margin-bottom: .25rem; }
+.bmi-panel .lead { color: var(--fs-muted); margin-bottom: 1rem; font-size: .95rem; }
+.bmi-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
+.bmi-inputs label { font-size: .75rem; color: var(--fs-muted); text-transform: uppercase; letter-spacing: .05em; font-weight: 700; display: block; margin-bottom: .25rem; }
+.bmi-inputs input {
+    width: 100%;
+    padding: .65rem .85rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.bmi-inputs input:focus { outline: none; border-color: var(--fs-dark); }
+
+.bmi-result {
+    background: var(--fs-bg-soft);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.bmi-value { font-size: 3rem; font-weight: 800; line-height: 1; letter-spacing: -.03em; margin-bottom: .5rem; }
+.bmi-category { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; display: inline-block; padding: .25rem .65rem; border-radius: 6px; }
+.bmi-cat-under { color: #0369a1; background: #e0f2fe; }
+.bmi-cat-normal { color: #166534; background: #dcfce7; }
+.bmi-cat-over { color: #a16207; background: #fef3c7; }
+.bmi-cat-obese { color: #b91c1c; background: #fee2e2; }
+
+/* BMI skalės spalvotoji juosta.
+   Markeris žymi BMI diapazone [10..40] → [0..100%]. Todėl ir spalvų ribos apskaičiuotos ta pačia formule:
+     <18,5 → 0 %–28,33 %   (mėlyna, per mažas svoris)
+     18,5–25 → 28,33 %–50 %  (žalia, normalus)
+     25–30   → 50 %–66,67 %  (geltona, antsvoris)
+     30+     → 66,67 %–100 % (raudona, nutukimas) */
+.bmi-scale {
+    height: 10px;
+    background: linear-gradient(90deg,
+        #38bdf8 0%      28.33%,
+        #22c55e 28.33%  50%,
+        #eab308 50%     66.67%,
+        #ef4444 66.67%  100%);
+    border-radius: 999px;
+    position: relative;
+    margin: 1.5rem 0 .75rem;
+}
+.bmi-marker {
+    position: absolute;
+    top: -6px;
+    width: 3px;
+    height: 22px;
+    background: var(--fs-dark);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: left .3s ease;
+}
+/* BMI skalės label'ai absoliučiai pozicionuoti prie spalvų ribų,
+   kad vizualiai sutaptų su gradient stop'ais ir markerio pozicija. */
+.bmi-scale-labels {
+    position: relative;
+    height: 1rem;
+    font-size: .7rem;
+    color: var(--fs-muted);
+    font-weight: 600;
+}
+.bmi-scale-labels span {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+.bmi-scale-labels span:first-child { transform: none; }              /* 10 — kairys kraštas */
+.bmi-scale-labels span:last-child  { transform: translateX(-100%); } /* 40+ — dešinys kraštas */
+.bmi-note { color: var(--fs-muted); font-size: .8rem; line-height: 1.5; margin-top: 1rem; margin-bottom: 0; }
+
+/* ===== Calorie planner ===== */
+.planner-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+@media (max-width: 992px) { .planner-grid { grid-template-columns: 1fr; } }
+
+.planner-form {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius);
+    padding: 1.75rem;
+}
+.planner-form h4 { margin-bottom: 1rem; font-weight: 700; }
+.planner-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: .9rem; }
+.planner-form .form-row.single { grid-template-columns: 1fr; }
+@media (max-width: 480px) { .planner-form .form-row { grid-template-columns: 1fr; } }
+.planner-form label { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; color: var(--fs-muted); display: block; margin-bottom: .3rem; }
+.planner-form input, .planner-form select {
+    width: 100%;
+    padding: .65rem .85rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: .95rem;
+}
+.planner-form input:focus, .planner-form select:focus { outline: none; border-color: var(--fs-dark); }
+
+.segmented { display: flex; background: var(--fs-bg-soft); border-radius: 10px; padding: 4px; gap: 4px; }
+.segmented input { position: absolute; opacity: 0; pointer-events: none; }
+.segmented label {
+    flex: 1;
+    text-align: center;
+    padding: .55rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: .875rem;
+    color: var(--fs-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0;
+    transition: all .15s;
+}
+.segmented input:checked + label { background: #fff; color: var(--fs-dark); box-shadow: var(--fs-shadow-sm); }
+
+.planner-result {
+    background: #0f172a;
+    color: #fff;
+    border-radius: var(--fs-radius);
+    padding: 1.75rem;
+    position: sticky;
+    top: 1rem;
+}
+.planner-result h4 { color: #fff; margin-bottom: 1.25rem; font-weight: 700; }
+.planner-kcal {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: .25rem;
+    letter-spacing: -.03em;
+}
+.planner-kcal .unit { font-size: 1rem; color: #94a3b8; font-weight: 500; margin-left: .5rem; }
+.planner-goal-label { color: #cbd5e1; font-size: .875rem; margin-bottom: 1.25rem; }
+
+/* BMR/TDEE/Tikslas suvestinė — 3 kolonų mikro lentelė po pagrindine kcal reikšme. */
+.energy-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+    padding: .75rem;
+    background: rgba(255,255,255,.05);
+    border-radius: 10px;
+    font-size: .8rem;
+}
+.energy-breakdown > div { text-align: center; }
+.energy-breakdown span { display: block; color: #94a3b8; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .15rem; }
+.energy-breakdown strong { display: block; color: #fff; font-size: 1.1rem; font-weight: 700; }
+
+/* Info ikonėlė prie form label'ų — hover rodo tooltip'ą iš title atributo. */
+.hint-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px; height: 16px;
+    background: var(--fs-border);
+    color: var(--fs-muted);
+    border-radius: 50%;
+    font-size: .65rem;
+    font-weight: 700;
+    margin-left: .35rem;
+    cursor: help;
+    transition: background .15s, color .15s;
+}
+.hint-icon:hover { background: var(--fs-primary); color: #fff; }
+
+/* Vandens rekomendacijos kortelė */
+.water-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(59, 130, 246, .12);
+    border: 1px solid rgba(59, 130, 246, .3);
+    border-radius: 10px;
+    padding: .85rem 1rem;
+    margin: 1rem 0;
+}
+.water-card .water-icon {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(59, 130, 246, .25);
+    border-radius: 50%;
+    color: #60a5fa;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+.water-card .water-label { color: #cbd5e1; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+.water-card .water-value { color: #fff; font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+.water-card .water-hint { color: #94a3b8; font-size: .7rem; margin-top: .15rem; }
+
+/* Įspėjimai (deficitas per didelis, baltymų trūkumas, ir pan.) */
+.planner-warnings { display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0; }
+.planner-warnings .warning-item {
+    display: flex;
+    gap: .5rem;
+    align-items: flex-start;
+    background: rgba(234, 179, 8, .12);
+    border: 1px solid rgba(234, 179, 8, .35);
+    border-radius: 8px;
+    padding: .65rem .8rem;
+    color: #fde68a;
+    font-size: .8rem;
+    line-height: 1.45;
+}
+.planner-warnings .warning-item i { color: #facc15; flex-shrink: 0; margin-top: .1rem; }
+
+/* Mokslinių šaltinių sąrašas po planuotoju */
+.citations-block {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+}
+.citations-list { padding-left: 1.25rem; margin: 0; }
+.citations-list li {
+    color: var(--fs-ink);
+    line-height: 1.65;
+    margin-bottom: .85rem;
+    font-size: .9rem;
+}
+.citations-list li:last-child { margin-bottom: 0; }
+.citations-list a {
+    color: var(--fs-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+.citations-list a:hover { text-decoration: underline; }
+
+.macros { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-bottom: 1.5rem; }
+.macro-card { background: rgba(255,255,255,.08); border-radius: 10px; padding: .85rem .9rem; }
+.macro-card .macro-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: #94a3b8; font-weight: 700; margin-bottom: .25rem; }
+.macro-card .macro-value { font-size: 1.35rem; font-weight: 700; color: #fff; }
+.macro-card .macro-value .g { font-size: .85rem; color: #94a3b8; font-weight: 500; margin-left: .2rem; }
+.macro-card .macro-kcal { font-size: .7rem; color: #94a3b8; margin-top: .15rem; }
+
+.macro-bar { height: 8px; background: rgba(255,255,255,.1); border-radius: 999px; overflow: hidden; display: flex; margin-bottom: 1rem; }
+.macro-bar .seg { height: 100%; }
+.macro-bar .seg.p { background: #3b82f6; }
+.macro-bar .seg.c { background: #f59e0b; }
+.macro-bar .seg.f { background: #ef4444; }
+
+.planner-diet-pick {
+    background: rgba(255,255,255,.06);
+    padding: 1rem 1.1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.planner-diet-pick .label { color: #94a3b8; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; margin-bottom: .35rem; }
+.planner-diet-pick .name { font-weight: 700; color: #fff; }
+.planner-diet-pick .desc { color: #94a3b8; font-size: .8rem; margin-top: .2rem; }
+
+.planner-note {
+    font-size: .75rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+/* ===== Support page ===== */
+.support-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.support-tile {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: left;
+    transition: border-color .2s, transform .2s;
+}
+.support-tile:hover { border-color: var(--fs-primary); transform: translateY(-2px); }
+.support-tile .icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, .1);
+    color: var(--fs-primary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: .85rem;
+}
+.support-tile .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: #64748b; margin-bottom: .25rem; }
+.support-tile .value { display: block; font-size: 1.05rem; font-weight: 600; color: var(--fs-dark); text-decoration: none; }
+.support-tile a.value:hover { color: var(--fs-primary); }
+.support-tile .hint { font-size: .8rem; color: #94a3b8; margin-top: .35rem; }
+
+.faq { display: flex; flex-direction: column; gap: .5rem; }
+.faq details {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color .2s;
+}
+.faq details[open] { border-color: var(--fs-primary); }
+.faq summary {
+    list-style: none;
+    padding: 1rem 1.15rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--fs-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #94a3b8;
+    transition: transform .2s;
+}
+.faq details[open] summary::after { content: '−'; color: var(--fs-primary); }
+.faq .body {
+    padding: 0 1.15rem 1rem;
+    color: #475569;
+    line-height: 1.6;
+    font-size: .95rem;
+}
+
+.support-form-card {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    position: sticky;
+    top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .support-contact-grid { grid-template-columns: 1fr; }
+    .support-form-card { position: static; }
+}
+
+/* ===== Pratimo kortelė su hover tooltip'u (vietoj atskiro puslapio) =====
+   Kortelė veikia kaip paprasta card; užvedus pelę arba gavus focus — iš viršaus
+   „iššoka" tooltip'as su pilna pratimo informacija. CSS only, be JS. */
+.exercise-card-hover {
+    position: relative;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.exercise-card-hover:hover,
+.exercise-card-hover:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(15, 23, 42, .1);
+    z-index: 10;
+}
+.exercise-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%) translateY(8px);
+    width: min(360px, calc(100vw - 2rem));
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, .18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 100;
+    overflow: hidden;
+}
+.exercise-card-hover:hover .exercise-tooltip,
+.exercise-card-hover:focus-visible .exercise-tooltip,
+.exercise-card-hover:focus-within .exercise-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+/* Trikampis-rodyklė prie tooltip'o apačios. */
+.exercise-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-right: 1px solid var(--fs-border);
+    border-bottom: 1px solid var(--fs-border);
+}
+
+.tooltip-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+.tooltip-body { padding: .85rem 1rem; }
+.tooltip-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .4rem;
+}
+.tooltip-head strong { font-size: .95rem; color: var(--fs-dark); }
+.badge-diff {
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 700;
+    padding: .2rem .5rem;
+    border-radius: 4px;
+    background: #e2e8f0;
+    color: var(--fs-dark);
+}
+.badge-diff.beginner     { background: #dcfce7; color: #166534; }
+.badge-diff.intermediate { background: #fef3c7; color: #a16207; }
+.badge-diff.advanced     { background: #fee2e2; color: #b91c1c; }
+.tooltip-desc { font-size: .82rem; color: var(--fs-muted); margin: 0 0 .6rem; line-height: 1.45; }
+.tooltip-section { margin-bottom: .6rem; }
+.tooltip-section:last-child { margin-bottom: 0; }
+.tooltip-label {
+    display: block;
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    color: var(--fs-dark);
+    margin-bottom: .3rem;
+}
+.tooltip-muscles { display: flex; flex-wrap: wrap; gap: .25rem; }
+.tooltip-muscles .muscle-tag { font-size: .7rem; }
+.tooltip-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: .8rem;
+    color: var(--fs-dark);
+    line-height: 1.5;
+}
+.tooltip-list li { margin-bottom: .15rem; }
+.tooltip-how { font-size: .78rem; color: var(--fs-muted); line-height: 1.5; margin: 0; }
+
+/* Mobiliam — tooltip'as rodomas po kortele, o ne virš, ir išnaudoja visą plotą. */
+@media (max-width: 576px) {
+    .exercise-tooltip {
+        width: calc(100% + 2px);
+        left: -1px;
+        right: -1px;
+        top: 100%;
+        bottom: auto;
+        transform: none;
+        margin-top: 8px;
+    }
+    .exercise-card-hover:hover .exercise-tooltip,
+    .exercise-card-hover:focus-within .exercise-tooltip { transform: none; }
+    .exercise-tooltip::after { display: none; }
+}
+
+/* ===== Parduotuvės filtras (sidebar + rezultatų tinklelis) ===== */
+.shop-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+@media (max-width: 991px) { .shop-layout { grid-template-columns: 1fr; } }
+
+.shop-filters {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 1.5rem);
+    overflow: auto;
+}
+@media (max-width: 991px) { .shop-filters { position: static; } }
+
+.filter-block { padding: .85rem 0; border-bottom: 1px solid var(--fs-border); }
+.filter-block:last-of-type { border-bottom: 0; }
+.filter-block:first-of-type { padding-top: 0; }
+.filter-title {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    color: var(--fs-dark);
+    margin-bottom: .6rem;
+}
+.filter-label {
+    display: block;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    color: var(--fs-dark);
+    margin-bottom: .4rem;
+}
+
+/* Paieškos laukelio wrap'eris su search ikona. */
+.search-wrap { position: relative; }
+.search-wrap i {
+    position: absolute;
+    left: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--fs-muted);
+    font-size: .95rem;
+    pointer-events: none;
+}
+.search-wrap input {
+    width: 100%;
+    padding: .55rem .75rem .55rem 2.2rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    font-size: .9rem;
+    background: #fff;
+}
+.search-wrap input:focus { outline: none; border-color: var(--fs-primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, .12); }
+
+/* Radio/checkbox filtro įrašai — klikiami visi, ne tik dėžutės. */
+.filter-radio, .filter-check {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .35rem 0;
+    font-size: .88rem;
+    color: var(--fs-dark);
+    cursor: pointer;
+    user-select: none;
+}
+.filter-radio input, .filter-check input { margin: 0; cursor: pointer; }
+.filter-radio span:not(.count),
+.filter-check span:not(.count) { flex: 1; }
+.filter-radio .count, .filter-check .count {
+    color: var(--fs-muted);
+    font-size: .75rem;
+    font-variant-numeric: tabular-nums;
+}
+.filter-radio:hover, .filter-check:hover { color: var(--fs-primary); }
+
+/* Žvaigždučių eilutė filtro label'yje. */
+.stars-inline { display: inline-flex; align-items: center; gap: .15rem; }
+.stars-inline .bi-star-fill, .stars-inline .bi-star-half { color: #f59e0b; }
+.stars-inline .bi-star { color: #e2e8f0; }
+.stars-inline em { font-style: normal; margin-left: .4rem; color: var(--fs-muted); font-size: .8rem; }
+
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+.price-inputs input {
+    flex: 1;
+    min-width: 0;
+    padding: .45rem .55rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 6px;
+    font-size: .85rem;
+}
+.price-inputs span { color: var(--fs-muted); }
+.price-hint { font-size: .72rem; color: var(--fs-muted); margin-top: .4rem; }
+
+.filter-actions { padding-top: 1rem; }
+.filter-actions .btn {
+    border-radius: 10px;
+}
+
+/* Viršutinė juosta: rezultatų kiekis + rūšiavimas. */
+.shop-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.shop-toolbar .result-count { color: var(--fs-muted); font-size: .9rem; }
+.shop-toolbar .result-count strong { color: var(--fs-dark); }
+.sort-form {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.sort-form label { margin: 0; font-size: .85rem; color: var(--fs-muted); }
+.sort-form select {
+    padding: .4rem .6rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    font-size: .85rem;
+    background: #fff;
+    cursor: pointer;
+}
+
+.shop-filters .form-select,
+.shop-filters input[type="number"],
+.shop-filters input[type="search"] {
+    border-radius: 10px;
+}
+
+/* Aktyvių filtrų „čipsai" — pašalinimas paspaudus. */
+.active-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: 1rem;
+}
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .3rem .65rem;
+    background: #f1f5f9;
+    border: 1px solid var(--fs-border);
+    border-radius: 999px;
+    font-size: .8rem;
+    color: var(--fs-dark);
+    text-decoration: none;
+    transition: all .15s;
+}
+.chip:hover { background: #fee2e2; border-color: #fecaca; color: #b91c1c; }
+.chip i { font-size: .9rem; }
+.chip-clear {
+    background: transparent;
+    border: 1px dashed var(--fs-border);
+    color: var(--fs-muted);
+    font-weight: 600;
+}
+.chip-clear:hover { background: var(--fs-dark); color: #fff; border-color: var(--fs-dark); }
+
+/* Tuščių rezultatų būsena. */
+.empty-state-card {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 14px;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+.empty-state-card i {
+    font-size: 2.5rem;
+    color: var(--fs-muted);
+    margin-bottom: 1rem;
+}
+.empty-state-card h5 { font-weight: 700; }
+
+/* Google (Gmail) OAuth mygtukas — sutampa su Google brand guidelines (baltas fonas, pilkas rėmas). */
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .65rem;
+    padding: .65rem 1rem;
+    background: #fff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .95rem;
+    text-decoration: none;
+    transition: background .15s, box-shadow .15s, border-color .15s;
+}
+.btn-google:hover {
+    background: #f8f9fa;
+    border-color: #c0c4c9;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    color: #3c4043;
+}
+.btn-google svg { flex-shrink: 0; }
+
+/* „arba" skirtukas tarp OAuth ir įprastos formos. */
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 1rem 0;
+    color: var(--fs-muted);
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+.or-divider::before,
+.or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--fs-border);
+}
+
+/* Tuščio krepšelio būsena — prieš pasiūlymų sąrašą. */
+.empty-cart-card {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 14px;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.06);
+}
+.empty-cart-card i {
+    font-size: 2.6rem;
+    color: #7f8c99;
+    margin-bottom: .9rem;
+}
+.empty-cart-card h4 {
+    font-weight: 700;
+    margin-bottom: .55rem;
+    color: #13293d;
+}
+
+.empty-cart-card p {
+    max-width: 520px;
+    margin: 0 auto 1.25rem;
+    color: #5b6775;
+}
+
+.empty-cart-card .btn {
+    min-width: 180px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: .95rem;
+}
+.empty-cart-card .btn i {
+    font-size: 1rem;
+    color: inherit;
+    margin-bottom: 0;
+    vertical-align: -1px;
+}
+
+/* ===== Reviews ===== */
+.review-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.review-item {
+    background: #fff;
+    border: 1px solid var(--fs-border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color .2s;
+}
+.review-item:hover { border-color: var(--fs-muted); }
+.review-head {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: .5rem;
+}
+.review-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fs-primary), #6366f1);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.review-head .rating { color: #f59e0b; font-size: .9rem; }
+.review-title { font-weight: 600; color: var(--fs-dark); margin-bottom: .25rem; }
+.review-comment { margin: 0; color: #475569; line-height: 1.55; }
+.review-submit {
+    background: #f8fafc;
+    border: 1px solid var(--fs-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* ===== Mobile tightening ===== */
+@media (max-width: 768px) {
+    /* Hero sections: less padding, smaller min-height on phones. */
+    .sports-hero, .nutrition-hero {
+        padding: 2rem 1.25rem;
+        min-height: 220px;
+        border-radius: 14px;
+    }
+    .sports-hero h1, .nutrition-hero h1 { font-size: 1.75rem; }
+    .sports-hero p, .nutrition-hero p { font-size: .95rem; }
+
+    /* Sport/diet overview grids collapse & re-order so image comes first. */
+    .sport-overview {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .sport-overview > div:last-child { order: -1; }
+
+    /* Section spacing cuts in half on mobile. */
+    .section-block { margin: 2rem 0; }
+    .section-block h3 { font-size: 1.35rem; }
+
+    /* Builder header actions wrap cleanly below the title. */
+    .builder-header h1 { font-size: 1.5rem; }
+    .builder-header .d-flex.gap-2 { width: 100%; }
+    .builder-header .d-flex.gap-2 .btn { flex: 1; }
+
+    /* Week grid compresses but stays readable. */
+    .week-grid { grid-template-columns: repeat(7, 1fr); gap: .25rem; }
+    .week-day { padding: .5rem .25rem; min-height: 70px; }
+    .week-day .dow { font-size: .6rem; }
+    .week-day .wk { font-size: .7rem; }
+
+    /* CTA stacks vertically. */
+    .cta-builder { flex-direction: column; align-items: stretch; padding: 1.5rem; }
+    .cta-builder .btn-cta { justify-content: center; }
+
+    /* Panel header becomes column layout, days selector full width. */
+    .panel-header { flex-direction: column; align-items: stretch; }
+
+    /* Exercise inputs go 2-per-row on mobile (already in prior rule, reinforce). */
+    .ex-inputs { grid-template-columns: repeat(2, 1fr); }
+
+    /* Search bar in navbar becomes full-width when expanded. */
+    .navbar form[role="search"] .input-group input { min-width: 0 !important; width: 100%; }
+}
+
+@media (max-width: 480px) {
+    .sport-nav { gap: .35rem; }
+    .sport-nav .sport-chip { padding: .45rem .85rem; font-size: .85rem; }
+    .sport-overview h2 { font-size: 1.5rem; }
+    .sport-stats { gap: 1rem; }
+    .sport-stats .stat-num { font-size: 1.35rem; }
+    .planner-kcal { font-size: 2.5rem; }
+    .macros { grid-template-columns: 1fr; }
+    .builder-wrapper { padding: 0; }
+}
+
+/* ============================================================
+   MEDICAL THEME STYLES - Esdix Inspired
+   ============================================================ */
+
+/* Top Bar */
+.top-bar {
+    background: linear-gradient(135deg, var(--fs-medical-dark) 0%, #1e3a5f 100%);
+    color: white;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+}
+.top-bar a { color: #7dd3fc; text-decoration: none; }
+.top-bar a:hover { color: white; }
+
+/* Medical Navbar */
+.medical-navbar {
+    background: white;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    padding: 0.75rem 0;
+}
+.medical-navbar .navbar-brand {
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--fs-primary-dark) !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.medical-navbar .nav-link {
+    color: #475569 !important;
+    font-weight: 500;
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+.medical-navbar .nav-link:hover,
+.medical-navbar .nav-link.active {
+    color: var(--fs-primary) !important;
+    background: var(--fs-primary-soft);
+}
+
+/* Deep Search Bar */
+.deep-search {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 90;
+}
+
+.medical-hero .deep-search {
+    margin-left: 0;
+    margin-right: 0;
+}
+.deep-search .search-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    padding-right: 3rem;
+    border: 2px solid var(--fs-border);
+    border-radius: 999px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: white;
+}
+.deep-search .search-input:focus {
+    outline: none;
+    border-color: var(--fs-primary);
+    box-shadow: 0 0 0 4px var(--fs-primary-soft);
+}
+.deep-search .search-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--fs-primary);
+    color: white;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Search Filters */
+.search-filters {
+    background: white;
+    border-radius: var(--fs-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--fs-shadow-md);
+    margin-top: 1rem;
+}
+.filter-group {
+    margin-bottom: 1rem;
+}
+.filter-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fs-dark);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.filter-chip {
+    padding: 0.5rem 1rem;
+    background: var(--fs-bg-soft);
+    border: 1px solid var(--fs-border);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.filter-chip:hover,
+.filter-chip.active {
+    background: var(--fs-primary);
+    color: white;
+    border-color: var(--fs-primary);
+}
+
+/* Medical Hero */
+.medical-hero {
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #ffffff 100%);
+    padding: 4rem 0;
+    position: relative;
+    overflow: visible;
+}
+.medical-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+}
+.medical-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--fs-medical-dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+.medical-hero .lead {
+    font-size: 1.25rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+/* Category Pills */
+.category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+}
+.category-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: white;
+    border: 1px solid var(--fs-border);
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+.category-pill:hover {
+    border-color: var(--fs-primary);
+    color: var(--fs-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+}
+.category-pill i {
+    color: var(--fs-primary);
+}
+
+/* Medical Product Card */
+.medical-product-card {
+    background: white;
+    border-radius: var(--fs-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.medical-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+.medical-product-card .card-image {
+    height: 200px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.medical-product-card .card-image img {
+    display: none;
+}
+.medical-product-card .card-body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.medical-product-card .card-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fs-primary);
+    margin-bottom: 0.5rem;
+}
+.medical-product-card .card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--fs-medical-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+.medical-product-card .card-description {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+.medical-product-card .card-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--fs-primary-dark);
+}
+.medical-product-card .card-footer {
+    padding-top: 1rem;
+    border-top: 1px solid var(--fs-border);
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+/* Accessibility Settings Panel */
+.accessibility-panel {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 9999;
+}
+.accessibility-toggle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--fs-medical-dark);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+.accessibility-toggle:hover {
+    transform: scale(1.1);
+}
+.accessibility-menu {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 0;
+    background: white;
+    border-radius: var(--fs-radius-lg);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    padding: 1.5rem;
+    min-width: 340px;
+    display: none;
+}
+.accessibility-menu.active {
+    display: block;
+}
+.accessibility-menu h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--fs-medical-dark);
+}
+.a11y-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--fs-border);
+}
+.a11y-option:last-child {
+    border-bottom: none;
+}
+.a11y-option label {
+    font-size: 0.875rem;
+    color: #475569;
+}
+.a11y-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--fs-border);
+    background: white;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.a11y-btn:hover,
+.a11y-btn.active {
+    background: var(--fs-primary);
+    color: white;
+    border-color: var(--fs-primary);
+}
+.a11y-reset {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 1px solid var(--fs-border);
+    background: #fff;
+    color: #4b5a52;
+    font-size: .82rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.a11y-reset:hover {
+    background: #eef8f1;
+    border-color: #cde2d4;
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+    --fs-primary: #0066cc;
+    --fs-primary-dark: #004499;
+    --fs-bg: #ffffff;
+    --fs-ink: #000000;
+}
+body.high-contrast .medical-navbar {
+    background: #ffffff;
+    border-bottom: 3px solid #000;
+}
+
+/* Large Text Mode */
+body.large-text {
+    font-size: 18px;
+}
+body.large-text .medical-hero h1 {
+    font-size: 3.5rem;
+}
+
+/* Exercise Tooltip & Link */
+.exercise-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--fs-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.exercise-link::after {
+    content: '/';
+    color: var(--fs-muted);
+    margin: 0 0.25rem;
+}
+.exercise-link .english-name {
+    color: var(--fs-muted);
+    font-size: 0.875em;
+    font-weight: 400;
+}
+.exercise-link:hover {
+    color: var(--fs-primary-dark);
+}
+
+/* Exercise Card Hover */
+.exercise-card-hover {
+    position: relative;
+}
+.exercise-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--fs-medical-dark);
+    color: white;
+    padding: 1rem;
+    border-radius: var(--fs-radius-lg);
+    font-size: 0.875rem;
+    width: 320px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    margin-bottom: 10px;
+}
+.exercise-card-hover:hover .exercise-tooltip {
+    opacity: 1;
+    visibility: visible;
+    bottom: calc(100% + 10px);
+}
+.exercise-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: var(--fs-medical-dark);
+}
+.exercise-tooltip .tooltip-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--fs-radius);
+    margin-bottom: 0.75rem;
+}
+.exercise-tooltip .tooltip-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.exercise-tooltip .tooltip-desc {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+.exercise-tooltip .tooltip-section {
+    margin-bottom: 0.75rem;
+}
+.exercise-tooltip .tooltip-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+.exercise-tooltip .tooltip-muscles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+.exercise-tooltip .tooltip-muscles .muscle-tag {
+    background: rgba(255,255,255,0.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+}
+.exercise-tooltip .tooltip-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.exercise-tooltip .tooltip-list li {
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+    font-size: 0.8125rem;
+}
+.exercise-tooltip .tooltip-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--fs-medical-teal);
+}
+.exercise-tooltip .badge-diff {
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.exercise-tooltip .badge-diff.easy { background: #22c55e; }
+.exercise-tooltip .badge-diff.medium { background: #f59e0b; }
+.exercise-tooltip .badge-diff.hard { background: #ef4444; }
+.exercise-tooltip .tooltip-how {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* ============================================================
+   FINAL UI OVERRIDES (light green + cleanup)
+   ============================================================ */
+
+.medical-hero {
+    background: linear-gradient(135deg, #eef9f1 0%, #f8fcf9 55%, #ffffff 100%);
+}
+
+.chip-search-btn {
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.chip-search-btn:hover,
+.chip-search-btn.active {
+    background: var(--fs-primary) !important;
+    color: #fff !important;
+    border-color: var(--fs-primary) !important;
+}
+
+.category-photo-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    display: block;
+    min-height: 220px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+}
+.category-photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 220px;
+}
+.category-photo-card .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, .15));
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+}
+.category-photo-card .overlay h4 {
+    color: #fff;
+    font-size: 1.15rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.footer-dark {
+    background: #f8faf8;
+    color: #4b5563;
+    margin-top: 3rem !important;
+    padding: 2rem 0 !important;
+    border-top: 1px solid #e5efe8;
+}
+.footer-minimal {
+    text-align: center;
+}
+.footer-minimal h4 {
+    margin-bottom: .75rem;
+    font-weight: 700;
+}
+.footer-minimal .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .9rem;
+    margin-bottom: .5rem;
+}
+.footer-minimal .footer-links a {
+    color: #4b5563;
+    font-size: .9rem;
+    text-decoration: none;
+}
+.footer-minimal .footer-links a:hover {
+    color: var(--fs-primary);
+}
+
+.product-reviews-mini {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-size: .8rem;
+}
+.product-reviews-mini .stars {
+    color: #f59e0b;
+}
+.product-reviews-mini .count {
+    color: #6b7280;
+}
+.product-review-snippet {
+    font-size: .82rem;
+    color: #6b7280;
+    margin-bottom: .65rem;
+    min-height: 2.2em;
+}
+
+.product-description-simple {
+    background: #f9fbf9;
+    border: 1px solid #e6efe8;
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    line-height: 1.7;
+    color: #2f3a32;
+}
+
+.nutrition-label {
+    border: 2px solid #111;
+    border-radius: 4px;
+    background: #fff;
+    max-width: 360px;
+    color: #111;
+}
+.nutrition-label-head {
+    font-size: 1.95rem;
+    line-height: 1;
+    font-weight: 800;
+    padding: .65rem .75rem .45rem;
+    border-bottom: 7px solid #111;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+.nutrition-label-head span {
+    font-weight: 500;
+    color: #1f2937;
+    font-size: .76rem;
+}
+.nutrition-label-body > div {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .3rem .75rem;
+    border-top: 1px solid #333;
+    font-size: .86rem;
+}
+.nutrition-label-body > div:first-child {
+    border-top: 0;
+}
+.nutrition-label-body > div strong {
+    font-weight: 700;
+}
+
+.citations-block {
+    background: #f9fbf9;
+    border: 1px solid #e6efe8;
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+}
+.citations-list li {
+    margin-bottom: .65rem;
+    line-height: 1.55;
+}
+
+.benefits-grid {
+    align-items: stretch;
+}
+.benefit-item,
+.split-card-v2,
+.help-card,
+.plan-card {
+    height: 100%;
+}
+
+.pagination {
+    gap: .3rem;
+}
+.pagination .page-link {
+    border-radius: 8px !important;
+    min-width: 42px;
+    text-align: center;
+}
+.pagination .page-item.active .page-link {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+}
+
+@media (max-width: 767px) {
+    .medical-hero h1 { font-size: 2rem; }
+    .category-photo-card,
+    .category-photo-card img { min-height: 180px; }
+}
+
+/* Theme consistency overrides */
+.top-bar {
+    background: linear-gradient(135deg, #153823 0%, #1f5133 100%);
+}
+.top-bar a { color: #d9f5e2; }
+
+.medical-navbar .nav-link:hover,
+.medical-navbar .nav-link.active {
+    color: var(--fs-primary) !important;
+    background: var(--fs-primary-soft);
+}
+
+.btn-primary,
+.btn-success {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+}
+.btn-primary:hover,
+.btn-success:hover {
+    background: var(--fs-primary-dark);
+    border-color: var(--fs-primary-dark);
+}
+
+.btn-outline-primary {
+    color: var(--fs-primary);
+    border-color: var(--fs-primary);
+}
+.btn-outline-primary:hover {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+    color: #fff;
+}
+
+.admin-nav-item.active {
+    color: var(--fs-primary);
+    background: var(--fs-primary-soft);
+    border-left-color: var(--fs-primary);
+}
+
+.split-card-v2.selected {
+    border-color: var(--fs-primary);
+    background: var(--fs-primary-soft);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+    color: #fff;
+}
+
+.shop-pagination > nav > div:first-child {
+    display: none;
+}
+.shop-pagination .pagination {
+    justify-content: center;
+}
+
+.diet-card .cover {
+    background-image: none !important;
+    background: #eef3ef !important;
+    min-height: 130px;
+}
+
+/* Global zoom/responsive stability */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+body {
+    overflow-x: hidden;
+}
+
+/* Search suggestion dropdowns (home + shop) */
+.search-suggest {
+    position: absolute;
+    top: calc(100% + .4rem);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: #fff;
+    border: 1px solid #d6e6db;
+    border-radius: 12px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .1);
+    overflow: hidden;
+}
+.search-suggest .item {
+    width: 100%;
+    border: 0;
+    background: #fff;
+    color: #1f2a24;
+    text-align: left;
+    font-size: .92rem;
+    padding: .65rem .85rem;
+    cursor: pointer;
+    border-bottom: 1px solid #edf3ef;
+}
+.search-suggest .item:last-child {
+    border-bottom: 0;
+}
+.search-suggest .item:hover {
+    background: #eef8f1;
+    color: #165c2f;
+}
+
+/* Shop filter accordions */
+.filter-accordion {
+    border-bottom: 1px solid var(--fs-border);
+}
+.filter-accordion > summary {
+    list-style: none;
+    cursor: pointer;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.filter-accordion > summary::-webkit-details-marker {
+    display: none;
+}
+.filter-accordion > summary::after {
+    content: '\F282';
+    font-family: 'bootstrap-icons';
+    margin-left: auto;
+    font-size: .85rem;
+    color: #6c7f73;
+    transition: transform .18s ease;
+}
+.filter-accordion[open] > summary::after {
+    transform: rotate(180deg);
+}
+.filter-list-scroll {
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: .25rem;
+}
+
+.search-wrap input:focus {
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, .16);
+}
+
+/* Product cards readability and cleaner colors */
+.medical-product-card {
+    border: 1px solid #deebe2;
+    box-shadow: 0 6px 16px rgba(10, 30, 18, .06);
+}
+.medical-product-card .card-image {
+    background: linear-gradient(160deg, #edf3ef 0%, #f8fbf9 100%);
+}
+.medical-product-card .card-title,
+.medical-product-card .card-title a {
+    color: #1a2a22 !important;
+}
+.medical-product-card .card-description {
+    color: #4f5f56;
+}
+.medical-product-card .card-price .text-primary {
+    color: var(--fs-primary-dark) !important;
+}
+
+/* Sports category/type helper cards */
+.sport-types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem;
+}
+.sport-type-card {
+    background: #fff;
+    border: 1px solid #dce9e1;
+    border-radius: 12px;
+    padding: .85rem .95rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+.sport-type-card strong {
+    font-size: .92rem;
+    color: #173524;
+}
+.sport-type-card span {
+    font-size: .83rem;
+    line-height: 1.45;
+    color: #5d6d63;
+}
+
+/* Builder help cards: minimal + hover grow */
+.compact-help .help-card {
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.compact-help .help-card:hover {
+    transform: translateY(-2px) scale(1.02);
+    border-color: #c2dbc9;
+    box-shadow: 0 10px 20px rgba(20, 40, 25, .08);
+}
+
+/* Evidence cards instead of long AI-looking list */
+.evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(180px, 1fr));
+    gap: .85rem;
+}
+.evidence-item {
+    display: block;
+    background: #fff;
+    border: 1px solid #dce9e1;
+    border-radius: 12px;
+    padding: .95rem 1rem;
+    text-decoration: none;
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.evidence-item:hover {
+    transform: translateY(-2px);
+    border-color: #c0dbc8;
+    box-shadow: 0 10px 20px rgba(16, 44, 29, .09);
+}
+.evidence-item h6 {
+    margin-bottom: .4rem;
+    font-size: .92rem;
+    font-weight: 700;
+    color: #163324;
+}
+.evidence-item p {
+    font-size: .84rem;
+    color: #5d6d63;
+    line-height: 1.5;
+    margin-bottom: .55rem;
+}
+.evidence-item a,
+.evidence-item span {
+    font-size: .82rem;
+    color: var(--fs-primary-dark);
+    font-weight: 600;
+}
+
+/* Paskyros puslapio dizainas */
+.account-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fs-primary), #27864a);
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.account-tabs .nav-link {
+    color: #4b5563;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: .45rem 1.1rem;
+    font-size: .92rem;
+}
+.account-tabs .nav-link.active {
+    background: var(--fs-primary);
+    color: #fff;
+}
+.account-tabs .nav-link:not(.active):hover {
+    background: var(--fs-primary-soft);
+    color: var(--fs-primary);
+}
+
+/* Account page contrast and readability */
+.account-page .account-card {
+    border: 1px solid #dbe6df;
+    box-shadow: 0 4px 14px rgba(10, 30, 18, .05) !important;
+}
+.account-page .account-card h5 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #173524;
+}
+.account-page .form-label.small {
+    color: #3d4d44;
+    font-weight: 600;
+}
+.account-page .form-control,
+.account-page .form-select {
+    border-color: #cfdcd4;
+    background: #fcfffd;
+}
+.account-page .form-control:focus,
+.account-page .form-select:focus {
+    border-color: var(--fs-primary);
+    box-shadow: 0 0 0 .2rem rgba(52, 168, 83, .15);
+}
+.account-menu .list-group-item {
+    border-color: #dbe6df;
+    font-weight: 500;
+}
+.account-menu .list-group-item.active {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+}
+
+@media (max-width: 992px) {
+    .sport-types-grid,
+    .evidence-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .shop-layout {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .sport-types-grid,
+    .evidence-grid {
+        grid-template-columns: 1fr;
+    }
+    .search-suggest .item {
+        font-size: .88rem;
+    }
+    .medical-product-card .card-body {
+        padding: .9rem;
+    }
+}
+
+/* Cart refinements */
+.cart-continue-btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: .55rem .9rem;
+}
+.cart-remove-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid #f1c8cf;
+    background: #fff;
+    color: #b93f50;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.cart-remove-btn:hover {
+    background: #fff5f6;
+    border-color: #e7a3af;
+    color: #a93245;
+}
+.qty-sync-btn {
+    display: none;
+}
+
+.cart-suggestions .medical-product-card {
+    font-size: .92rem;
+}
+.cart-suggestions .medical-product-card .card-image {
+    min-height: 118px;
+}
+.cart-suggestions .medical-product-card .card-image img {
+    max-height: 72%;
+}
+.cart-suggestions .medical-product-card .card-title {
+    font-size: 1rem;
+}
+.cart-suggestions .medical-product-card .card-description {
+    font-size: .8rem;
+    margin-bottom: .45rem;
+}
+.cart-suggestions .medical-product-card .product-review-snippet {
+    font-size: .74rem;
+    margin-bottom: .55rem;
+}
+.cart-summary-card {
+    border: 1px solid #d3e4d8;
+    border-radius: 14px;
+    overflow: hidden;
+}
+.cart-summary-card .card-body {
+    background: linear-gradient(180deg, #ffffff 0%, #f7fcf8 100%);
+}
+.cart-summary-total span:last-child {
+    color: #1b8d49;
+}
+
+/* Builder info polish */
+.builder-info-block {
+    border: 1px solid #dce9e1;
+    border-radius: 14px;
+    padding: 1.1rem 1.15rem;
+    background: #fff;
+}
+.builder-info-row .section-block h3 {
+    font-size: 1.95rem;
+    margin-bottom: .95rem;
+}
+.builder-info-centered {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.builder-info-centered > h3,
+.builder-info-centered > .section-label {
+    text-align: center;
+}
+.builder-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem;
+    margin-bottom: .8rem;
+}
+.builder-steps.one-col {
+    grid-template-columns: 1fr;
+    margin-bottom: .5rem;
+}
+.builder-steps .step-item {
+    display: flex;
+    gap: .6rem;
+    align-items: flex-start;
+}
+.builder-steps .step-item span {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #e9f6ee;
+    color: #1d6b3a;
+    font-size: .76rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 24px;
+}
+.builder-steps .step-item p {
+    margin: 0;
+    font-size: .88rem;
+    color: #44524a;
+    line-height: 1.5;
+}
+.builder-note {
+    color: #506158;
+    font-size: .88rem;
+    line-height: 1.55;
+}
+.glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .7rem;
+    max-width: 980px;
+    margin: 0 auto;
+}
+.glossary-grid.two-col-tight {
+    max-width: 100%;
+    margin: 0;
+}
+.glossary-item {
+    border: 1px solid #e1ebe5;
+    border-radius: 10px;
+    padding: .75rem .85rem;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+.glossary-item strong {
+    font-size: .9rem;
+    color: #143525;
+}
+.glossary-item span {
+    font-size: .84rem;
+    color: #5a6b62;
+}
+
+/* Better evidence card alignment */
+.evidence-grid {
+    align-items: stretch;
+    justify-content: center;
+    max-width: 1220px;
+    margin: 0 auto;
+}
+.evidence-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.evidence-item span {
+    margin-top: auto;
+}
+
+/* Checkout visual redesign */
+.checkout-shell {
+    max-width: 1180px;
+}
+.checkout-card-split {
+    display: grid;
+    grid-template-columns: 390px 1fr;
+    background: #fff;
+    border: 1px solid #dce6df;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(12, 35, 22, .08);
+}
+.checkout-aside {
+    padding: 2rem 1.6rem;
+    color: #fff;
+    background:
+        radial-gradient(1200px 320px at -20% 100%, rgba(139, 230, 170, .36) 0%, rgba(139, 230, 170, 0) 60%),
+        radial-gradient(900px 280px at 100% 0%, rgba(255, 255, 255, .15) 0%, rgba(255, 255, 255, 0) 50%),
+        linear-gradient(165deg, #1c9d50 0%, #188a47 45%, #11723a 100%);
+}
+.checkout-aside .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .72rem;
+    font-weight: 600;
+    opacity: .88;
+}
+.checkout-aside h2 {
+    font-size: 1.6rem;
+    margin: .25rem 0 .7rem;
+}
+.checkout-total {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+}
+.checkout-aside p {
+    color: rgba(255, 255, 255, .88);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+.checkout-items {
+    margin-top: 1.2rem;
+    padding: .9rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .22);
+}
+.checkout-items .item-row {
+    display: flex;
+    justify-content: space-between;
+    gap: .75rem;
+    font-size: .85rem;
+    margin-bottom: .5rem;
+}
+.checkout-items .item-row:last-child {
+    margin-bottom: 0;
+}
+.checkout-breakdown {
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, .22);
+    padding-top: .85rem;
+}
+.checkout-breakdown > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .35rem;
+    font-size: .88rem;
+}
+.checkout-breakdown > div.final {
+    margin-top: .55rem;
+    padding-top: .55rem;
+    border-top: 1px solid rgba(255, 255, 255, .22);
+    font-weight: 700;
+    font-size: .97rem;
+}
+
+.checkout-main {
+    padding: 1.9rem;
+    background: #fff;
+}
+.checkout-main h1 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.checkout-section {
+    border: 1px solid #e1e9e3;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.checkout-section h5 {
+    margin-bottom: .85rem;
+    font-size: .98rem;
+    font-weight: 700;
+}
+.checkout-main .form-label.small {
+    color: #42524a;
+    font-weight: 600;
+}
+.checkout-main .form-control {
+    border-color: #d3ddd6;
+    border-radius: 8px;
+}
+.checkout-main .form-control:focus {
+    border-color: #57b572;
+    box-shadow: 0 0 0 .2rem rgba(52, 168, 83, .14);
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6rem;
+}
+.pay-option {
+    position: relative;
+    margin: 0;
+}
+.pay-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.pay-option span {
+    display: block;
+    border: 1px solid #d4ded7;
+    border-radius: 9px;
+    padding: .58rem .7rem;
+    font-size: .87rem;
+    text-align: center;
+    font-weight: 600;
+    color: #2f3b34;
+    background: #fff;
+    cursor: pointer;
+}
+.pay-option input:checked + span {
+    border-color: #238f4d;
+    color: #1f6c3b;
+    background: #f2fcf5;
+    box-shadow: 0 0 0 2px rgba(36, 161, 78, .12);
+}
+
+.checkout-demo {
+    border-color: #bfe6c9 !important;
+    background: #f3fbf5 !important;
+    color: #215f35 !important;
+}
+.checkout-demo u {
+    text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
+}
+
+.checkout-submit {
+    border-radius: 10px;
+    font-weight: 600;
+    background: #1b944d;
+    border-color: #1b944d;
+}
+.checkout-submit:hover,
+.checkout-submit:focus {
+    background: #157b3f;
+    border-color: #157b3f;
+}
+
+@media (max-width: 991px) {
+    .checkout-card-split {
+        grid-template-columns: 1fr;
+    }
+    .checkout-aside,
+    .checkout-main {
+        padding: 1.2rem;
+    }
+    .builder-steps,
+    .glossary-grid {
+        grid-template-columns: 1fr;
+    }
+}
