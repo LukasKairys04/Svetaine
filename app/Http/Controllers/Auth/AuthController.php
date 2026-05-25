@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -55,6 +57,39 @@ class AuthController extends Controller
 
         Auth::login($User);
         $request->session()->regenerate();
+        
+        try {
+            $apiKey = env('SENDGRID_API_KEY');
+            $fromEmail = env('MAIL_FROM_ADDRESS');
+            $fromName = env('MAIL_FROM_NAME', 'FitShop');
+            
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $apiKey,
+                'Content-Type' => 'application/json',
+            ])->post('https://api.sendgrid.com/v3/mail/send', [
+                'personalizations' => [
+                    [
+                        'to' => [['email' => $User->email, 'name' => $User->name]],
+                        'subject' => 'Sveiki atvykę į FitShop!',
+                    ],
+                ],
+                'from' => [
+                    'email' => $fromEmail,
+                    'name' => $fromName,
+                ],
+                'content' => [
+                    [
+                        'type' => 'text/html',
+                        'value' => view('emails.welcome', ['user' => $User])->render(),
+                    ],
+                ],
+            ]);
+            
+            \Log::info('SendGrid response: ' . $response->status());
+        } catch (\Exception $e) {
+            \Log::error('SendGrid error: ' . $e->getMessage());
+        }
+        
         return redirect()->route('home')->with('success', 'Sveiki atvykę, ' . $User->name . '!');
     }
 

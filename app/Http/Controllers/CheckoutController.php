@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -78,6 +80,8 @@ class CheckoutController extends Controller
 
             return $order;
         });
+
+        Mail::to($order->billing_email)->send(new OrderConfirmationMail($order));
 
         return redirect()->route('checkout.success', $order)->with('success', 'Užsakymas sėkmingai priimtas!');
     }

@@ -29,8 +29,6 @@ class SupportController extends Controller
 
     }
 
-
-
     public function submit(Request $request)
 
     {
@@ -47,10 +45,12 @@ class SupportController extends Controller
 
         ]);
 
-        SupportMessage::create(array_merge($data, [
+        $message = SupportMessage::create(array_merge($data, [
             'user_id' => Auth::id(),
             'status' => 'new',
         ]));
+
+        Mail::to($data['email'])->send(new SupportReceivedMail($message));
 
         return back()->with('success', 'Ačiū! Jūsų žinutė gauta, greitai atsakysime.');
 
