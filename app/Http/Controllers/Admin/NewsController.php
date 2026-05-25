@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Naujiena;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,7 +18,7 @@ class NewsController extends Controller
 
     public function create()
     {
-        return view('admin.news.form', ['item' => new Naujiena(['is_published' => true, 'published_at' => now()])]);
+        return view('admin.news.form', ['item' => new News(['is_published' => true, 'published_at' => now()])]);
     }
 
     public function store(Request $request)
