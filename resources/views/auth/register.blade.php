@@ -29,10 +29,11 @@
                     <label class="form-label">Pakartokite slaptažodį</label>
                     <input type="password" name="password_confirmation" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100" id="registerBtn" onclick="this.disabled=true; this.innerHTML='<span class=\'spinner-border spinner-border-sm\'></span> Registruojama...';">
+                <button type="submit" class="btn btn-primary w-100" id="registerBtn">
                     Registruotis
                 </button>
             </form>
+            <script>document.querySelector('#registerBtn').closest('form').addEventListener('submit',function(){var b=document.getElementById('registerBtn');b.disabled=true;b.innerHTML='<span class="spinner-border spinner-border-sm"></span> Registruojama...';});</script>
             <hr>
             <div class="text-center small">Jau turite paskyrą? <a href="{{ route('login') }}">Prisijungti</a></div>
         </div>

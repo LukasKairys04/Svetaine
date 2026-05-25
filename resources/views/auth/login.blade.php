@@ -26,10 +26,11 @@
                     <input type="checkbox" name="remember" id="remember" class="form-check-input">
                     <label for="remember" class="form-check-label">Prisiminti mane</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100" onclick="this.disabled=true; this.innerHTML='<span class=\'spinner-border spinner-border-sm\'></span> Prisijungiama...';">
+                <button type="submit" class="btn btn-primary w-100" id="loginBtn">
                     Prisijungti
                 </button>
             </form>
+            <script>document.querySelector('#loginBtn').closest('form').addEventListener('submit',function(){var b=document.getElementById('loginBtn');b.disabled=true;b.innerHTML='<span class="spinner-border spinner-border-sm"></span> Prisijungiama...';});</script>
             <hr>
             <div class="text-center small">Neturite paskyros? <a href="{{ route('register') }}">Registruotis</a></div>
         </div>
