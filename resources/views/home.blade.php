@@ -115,59 +115,6 @@
 </section>
 
 @endif
-<section class="py-5">
-
-    <div class="container">
-
-        <div class="row justify-content-center">
-
-            <div class="col-lg-8">
-
-                <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, var(--fs-primary-soft) 0%, white 100%);">
-
-                    <div class="card-body p-5 text-center">
-
-                        <i class="bi bi-envelope-heart text-primary fs-1 mb-3"></i>
-
-                        <h3>Prenumeruokite mūsų naujienlaiškį</h3>
-
-                        <p class="text-muted">Gaukite naujausius pasiūlymus ir sveikatos patarimus tiesiai į savo el. paštą</p>
-
-                        <div id="newsletter-success" class="alert alert-success d-none"><i class="bi bi-check-circle me-2"></i>Ačiū! Jūs sėkmingai užsiprenumeravote.</div>
-
-                        <form class="row g-2 justify-content-center" id="newsletter-form" onsubmit="subscribeNewsletter(event)">
-
-                            <div class="col-md-8">
-
-                                <input type="email" class="form-control form-control-lg" placeholder="Įveskite savo el. paštą" required>
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <button type="submit" class="btn btn-primary btn-lg w-100">
-
-                                    <i class="bi bi-send me-2"></i>Prenumeruoti
-
-                                </button>
-
-                            </div>
-
-                        </form>
-
-                        <script>function subscribeNewsletter(e){e.preventDefault();document.getElementById('newsletter-form').classList.add('d-none');document.getElementById('newsletter-success').classList.remove('d-none');}</script>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 
