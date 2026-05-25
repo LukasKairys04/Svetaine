@@ -22,13 +22,16 @@
                 <div class="mb-3">
                     <label class="form-label">Slaptažodis</label>
                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
+                    <div class="form-text small">Mažiausiai 8 simboliai</div>
                     @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Pakartokite slaptažodį</label>
                     <input type="password" name="password_confirmation" class="form-control" required>
                 </div>
-                <button class="btn btn-primary w-100">Registruotis</button>
+                <button type="submit" class="btn btn-primary w-100" id="registerBtn" onclick="this.disabled=true; this.innerHTML='<span class=\'spinner-border spinner-border-sm\'></span> Registruojama...';">
+                    Registruotis
+                </button>
             </form>
             <hr>
             <div class="text-center small">Jau turite paskyrą? <a href="{{ route('login') }}">Prisijungti</a></div>

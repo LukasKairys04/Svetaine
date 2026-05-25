@@ -17,6 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/saltiniai', 'references')->name('references');
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/search', [ShopController::class, 'search'])->name('shop.search');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/product/{slug}/review', [\App\Http\Controllers\ReviewController::class, 'store'])
     ->middleware('auth')->name('product.review');

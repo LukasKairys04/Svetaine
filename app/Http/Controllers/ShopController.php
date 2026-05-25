@@ -85,4 +85,33 @@ class ShopController extends Controller
             'products', 'categories', 'brandCounts', 'priceBounds', 'selectedBrands'
         ));
     }
+
+    public function search(Request $request)
+    {
+        $q = $request->input('q');
+        if (strlen($q) < 2) {
+            return response()->json(['results' => []]);
+        }
+
+        $products = Product::active()
+            ->where(function ($w) use ($q) {
+                $w->where('name', 'like', "%{$q}%")
+                  ->orWhere('brand', 'like', "%{$q}%")
+                  ->orWhere('short_description', 'like', "%{$q}%");
+            })
+            ->limit(8)
+            ->get(['id', 'name', 'slug', 'price', 'sale_price', 'image']);
+
+        return response()->json([
+            'results' => $products->map(function ($p) {
+                return [
+                    'id' => $p->id,
+                    'name' => $p->name,
+                    'slug' => $p->slug,
+                    'price' => $p->effective_price,
+                    'image' => $p->image,
+                ];
+            })
+        ]);
+    }
 }

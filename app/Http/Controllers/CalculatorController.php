@@ -52,9 +52,9 @@ class CalculatorController extends Controller
                 default => $tdee,
             };
             $calories = (int) round($calories);
-            $protein = (int) round($w * ($goal === 'gain' ? 2 : 1.8));
-            $fat = (int) round(($calories * 0.25) / 9);
-            $carbs = (int) round(($calories - $protein * 4 - $fat * 9) / 4);
+            $protein = max(50, (int) round($w * ($goal === 'gain' ? 2 : 1.8)));
+            $fat = max(20, (int) round(($calories * 0.25) / 9));
+            $carbs = max(50, (int) round(($calories - $protein * 4 - $fat * 9) / 4));
 
             $result = compact('bmr', 'tdee', 'calories', 'protein', 'fat', 'carbs');
         }

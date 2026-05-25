@@ -20,12 +20,15 @@
                 <div class="mb-3">
                     <label class="form-label">Slaptažodis</label>
                     <input type="password" name="password" class="form-control" required>
+                    <div class="form-text small">Mažiausiai 8 simboliai</div>
                 </div>
                 <div class="form-check mb-3">
                     <input type="checkbox" name="remember" id="remember" class="form-check-input">
                     <label for="remember" class="form-check-label">Prisiminti mane</label>
                 </div>
-                <button class="btn btn-primary w-100">Prisijungti</button>
+                <button type="submit" class="btn btn-primary w-100" onclick="this.disabled=true; this.innerHTML='<span class=\'spinner-border spinner-border-sm\'></span> Prisijungiama...';">
+                    Prisijungti
+                </button>
             </form>
             <hr>
             <div class="text-center small">Neturite paskyros? <a href="{{ route('register') }}">Registruotis</a></div>

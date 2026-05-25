@@ -44,54 +44,29 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => ['required', 'string', 'min:8', 'max:64', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
-        ]);
-
-        $User = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        Auth::login($User);
-        $request->session()->regenerate();
-        
         try {
-            $apiKey = env('SENDGRID_API_KEY');
-            $fromEmail = env('MAIL_FROM_ADDRESS');
-            $fromName = env('MAIL_FROM_NAME', 'FitShop');
-            
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $apiKey,
-                'Content-Type' => 'application/json',
-            ])->post('https://api.sendgrid.com/v3/mail/send', [
-                'personalizations' => [
-                    [
-                        'to' => [['email' => $User->email, 'name' => $User->name]],
-                        'subject' => 'Sveiki atvykę į FitShop!',
-                    ],
-                ],
-                'from' => [
-                    'email' => $fromEmail,
-                    'name' => $fromName,
-                ],
-                'content' => [
-                    [
-                        'type' => 'text/html',
-                        'value' => view('emails.welcome', ['user' => $User])->render(),
-                    ],
-                ],
+            $data = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => ['required', 'string', 'min:8', 'max:64', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
             ]);
-            
-            \Log::info('SendGrid response: ' . $response->status());
+
+            $User = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            Auth::login($User);
+            $request->session()->regenerate();
+
+            \Log::info('User registered: ' . $User->email);
+
+            return redirect()->route('home')->with('success', 'Sveiki atvykę, ' . $User->name . '!');
         } catch (\Exception $e) {
-            \Log::error('SendGrid error: ' . $e->getMessage());
+            \Log::error('Registration error: ' . $e->getMessage());
+            return back()->with('error', 'Registracija nepavyko. Prašome pabandyti vėliau.')->withInput();
         }
-        
-        return redirect()->route('home')->with('success', 'Sveiki atvykę, ' . $User->name . '!');
     }
 
     public function logout(Request $request)
