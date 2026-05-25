@@ -134,5 +134,18 @@ class AccountController extends Controller
 
     }
 
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'password' => 'required|current_password',
+        ]);
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        $user->delete();
+        return redirect()->route('home')->with('success', 'Paskyra sėkmingai ištrinta.');
+    }
+
 }
 
