@@ -20,14 +20,12 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('partials.navbar', function ($view) {
             $view->with('navProductCategories',
-                Cache::remember('nav_product_categories', 3600, function () {
-                    return Category::where('type', 'product')
-                        ->where('is_active', true)
-                        ->whereNotIn('slug', ['mityba', 'sportas'])
-                        ->orderBy('sort_order')
-                        ->orderBy('name')
-                        ->get();
-                })
+                Category::where('type', 'product')
+                    ->where('is_active', true)
+                    ->whereNotIn('slug', ['mityba', 'sportas'])
+                    ->orderBy('sort_order')
+                    ->orderBy('name')
+                    ->get()
             );
         });
     }
