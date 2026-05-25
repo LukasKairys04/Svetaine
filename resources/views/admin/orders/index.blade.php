@@ -2,18 +2,26 @@
 @section('title', 'Užsakymai')
 
 @section('admin')
-    <form method="GET" class="card p-3 mb-3 shadow-sm">
-        <div class="row g-2">
-            <div class="col-md-6"><input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Nr. / vardas / el. paštas"></div>
-            <div class="col-md-4">
-                <select name="status" class="form-select">
-                    <option value="">Visos būsenos</option>
-                    @foreach(['pending','paid','processing','shipped','completed','cancelled','refunded'] as $s)
-                        <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
-                    @endforeach
-                </select>
+    <form method="GET" class="card shadow-sm mb-3">
+        <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-semibold text-muted text-uppercase" style="letter-spacing:.05em">Filtrai</span>
+                @if(request()->hasAny(['q','status']))
+                    <a href="{{ route('admin.orders.index') }}" class="small text-danger text-decoration-none"><i class="bi bi-x-circle me-1"></i>Valyti filtrus</a>
+                @endif
             </div>
-            <div class="col-md-2"><button class="btn btn-primary w-100">Filtruoti</button></div>
+            <div class="row g-2 align-items-center">
+                <div class="col-md-5"><input type="text" name="q" value="{{ request('q') }}" class="form-control form-control-sm" placeholder="Nr. / vardas / el. paštas"></div>
+                <div class="col-md-4">
+                    <select name="status" class="form-select form-select-sm">
+                        <option value="">Visos būsenos</option>
+                        @foreach(['pending','paid','processing','shipped','completed','cancelled','refunded'] as $s)
+                            <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-auto"><button class="btn btn-primary btn-sm">Ieškoti</button></div>
+            </div>
         </div>
     </form>
 

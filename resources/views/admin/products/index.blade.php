@@ -6,39 +6,46 @@
         <a href="{{ route('admin.products.create') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Pridėti</a>
     </div>
 
-    <form method="GET" class="card p-3 mb-3 shadow-sm">
-        <div class="row g-2">
-            <div class="col-lg-3 col-md-6"><input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Ieškoti pagal pavadinimą, brand, slug..."></div>
-            <div class="col-lg-2 col-md-6">
-                <select name="category_id" class="form-select">
-                    <option value="">Visos kategorijos</option>
-                    @foreach($categories as $c)<option value="{{ $c->id }}" @selected(request('category_id') == $c->id)>{{ $c->name }}</option>@endforeach
-                </select>
+    <form method="GET" class="card shadow-sm mb-3">
+        <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-semibold text-muted text-uppercase" style="letter-spacing:.05em">Filtrai</span>
+                @if(request()->hasAny(['q','category_id','status','featured','stock']))
+                    <a href="{{ route('admin.products.index') }}" class="small text-danger text-decoration-none"><i class="bi bi-x-circle me-1"></i>Valyti filtrus</a>
+                @endif
             </div>
-            <div class="col-lg-2 col-md-4">
-                <select name="status" class="form-select">
-                    <option value="">Visos būsenos</option>
-                    <option value="active" @selected(request('status') === 'active')>Aktyvūs</option>
-                    <option value="inactive" @selected(request('status') === 'inactive')>Neaktyvūs</option>
-                </select>
-            </div>
-            <div class="col-lg-2 col-md-4">
-                <select name="featured" class="form-select">
-                    <option value="">Visi produktai</option>
-                    <option value="1" @selected(request('featured') === '1')>Rekomenduojami</option>
-                    <option value="0" @selected(request('featured') === '0')>Nerekomenduojami</option>
-                </select>
-            </div>
-            <div class="col-lg-1 col-md-4">
-                <select name="stock" class="form-select">
-                    <option value="">Likutis</option>
-                    <option value="in" @selected(request('stock') === 'in')>Yra</option>
-                    <option value="out" @selected(request('stock') === 'out')>Nėra</option>
-                </select>
-            </div>
-            <div class="col-12 col-md-auto d-flex gap-2">
-                <button class="btn btn-primary">Filtruoti</button>
-                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Valyti</a>
+            <div class="row g-2 align-items-center">
+                <div class="col-md-4"><input type="text" name="q" value="{{ request('q') }}" class="form-control form-control-sm" placeholder="Ieškoti pagal pavadinimą, brand, slug..."></div>
+                <div class="col-md-2">
+                    <select name="category_id" class="form-select form-select-sm">
+                        <option value="">Visos kategorijos</option>
+                        @foreach($categories as $c)<option value="{{ $c->id }}" @selected(request('category_id') == $c->id)>{{ $c->name }}</option>@endforeach
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select name="status" class="form-select form-select-sm">
+                        <option value="">Visos būsenos</option>
+                        <option value="active" @selected(request('status') === 'active')>Aktyvūs</option>
+                        <option value="inactive" @selected(request('status') === 'inactive')>Neaktyvūs</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select name="featured" class="form-select form-select-sm">
+                        <option value="">Visi produktai</option>
+                        <option value="1" @selected(request('featured') === '1')>Rekomenduojami</option>
+                        <option value="0" @selected(request('featured') === '0')>Nerekomenduojami</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <select name="stock" class="form-select form-select-sm">
+                        <option value="">Likutis</option>
+                        <option value="in" @selected(request('stock') === 'in')>Yra</option>
+                        <option value="out" @selected(request('stock') === 'out')>Nėra</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary btn-sm w-100">Ieškoti</button>
+                </div>
             </div>
         </div>
     </form>

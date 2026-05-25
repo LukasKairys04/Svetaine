@@ -2,22 +2,27 @@
 @section('title', 'Pagalbos žinutės')
 
 @section('admin')
-    <form method="GET" class="card p-3 mb-3 shadow-sm">
-        <div class="row g-2">
-            <div class="col-md-5">
-                <input type="search" name="search" class="form-control" placeholder="Ieškoti pagal vardą, el. paštą, temą..." value="{{ request('search') }}">
+    <form method="GET" class="card shadow-sm mb-3">
+        <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-semibold text-muted text-uppercase" style="letter-spacing:.05em">Filtrai</span>
+                @if(request()->hasAny(['search','status']))
+                    <a href="{{ route('admin.support.index') }}" class="small text-danger text-decoration-none"><i class="bi bi-x-circle me-1"></i>Valyti filtrus</a>
+                @endif
             </div>
-            <div class="col-md-3">
-                <select name="status" class="form-select">
-                    <option value="">Visos būsenos</option>
-                    @foreach(['new','in_progress','resolved','closed'] as $s)
-                        <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-4 d-flex gap-2">
-                <button class="btn btn-primary w-100">Filtruoti</button>
-                <a href="{{ route('admin.support.index') }}" class="btn btn-outline-secondary">Išvalyti</a>
+            <div class="row g-2 align-items-center">
+                <div class="col-md-5"><input type="search" name="search" class="form-control form-control-sm" placeholder="Ieškoti pagal vardą, el. paštą, temą..." value="{{ request('search') }}"></div>
+                <div class="col-md-3">
+                    <select name="status" class="form-select form-select-sm">
+                        <option value="">Visos būsenos</option>
+                        @foreach(['new','in_progress','resolved','closed'] as $s)
+                            <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-auto">
+                    <button class="btn btn-primary btn-sm">Ieškoti</button>
+                </div>
             </div>
         </div>
     </form>
