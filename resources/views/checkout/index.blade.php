@@ -185,9 +185,8 @@
                 </div>
 
                 <div class="alert checkout-demo small m-0 mt-3">
-
-                    <i class="bi bi-info-circle"></i> Demonstracinis režimas — realus mokėjimas nevyksta, užsakymas bus pažymėtas kaip apmokėtas.
-
+                    <i class="bi bi-shield-lock"></i> Pasirinkus <strong>Kortelė</strong> — būsite nukreipti į saugų Stripe mokėjimo puslapį.
+                    Testavimui naudokite kortelės nr. <code>4242 4242 4242 4242</code>, bet kokią datą ir CVC.
                 </div>
 
             </div>

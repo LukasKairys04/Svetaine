@@ -40,7 +40,12 @@ Route::prefix('checkout')->name('checkout.')->middleware('auth')->group(function
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/', [CheckoutController::class, 'place'])->name('place');
     Route::get('/success/{order}', [CheckoutController::class, 'success'])->name('success');
+    Route::get('/cancel/{order}', [CheckoutController::class, 'cancel'])->name('cancel');
 });
+
+Route::post('/stripe/webhook', [\App\Http\Controllers\StripeWebhookController::class, 'handle'])
+    ->name('stripe.webhook')
+    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class]);
 
 // ── Mityba ───────────────────────────────────────────────────────────────────
 Route::prefix('nutrition')->name('nutrition.')->group(function () {

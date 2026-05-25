@@ -15,6 +15,11 @@
         <h1 class="fw-bold mt-3">Ačiū už užsakymą!</h1>
 
         <p class="lead text-muted">Jūsų užsakymas <strong>#{{ $order->order_number }}</strong> sėkmingai priimtas.</p>
+        @if($order->payment_status === 'paid')
+            <span class="badge bg-success fs-6"><i class="bi bi-check-circle"></i> Apmokėta</span>
+        @elseif($order->payment_status === 'pending')
+            <span class="badge bg-warning fs-6"><i class="bi bi-clock"></i> Laukiama apmokėjimo</span>
+        @endif
 
     </div>
 
