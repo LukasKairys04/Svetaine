@@ -13,9 +13,9 @@
 
             <div class="col-lg-6">
 
-                <h1>Jūsų sveikata.<br>Jūsų jėga.<br><span style="color: var(--fs-primary);">Mūsų misija.</span></h1>
+                <h1>Aukštos kokybės<br><span style="color: var(--fs-primary);">maisto papildai</span><br>visiems.</h1>
 
-                <p class="lead">Aukštos kokybės vitaminai, maisto papildai ir sporto mityba vienoje vietoje.</p>
+                <p class="lead">Vitaminai, sporto mityba ir maisto papildai — visiems amžiaus žmonėms, vienoje vietoje.</p>
 <form class="deep-search mb-4" id="homeSearchForm" method="GET" action="{{ route('shop.index') }}">
 
                     <input type="search" id="homeSearchInput" name="q" class="search-input" placeholder="Ieškoti produktų, kategorijų arba ingredientų...">
