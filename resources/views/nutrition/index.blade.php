@@ -232,9 +232,9 @@
 
 
 
-        <a href="{{ route('nutrition.planner') }}" class="btn-cta">
+        <a href="{{ route('nutrition.planner') }}" class="btn btn-primary mt-3">
 
-            <i class="bi bi-clipboard-data"></i> Kalorijų planuotojas
+            <i class="bi bi-clipboard-data me-1"></i> Kalorijų planuotojas
 
         </a>
 
