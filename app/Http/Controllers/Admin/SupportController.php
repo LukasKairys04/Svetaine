@@ -12,6 +12,13 @@ class SupportController extends Controller
     {
         $query = SupportMessage::query();
         if ($s = $request->input('status')) $query->where('status', $s);
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                  ->orWhere('email', 'like', "%$search%")
+                  ->orWhere('subject', 'like', "%$search%");
+            });
+        }
         $messages = $query->latest()->paginate(20)->withQueryString();
         return view('admin.support.index', compact('messages'));
     }

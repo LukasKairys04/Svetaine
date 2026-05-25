@@ -12,11 +12,6 @@
         }
         $reviewsCount = $product->reviews->count();
         $avg          = $reviewsCount ? round($product->reviews->avg('rating'), 1) : (float) $product->rating;
-
-       
-        $hasNutrition = ($product->calories > 0) || ($product->protein > 0)
-                     || ($product->carbs > 0)   || ($product->fat > 0)
-                     || ($product->fiber > 0)    || ($product->sodium > 0);
     @endphp
 
     <nav aria-label="breadcrumb">
@@ -128,25 +123,23 @@
                 </div>
             </form>
 
-            @if($hasNutrition)
-                <div class="nutrition-label mb-3">
-                    <div class="nutrition-label-head">
-                        <div>Nutrition Facts</div>
-                        @if($product->serving_size)<span>Serving Size {{ $product->serving_size }}</span>@endif
-                        @if($product->servings_per_container)<span>Servings Per Container {{ $product->servings_per_container }}</span>@endif
-                    </div>
-                    <div class="nutrition-label-body">
-                        @if($product->calories > 0)<div><strong>Kalorijos</strong><span>{{ $product->calories }} kcal</span></div>@endif
-                        @if($product->protein > 0)<div><strong>Baltymai</strong><span>{{ $product->protein }} g</span></div>@endif
-                        @if($product->carbs > 0)<div><strong>Angliavandeniai</strong><span>{{ $product->carbs }} g</span></div>@endif
-                        @if($product->sugar > 0)<div><strong>Iš jų cukrai</strong><span>{{ $product->sugar }} g</span></div>@endif
-                        @if($product->fat > 0)<div><strong>Riebalai</strong><span>{{ $product->fat }} g</span></div>@endif
-                        @if($product->saturated_fat > 0)<div><strong>Iš jų sotieji</strong><span>{{ $product->saturated_fat }} g</span></div>@endif
-                        @if($product->fiber > 0)<div><strong>Skaidulos</strong><span>{{ $product->fiber }} g</span></div>@endif
-                        @if($product->sodium > 0)<div><strong>Natris</strong><span>{{ $product->sodium }} mg</span></div>@endif
-                    </div>
+            <div class="nutrition-label mb-3">
+                <div class="nutrition-label-head">
+                    <div>Maistinė vertė</div>
+                    @if($product->serving_size)<span>Porcija: {{ $product->serving_size }}</span>@endif
+                    @if($product->servings_per_container)<span>Porcijų: {{ $product->servings_per_container }}</span>@endif
                 </div>
-            @endif
+                <div class="nutrition-label-body">
+                    <div><strong>Kalorijos</strong><span>{{ $product->calories ?? 0 }} kcal</span></div>
+                    <div><strong>Baltymai</strong><span>{{ $product->protein ?? 0 }} g</span></div>
+                    <div><strong>Angliavandeniai</strong><span>{{ $product->carbs ?? 0 }} g</span></div>
+                    <div><strong>Iš jų cukrai</strong><span>{{ $product->sugar ?? 0 }} g</span></div>
+                    <div><strong>Riebalai</strong><span>{{ $product->fat ?? 0 }} g</span></div>
+                    <div><strong>Iš jų sotieji</strong><span>{{ $product->saturated_fat ?? 0 }} g</span></div>
+                    <div><strong>Skaidulos</strong><span>{{ $product->fiber ?? 0 }} g</span></div>
+                    <div><strong>Natris</strong><span>{{ $product->sodium ?? 0 }} mg</span></div>
+                </div>
+            </div>
         </div>
 
     </div>

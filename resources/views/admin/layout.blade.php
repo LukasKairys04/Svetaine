@@ -316,8 +316,11 @@
             <a href="{{ route('admin.support.index') }}" class="admin-nav-item {{ request()->routeIs('admin.support.*') ? 'active' : '' }}">
                 <i class="bi bi-chat-left"></i> Žinutės
             </a>
+            <a href="{{ route('admin.reviews.index') }}" class="admin-nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
+                <i class="bi bi-star"></i> Produktų atsiliepimai
+            </a>
             <a href="{{ route('admin.testimonials.index') }}" class="admin-nav-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
-                <i class="bi bi-star"></i> Atsiliepimai
+                <i class="bi bi-chat-quote"></i> Svetainės atsiliepimai
             </a>
         </div>
 

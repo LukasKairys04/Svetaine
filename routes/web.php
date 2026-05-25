@@ -97,4 +97,5 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
         Route::put('testimonials/{testimonial}', [\App\Http\Controllers\Admin\TestimonialController::class, 'update'])->name('testimonials.update');
         Route::delete('testimonials/{testimonial}', [\App\Http\Controllers\Admin\TestimonialController::class, 'destroy'])->name('testimonials.destroy');
         Route::resource('promo-codes', \App\Http\Controllers\Admin\PromoCodeController::class)->parameters(['promo-codes' => 'promoCode']);
+        Route::resource('reviews', \App\Http\Controllers\Admin\ReviewController::class)->only(['index', 'edit', 'update', 'destroy']);
     });

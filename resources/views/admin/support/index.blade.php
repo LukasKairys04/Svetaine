@@ -4,13 +4,20 @@
 @section('admin')
     <form method="GET" class="card p-3 mb-3 shadow-sm">
         <div class="row g-2">
-            <div class="col-md-4">
-                <select name="status" class="form-select" onchange="this.form.submit()">
+            <div class="col-md-5">
+                <input type="search" name="search" class="form-control" placeholder="Ieškoti pagal vardą, el. paštą, temą..." value="{{ request('search') }}">
+            </div>
+            <div class="col-md-3">
+                <select name="status" class="form-select">
                     <option value="">Visos būsenos</option>
                     @foreach(['new','in_progress','resolved','closed'] as $s)
                         <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button class="btn btn-primary w-100">Filtruoti</button>
+                <a href="{{ route('admin.support.index') }}" class="btn btn-outline-secondary">Išvalyti</a>
             </div>
         </div>
     </form>
