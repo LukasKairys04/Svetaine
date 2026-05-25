@@ -3,41 +3,47 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->index(['category_id', 'is_active']);
-            $table->index(['is_active', 'price']);
-            $table->index('brand');
-            $table->index('rating');
-            $table->index('stock');
-        });
+        $this->addIndexIfNotExists('products', ['category_id', 'is_active']);
+        $this->addIndexIfNotExists('products', ['is_active', 'price']);
+        $this->addIndexIfNotExists('products', 'brand');
+        $this->addIndexIfNotExists('products', 'rating');
+        $this->addIndexIfNotExists('products', 'stock');
 
-        Schema::table('orders', function (Blueprint $table) {
-            $table->index(['user_id', 'status']);
-            $table->index('status');
-            $table->index('created_at');
-            $table->index('order_number');
-        });
+        $this->addIndexIfNotExists('orders', ['user_id', 'status']);
+        $this->addIndexIfNotExists('orders', 'status');
+        $this->addIndexIfNotExists('orders', 'created_at');
+        $this->addIndexIfNotExists('orders', 'order_number');
 
-        Schema::table('reviews', function (Blueprint $table) {
-            $table->index(['product_id', 'user_id']);
-            $table->index('product_id');
-            $table->index('user_id');
-        });
+        $this->addIndexIfNotExists('reviews', ['product_id', 'user_id']);
+        $this->addIndexIfNotExists('reviews', 'product_id');
+        $this->addIndexIfNotExists('reviews', 'user_id');
 
-        Schema::table('categories', function (Blueprint $table) {
-            $table->index(['type', 'is_active']);
-            $table->index('slug');
-        });
+        $this->addIndexIfNotExists('categories', ['type', 'is_active']);
+        $this->addIndexIfNotExists('categories', 'slug');
 
-        Schema::table('cart_items', function (Blueprint $table) {
-            $table->index(['user_id', 'product_id']);
-            $table->index('user_id');
-        });
+        $this->addIndexIfNotExists('cart_items', ['user_id', 'product_id']);
+        $this->addIndexIfNotExists('cart_items', 'user_id');
+    }
+
+    private function addIndexIfNotExists($table, $columns)
+    {
+        $indexName = is_array($columns)
+            ? $table . '_' . implode('_', $columns) . '_index'
+            : $table . '_' . $columns . '_index';
+
+        $indexes = DB::select("SHOW INDEX FROM {$table} WHERE Key_name = ?", [$indexName]);
+
+        if (empty($indexes)) {
+            Schema::table($table, function (Blueprint $table) use ($columns) {
+                $table->index($columns);
+            });
+        }
     }
 
     public function down(): void
