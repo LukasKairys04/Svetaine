@@ -50,8 +50,6 @@ class SupportController extends Controller
             'status' => 'new',
         ]));
 
-        Mail::to($data['email'])->send(new SupportReceivedMail($message));
-
         return back()->with('success', 'Ačiū! Jūsų žinutė gauta, greitai atsakysime.');
 
     }
