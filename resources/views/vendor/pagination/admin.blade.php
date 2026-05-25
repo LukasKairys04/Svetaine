@@ -1,11 +1,11 @@
 @if ($paginator->hasPages())
     <nav aria-label="Pagination">
-        <ul class="pagination justify-content-center mb-0">
+        <ul class="pagination justify-content-center mb-0" style="font-size:.875rem">
             {{-- Previous --}}
             @if ($paginator->onFirstPage())
-                <li class="page-item disabled"><span class="page-link"><i class="bi bi-chevron-left"></i></span></li>
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
             @else
-                <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}">&laquo;</a></li>
             @endif
 
             {{-- Pages --}}
@@ -26,9 +26,9 @@
 
             {{-- Next --}}
             @if ($paginator->hasMorePages())
-                <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}"><i class="bi bi-chevron-right"></i></a></li>
+                <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}">&raquo;</a></li>
             @else
-                <li class="page-item disabled"><span class="page-link"><i class="bi bi-chevron-right"></i></span></li>
+                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
             @endif
         </ul>
     </nav>
