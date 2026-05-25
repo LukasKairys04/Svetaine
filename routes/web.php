@@ -73,6 +73,7 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
     Route::put('/password', [AccountController::class, 'password'])->name('password');
     Route::get('/orders', [AccountController::class, 'orders'])->name('orders');
     Route::get('/orders/{uzsakymas}', [AccountController::class, 'order'])->name('order');
+    Route::delete('/', [AccountController::class, 'destroy'])->name('destroy');
 });
 
 Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])

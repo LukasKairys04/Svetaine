@@ -66,4 +66,21 @@ class AccountController extends Controller
         $uzsakymas->load('items');
         return view('account.order', ['uzsakymas' => $uzsakymas]);
     }
+
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'password' => 'required|current_password',
+        ]);
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        $user->delete();
+
+        return redirect()->route('home')->with('success', 'Paskyra sėkmingai ištrinta.');
+    }
 }

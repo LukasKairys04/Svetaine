@@ -132,6 +132,23 @@
                 </form>
             </div>
         </div>
+
+        <div class="card account-card border-danger">
+            <div class="card-body">
+                <h5 class="text-danger">Paskyros ištrynimas</h5>
+                <p class="text-muted small mb-3">Ištrynus paskyrą visi duomenys bus prarasti negrįžtamai.</p>
+                <form method="POST" action="{{ route('account.destroy') }}" onsubmit="return confirm('Ar tikrai norite ištrinti savo paskyrą? Veiksmas negrįžtamas!');">
+                    @csrf @method('DELETE')
+                    <div class="mb-3">
+                        <label class="form-label small">Patvirtinkite slaptažodį</label>
+                        <input type="password" name="password"
+                               class="form-control @error('password') is-invalid @enderror" required>
+                        @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                    <button class="btn btn-danger">Ištrinti paskyrą</button>
+                </form>
+            </div>
+        </div>
 @elseif(request('tab') === 'uzsakymai')
 
         @if($orders->isEmpty())
