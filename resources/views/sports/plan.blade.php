@@ -10,9 +10,7 @@
             <li class="breadcrumb-item active">{{ $plan->name }}</li>
         </ol>
     </nav>
-
-    {{-- Plan overview --}}
-    <div class="sport-overview mb-4">
+<div class="sport-overview mb-4">
         <div>
             <div class="section-label">Sporto planas</div>
             <h2>{{ $plan->name }}</h2>
@@ -38,9 +36,7 @@
             @if($plan->image)<img src="{{ $plan->image }}" class="sport-overview-img" alt="{{ $plan->name }}">@endif
         </div>
     </div>
-
-    {{-- Workout days --}}
-    @php
+@php
         $byDay = $plan->exercises->groupBy('pivot.day');
         // Short muscle-group summary per day helps users scan the week.
         $dayFocus = [

@@ -43,7 +43,7 @@ class SupportController extends Controller
 
             'subject' => 'required|string|max:200',
 
-            'message' => 'required|string|max:3000',
+            'message' => 'required|string|min:10|max:3000',
 
         ]);
 
@@ -66,9 +66,9 @@ class SupportController extends Controller
 
             'name' => 'required|string|max:120',
 
-            'rating' => 'required|numeric|min:1|max:5',
+            'rating' => 'required|integer|min:1|max:5',
 
-            'content' => 'required|string|max:1000',
+            'content' => 'required|string|min:10|max:1000',
 
         ]);
 

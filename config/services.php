@@ -35,19 +35,10 @@ return [
         ],
     ],
 
-    // Google OAuth per Socialite — naudojama „Prisijungti su Gmail" mygtukui.
-    // Credentials paimami iš Google Cloud Console → OAuth 2.0 Client IDs.
-    // Redirect URI Google pusėje turi sutapti su GOOGLE_REDIRECT_URI .env reikšme.
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI', '/auth/google/callback'),
-    ],
-
-    'stripe' => [
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
     ],
 
 ];

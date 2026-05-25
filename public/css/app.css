@@ -3484,7 +3484,7 @@ body {
 }
 
 /* Checkout visual redesign */
-.checkout-stripe-page {
+.checkout-page {
     padding: 2.2rem 0 3rem;
     background:
         radial-gradient(900px 360px at 0% 0%, rgba(47, 172, 86, .12), transparent 60%),

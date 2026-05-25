@@ -35,10 +35,7 @@
 
 
     <div class="row g-4">
-
-        {{-- Library --}}
-
-        <div class="col-lg-4">
+<div class="col-lg-4">
 
             <div class="panel">
 
@@ -111,12 +108,7 @@
             </div>
 
         </div>
-
-
-
-        {{-- Plan --}}
-
-        <div class="col-lg-8">
+<div class="col-lg-8">
 
             <div class="panel">
 
@@ -190,12 +182,7 @@
             </div>
         </div>
     </div>
-
-
-
-    {{-- Mokslinių šaltinių sąrašas (2020+). --}}
-
-    <div class="citations-block mt-3 builder-info-centered">
+<div class="citations-block mt-3 builder-info-centered">
 
         <div class="section-label">Moksliniai šaltiniai</div>
 

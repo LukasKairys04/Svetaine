@@ -22,8 +22,7 @@
     </div>
 
     <div class="planner-grid">
-        {{-- Kairė: forma --}}
-        <div class="planner-form">
+<div class="planner-form">
             <h4>Tavo duomenys</h4>
 
             <div class="form-row">
@@ -82,9 +81,7 @@
                     </div>
                 </div>
             </div>
-
-            {{-- Svorio metimo greitis (rodomas, kai pasirinktas tikslas „Mesti svorį“) --}}
-            <div class="form-row single" id="rateRow-cut" style="display:none">
+<div class="form-row single" id="rateRow-cut" style="display:none">
                 <div>
                     <label for="p-cut-rate">
                         Svorio metimo greitis
@@ -97,9 +94,7 @@
                     </select>
                 </div>
             </div>
-
-            {{-- Masės auginimo greitis (rodomas, kai pasirinktas tikslas „Auginti raumenis“) --}}
-            <div class="form-row single" id="rateRow-bulk" style="display:none">
+<div class="form-row single" id="rateRow-bulk" style="display:none">
                 <div>
                     <label for="p-bulk-rate">
                         Kalorijų perteklius
@@ -142,9 +137,7 @@
                 </div>
             </div>
         </div>
-
-        {{-- Dešinė: rezultatai --}}
-        <aside class="planner-result">
+<aside class="planner-result">
             <h4>Tavo dienos planas</h4>
 
             <div class="planner-diet-pick" id="dietPick" style="display:none">
@@ -157,16 +150,12 @@
                 <span id="kcal">2 400</span><span class="unit">kcal</span>
             </div>
             <div class="planner-goal-label" id="goalLabel">Palaikymas · vidutinis aktyvumas</div>
-
-            {{-- BMR / TDEE suvestinė --}}
-            <div class="energy-breakdown">
+<div class="energy-breakdown">
                 <div><span>BMR</span><strong id="e-bmr">1 700</strong> kcal</div>
                 <div><span>TDEE</span><strong id="e-tdee">2 400</strong> kcal</div>
                 <div><span>Tikslas</span><strong id="e-goal">+0</strong> kcal</div>
             </div>
-
-            {{-- Makro juosta --}}
-            <div class="macro-bar" aria-hidden="true">
+<div class="macro-bar" aria-hidden="true">
                 <div class="seg p" id="bar-p" style="width:30%"></div>
                 <div class="seg c" id="bar-c" style="width:45%"></div>
                 <div class="seg f" id="bar-f" style="width:25%"></div>
@@ -189,9 +178,7 @@
                     <div class="macro-kcal" id="k-f">720 kcal</div>
                 </div>
             </div>
-
-            {{-- Vandens norma --}}
-            <div class="water-card">
+<div class="water-card">
                 <div class="water-icon"><i class="bi bi-droplet-fill"></i></div>
                 <div>
                     <div class="water-label">Rekomenduojamas vanduo per dieną</div>
@@ -199,9 +186,7 @@
                     <div class="water-hint">35 ml/kg kūno svorio + 500 ml už kiekvieną treniruotę</div>
                 </div>
             </div>
-
-            {{-- Įspėjimai --}}
-            <div id="warnings" class="planner-warnings"></div>
+<div id="warnings" class="planner-warnings"></div>
 
             <p class="planner-note">
                 Tai atspirties taškas. Reguliuok kas 2–3 sav. pagal realų svorio ir savijautos pokytį.
@@ -209,9 +194,7 @@
             </p>
         </aside>
     </div>
-
-    {{-- Mokslinių šaltinių sąrašas --}}
-    <div class="citations-block mt-5">
+<div class="citations-block mt-5">
         <div class="section-label">Moksliniai šaltiniai</div>
         <h3 class="mb-3">Kuo remiamės</h3>
         <div class="evidence-grid">

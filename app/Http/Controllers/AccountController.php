@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
-    // Pagrindinis paskyros puslapis: profilis ir užsakymai viename rodinyje.
     public function index()
     {
         $user   = Auth::user();
@@ -18,7 +17,6 @@ class AccountController extends Controller
         return view('account.index', compact('user', 'orders'));
     }
 
-    // Profilio duomenų atnaujinimas (vardas, adresas, kūno duomenys ir kt.).
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -41,21 +39,19 @@ class AccountController extends Controller
         return back()->with('success', 'Paskyros informacija atnaujinta.');
     }
 
-    // Slaptažodžio keitimas. Naujas slaptažodis bcrypt-hashujamas prieš įrašant.
     public function password(Request $request)
     {
         $user = Auth::user();
 
         $data = $request->validate([
             'current_password' => 'required|current_password',
-            'password'         => 'required|string|min:8|confirmed',
+            'password'         => ['required', 'string', 'min:8', 'max:64', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
         ]);
 
         $user->update(['password' => Hash::make($data['password'])]);
         return back()->with('success', 'Slaptažodis pakeistas.');
     }
 
-    // Atskiras užsakymų puslapis (naudojamas tik pagination ir breadcrumb tikslais).
     public function orders()
     {
         return view('account.orders', [
@@ -63,7 +59,6 @@ class AccountController extends Controller
         ]);
     }
 
-    // Individualaus užsakymo peržiūra. Tik savininkas gali matyti.
     public function order(Order $uzsakymas)
     {
         if ($uzsakymas->user_id !== Auth::id()) abort(403);

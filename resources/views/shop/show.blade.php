@@ -13,7 +13,7 @@
         $reviewsCount = $product->reviews->count();
         $avg          = $reviewsCount ? round($product->reviews->avg('rating'), 1) : (float) $product->rating;
 
-        // Mitybos faktai — rodyti tik eilutes kurių reikšmė > 0, ir visą bloką tik jei bent viena yra.
+       
         $hasNutrition = ($product->calories > 0) || ($product->protein > 0)
                      || ($product->carbs > 0)   || ($product->fat > 0)
                      || ($product->fiber > 0)    || ($product->sodium > 0);
@@ -23,16 +23,22 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Pradžia</a></li>
             <li class="breadcrumb-item"><a href="{{ route('shop.index') }}">Parduotuvė</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('shop.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></li>
+            @if($product->category->parent)
+                <li class="breadcrumb-item"><a href="{{ route('shop.index', ['category' => $product->category->parent->slug]) }}">{{ $product->category->parent->name }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('shop.index', ['category' => $product->category->parent->slug, 'subcategory' => $product->category->slug]) }}">{{ $product->category->name }}</a></li>
+            @else
+                <li class="breadcrumb-item"><a href="{{ route('shop.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></li>
+            @endif
             <li class="breadcrumb-item active">{{ $product->name }}</li>
         </ol>
     </nav>
 
     <div class="row g-5">
 
-        {{-- Kairė: nuotrauka + atsiliepimai --}}
         <div class="col-lg-6">
-            <img src="{{ $product->image }}" class="img-fluid rounded-4 shadow-sm" alt="{{ $product->name }}">
+            <div class="rounded-4 shadow-sm d-flex align-items-center justify-content-center" style="background:#f5f5f5;min-height:350px;">
+                <i class="bi bi-box-seam" style="font-size:5rem;color:#bbb;"></i>
+            </div>
 
             <div class="mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -49,7 +55,7 @@
                     <p class="text-muted">Kol kas nėra atsiliepimų.</p>
                 @else
                     <div class="review-list">
-                        @foreach($product->reviews->take(2) as $rev)
+                        @foreach($product->reviews as $rev)
                             <div class="review-item">
                                 <div class="review-head">
                                     <div class="review-avatar">{{ mb_strtoupper(mb_substr($rev->user->name ?? '?', 0, 1)) }}</div>
@@ -72,7 +78,6 @@
             </div>
         </div>
 
-        {{-- Dešinė: produkto info --}}
         <div class="col-lg-6">
             <div class="small text-muted">{{ $product->brand }}</div>
             <h1 class="fw-bold">{{ $product->name }}</h1>
@@ -97,7 +102,7 @@
                 @endif
             </div>
 
-            <p class="mb-3 text-muted">{{ Str::limit($simpleDescription, 220) }}</p>
+            <p class="mb-3 text-muted">{{ Str::limit($simpleDescription, 350) }}</p>
 
             <div class="mb-3">
                 @if($product->stock > 0)
@@ -123,7 +128,6 @@
                 </div>
             </form>
 
-            {{-- Mitybos faktai — rodomi tik jei bent viena reikšmė > 0 --}}
             @if($hasNutrition)
                 <div class="nutrition-label mb-3">
                     <div class="nutrition-label-head">
@@ -147,7 +151,6 @@
 
     </div>
 
-    {{-- Panašūs produktai --}}
     @if($related->isNotEmpty())
         <div class="mt-5">
             <h3 class="mb-3">Panašūs produktai</h3>

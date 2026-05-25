@@ -24,8 +24,6 @@ class AuthController extends Controller
 
         if (Auth::attempt($data, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            // Jei vartotojas buvo nukreiptas į login iš kito puslapio (pvz., krepšelio),
-            // po prisijungimo grąžinam ten.
             $next = $request->input('next');
             if ($next && str_starts_with($next, '/')) {
                 return redirect($next)->with('success', 'Sėkmingai prisijungėte.');
@@ -46,7 +44,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'string', 'min:8', 'max:64', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
         ]);
 
         $User = User::create([

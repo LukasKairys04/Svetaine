@@ -2,17 +2,7 @@
 
 namespace App\Models;
 
-/*
- |--------------------------------------------------------------------------
- | User modelis
- |--------------------------------------------------------------------------
- | Pagrindinis autentifikacijos modelis. Saugo profilio duomenis, adresą,
- | kūno parametrus ir administratoriaus žymą (is_admin).
- | Slaptažodis automatiškai hashujamas per cast 'hashed' — nereikia
- | rankiniu būdu kviesti Hash::make() prieš išsaugant per Eloquent.
- */
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -29,14 +19,13 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed',   // Auto-hash: Eloquent saugo jau sušifruotą.
+            'password'          => 'hashed',
             'is_admin'          => 'boolean',
             'birthdate'         => 'date',
             'height_cm'         => 'decimal:2',
@@ -44,19 +33,16 @@ class User extends Authenticatable
         ];
     }
 
-    // Visi vartotojo užsakymai.
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    // Vartotojo parašyti atsiliepimai apie produktus.
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
-    // DB krepšelio eilutės prisijungusiam vartotojui.
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);

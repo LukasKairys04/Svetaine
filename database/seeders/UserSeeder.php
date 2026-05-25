@@ -76,10 +76,6 @@ class UserSeeder extends Seeder
 
         );
 
-
-
-        // Papildomi demo naudotojai — naudojami atsiliepimų seederio.
-
         $demo = [
 
             ['Tomas K.', 'tomas@example.com'],

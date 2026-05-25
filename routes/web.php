@@ -13,19 +13,14 @@ use App\Http\Controllers\SportController;
 use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 
-// Pagrindinis puslapis.
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// Statinis mokslinių šaltinių puslapis — nuoroda iš footer'io ir skaičiuoklių.
 Route::view('/saltiniai', 'references')->name('references');
 
-// ── Parduotuvė ──────────────────────────────────────────────────────────────
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/product/{slug}/review', [\App\Http\Controllers\ReviewController::class, 'store'])
     ->middleware('auth')->name('product.review');
 
-// ── Krepšelis ───────────────────────────────────────────────────────────────
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::post('/add', [CartController::class, 'add'])->name('add');
@@ -34,27 +29,18 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::post('/promo', [CartController::class, 'applyPromo'])->name('promo');
 });
 
-// ── Checkout (tik prisijungusiems) ──────────────────────────────────────────
-// Užsakymą privaloma susieti su vartotojo paskyra.
 Route::prefix('checkout')->name('checkout.')->middleware('auth')->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/', [CheckoutController::class, 'place'])->name('place');
     Route::get('/success/{order}', [CheckoutController::class, 'success'])->name('success');
-    Route::get('/cancel/{order}', [CheckoutController::class, 'cancel'])->name('cancel');
 });
 
-Route::post('/stripe/webhook', [\App\Http\Controllers\StripeWebhookController::class, 'handle'])
-    ->name('stripe.webhook')
-    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class]);
-
-// ── Mityba ───────────────────────────────────────────────────────────────────
 Route::prefix('nutrition')->name('nutrition.')->group(function () {
     Route::get('/', [NutritionController::class, 'index'])->name('index');
     Route::get('/planner', [NutritionController::class, 'planner'])->name('planner');
     Route::get('/{slug}', [NutritionController::class, 'show'])->name('show');
 });
 
-// ── Sportas ──────────────────────────────────────────────────────────────────
 Route::prefix('sports')->name('sports.')->group(function () {
     Route::get('/', [SportController::class, 'index'])->name('index');
     Route::get('/builder', [SportController::class, 'builder'])->name('builder');
@@ -62,7 +48,6 @@ Route::prefix('sports')->name('sports.')->group(function () {
     Route::get('/{slug}', [SportController::class, 'show'])->name('show');
 });
 
-// ── Skaičiuokliai ────────────────────────────────────────────────────────────
 Route::prefix('calculators')->name('calculators.')->group(function () {
     Route::get('/', [CalculatorController::class, 'index'])->name('index');
     Route::match(['get', 'post'], '/bmi', [CalculatorController::class, 'bmi'])->name('bmi');
@@ -70,13 +55,10 @@ Route::prefix('calculators')->name('calculators.')->group(function () {
     Route::match(['get', 'post'], '/sport-plan', [CalculatorController::class, 'sportPlan'])->name('sport-plan');
 });
 
-// ── Pagalbos forma ───────────────────────────────────────────────────────────
 Route::get('/support', [SupportController::class, 'index'])->name('support.index');
 Route::post('/support', [SupportController::class, 'submit'])->name('support.submit');
 Route::post('/support/testimonial', [SupportController::class, 'testimonial'])->name('support.testimonial');
 
-// ── Autentifikacija ──────────────────────────────────────────────────────────
-// Guest middleware: prisijungęs vartotojas neturi matyti login/register formų.
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -85,7 +67,6 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-// ── Paskyra (tik prisijungusiems) ───────────────────────────────────────────
 Route::middleware('auth')->prefix('account')->name('account.')->group(function () {
     Route::get('/', [AccountController::class, 'index'])->name('index');
     Route::put('/', [AccountController::class, 'update'])->name('update');
@@ -94,8 +75,6 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
     Route::get('/orders/{uzsakymas}', [AccountController::class, 'order'])->name('order');
 });
 
-// ── Admin panelė (tik administratoriams) ────────────────────────────────────
-// AdminMiddleware papildomai tikrina is_admin — 403 visiems kitiems.
 Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
     ->prefix('admin')->name('admin.')
     ->group(function () {

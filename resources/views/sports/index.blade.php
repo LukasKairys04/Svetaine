@@ -7,10 +7,7 @@
 @section('content')
 
 <section class="container my-4">
-
-    {{-- Hero --}}
-
-    <div class="sports-hero mb-5">
+<div class="sports-hero mb-5">
 
         <div>
 
@@ -67,12 +64,7 @@
         </div>
 
     @endif
-
-
-
-    {{-- Workout splits --}}
-
-    <div class="section-block">
+<div class="section-block">
 
         <div class="section-label">Sistemos</div>
 
@@ -133,12 +125,7 @@
 
 
     </div>
-
-
-
-    {{-- Days picker --}}
-
-    <div class="days-picker-v2 mb-4">
+<div class="days-picker-v2 mb-4">
 
         <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
 
@@ -181,12 +168,7 @@
         </div>
 
     </div>
-
-
-
-    {{-- CTA Builder --}}
-
-    <div class="cta-builder">
+<div class="cta-builder">
 
         <div>
 

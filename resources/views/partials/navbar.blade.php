@@ -1,4 +1,4 @@
-{{-- Top Bar --}}
+
 <div class="top-bar d-none d-lg-block">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -18,8 +18,7 @@
 
 <nav class="navbar navbar-expand-lg sticky-top medical-navbar">
     <div class="container">
-        {{-- Brand — Medical Style --}}
-        <a class="navbar-brand" href="{{ route('home') }}">
+<a class="navbar-brand" href="{{ route('home') }}">
             <i class="bi bi-heart-pulse-fill" style="color: var(--fs-primary);"></i>
             <span style="color: var(--fs-primary);">PapildaiOnline</span>
         </a>
@@ -29,8 +28,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
-            {{-- Centrinė meniu juosta — tik svarbiausi link'ai, be ikonų. --}}
-            <ul class="navbar-nav mx-lg-auto align-items-lg-center">
+<ul class="navbar-nav mx-lg-auto align-items-lg-center">
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('home')) active @endif" href="{{ route('home') }}">Pradžia</a>
                 </li>
@@ -47,17 +45,14 @@
                     <a class="nav-link @if(request()->routeIs('support.*')) active @endif" href="{{ route('support.index') }}">Pagalba</a>
                 </li>
             </ul>
-
-            {{-- Dešinėje — deep search ir ikonos. --}}
-            <div class="d-flex align-items-center gap-3">
+<div class="d-flex align-items-center gap-3">
                 <form class="d-none d-lg-flex deep-search" role="search" method="GET" action="{{ route('shop.index') }}" style="width:280px">
                     <input type="search" name="q" value="{{ request('q') }}" class="search-input" placeholder="Ieškoti produktų..." aria-label="Paieška">
                     <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
                 </form>
 
                 <div class="nav-icons">
-                    {{-- Paskyra --}}
-                    <div class="dropdown">
+<div class="dropdown">
                         <button class="nav-icon-btn" data-bs-toggle="dropdown" aria-label="Paskyra">
                             <i class="bi bi-person"></i>
                         </button>
@@ -84,9 +79,7 @@
                             @endauth
                         </ul>
                     </div>
-
-                    {{-- Krepšelis --}}
-                    <a class="nav-icon-btn" href="{{ route('cart.index') }}" aria-label="Krepšelis">
+<a class="nav-icon-btn" href="{{ route('cart.index') }}" aria-label="Krepšelis">
                         <i class="bi bi-bag"></i>
                         @php $cartCount = \App\Services\CartService::countStatic(); @endphp
                         @if($cartCount > 0)

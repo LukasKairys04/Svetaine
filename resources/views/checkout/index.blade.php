@@ -6,7 +6,7 @@
 
 @section('content')
 
-<section class="checkout-stripe-page">
+<section class="checkout-page">
 <div class="container checkout-shell">
 
     <form method="POST" action="{{ route('checkout.place') }}" class="checkout-card-split">
@@ -25,7 +25,7 @@
 
             <div class="checkout-total">€{{ number_format($summary['total'], 2) }}</div>
 
-            <p>Saugus demonstracinis atsiskaitymas Stripe stiliaus lange su tavo FitShop spalvomis.</p>
+            <p>Saugus demonstracinis atsiskaitymas FitShop spalvomis.</p>
 
 
 
@@ -185,8 +185,7 @@
                 </div>
 
                 <div class="alert checkout-demo small m-0 mt-3">
-                    <i class="bi bi-shield-lock"></i> Pasirinkus <strong>Kortelė</strong> — būsite nukreipti į saugų Stripe mokėjimo puslapį.
-                    Testavimui naudokite kortelės nr. <code>4242 4242 4242 4242</code>, bet kokią datą ir CVC.
+                    <i class="bi bi-info-circle"></i> Demonstracinis režimas — realus mokėjimas nevyksta, užsakymas bus pažymėtas kaip apmokėtas.
                 </div>
 
             </div>

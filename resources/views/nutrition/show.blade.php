@@ -22,9 +22,7 @@
             @if($plan->image)<img src="{{ $plan->image }}" class="sport-overview-img" alt="{{ $plan->name }}">@endif
         </div>
     </div>
-
-    {{-- Pros / cons — symmetric 2-column grid --}}
-    <div class="section-block">
+<div class="section-block">
         <div class="section-label">Už ir prieš</div>
         <h3>Pliusai ir minusai</h3>
         <div class="row g-3">
@@ -56,9 +54,7 @@
             </div>
         </div>
     </div>
-
-    {{-- Recommendations (optional) --}}
-    @if($plan->recommendations->isNotEmpty())
+@if($plan->recommendations->isNotEmpty())
         @php
             $healthy = $plan->recommendations->where('type', 'healthy_food');
             $supps = $plan->recommendations->where('type', 'supplement_alt');

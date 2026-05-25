@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Category::withCount('products');
+        $query = Category::with('parent')->withCount('products');
 
         if ($q = $request->input('q')) {
             $query->where(fn($w) => $w
@@ -23,7 +23,7 @@ class CategoryController extends Controller
         if ($request->filled('type')) $query->where('type', $request->input('type'));
         if ($request->filled('status')) $query->where('is_active', $request->input('status') === 'active');
 
-        $categories = $query->orderBy('type')->orderBy('sort_order')->paginate(20)->withQueryString();
+        $categories = $query->orderBy('type')->orderByRaw('COALESCE(parent_id, id), parent_id IS NOT NULL, sort_order')->paginate(20)->withQueryString();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -65,6 +65,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:120',
             'slug' => "nullable|string|max:120|unique:categories,slug,{$id}",
             'type' => 'required|in:product,sport,nutrition',
+            'parent_id' => 'nullable|exists:categories,id',
             'description' => 'nullable|string|max:1000',
             'image' => 'nullable|string|max:500',
             'image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',

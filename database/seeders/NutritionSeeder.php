@@ -21,10 +21,6 @@ class NutritionSeeder extends Seeder
         foreach ($goals as $g) {
             NutritionGoal::updateOrCreate(['slug' => $g['slug']], $g);
         }
-
-        // Core diet types the user asked for. Each entry is a distinct eating
-        // style (not a calorie goal) — users pick one and combine it with the
-        // calorie planner for daily targets.
         $plans = [
             [
                 'name' => 'Low Fat',
@@ -81,9 +77,6 @@ class NutritionSeeder extends Seeder
                 'cons' => ['Pradžioje gali būti energijos kritimas', 'Reikia atidžiai rinktis produktus', 'Ne visiems patogu laikytis socialiai'],
             ],
         ];
-
-        // Remove any nutrition plans that are no longer part of the curated
-        // diet-type list. Keeps DB tidy across reseeds.
         $keepSlugs = array_column($plans, 'slug');
         NutritionPlan::whereNotIn('slug', $keepSlugs)->each(function ($p) {
             NutritionPlanRecommendation::where('plan_id', $p->id)->delete();

@@ -11,17 +11,23 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $query = Product::active()
-            ->with('category')
+            ->with('category.parent')
             ->withCount('reviews')
             ->withAvg('reviews', 'rating');
 
-        // Category filter
         if ($slug = $request->string('category')->toString()) {
             $cat = Category::where('slug', $slug)->first();
-            if ($cat) $query->where('category_id', $cat->id);
+            if ($cat) {
+                $catIds = $cat->children()->pluck('id')->push($cat->id);
+                $query->whereIn('category_id', $catIds);
+            }
         }
 
-        // Search
+        if ($subSlug = $request->string('subcategory')->toString()) {
+            $sub = Category::where('slug', $subSlug)->first();
+            if ($sub) $query->where('category_id', $sub->id);
+        }
+
         if ($q = $request->string('q')->toString()) {
             $query->where(function ($w) use ($q) {
                 $w->where('name', 'like', "%{$q}%")
@@ -30,26 +36,20 @@ class ShopController extends Controller
             });
         }
 
-        // Price range
         if ($min = $request->input('min_price')) $query->where('price', '>=', (float) $min);
         if ($max = $request->input('max_price')) $query->where('price', '<=', (float) $max);
 
-        // Min rating
         if ($rating = $request->input('rating')) $query->where('rating', '>=', (float) $rating);
 
-        // In stock only
         if ($request->boolean('in_stock')) $query->where('stock', '>', 0);
 
-        // On sale only
         if ($request->boolean('on_sale')) $query->whereNotNull('sale_price');
 
-        // Brand — palaikom tiek viengubą (?brand=Foo), tiek masyvinį (?brands[]=Foo&brands[]=Bar) variantą.
         $selectedBrands = array_filter((array) ($request->input('brands') ?: $request->input('brand')));
         if (!empty($selectedBrands)) {
             $query->whereIn('brand', $selectedBrands);
         }
 
-        // Sorting
         $sort = $request->input('sort', 'popular');
         match ($sort) {
             'price_asc' => $query->orderBy('price'),
@@ -61,13 +61,14 @@ class ShopController extends Controller
 
         $products = $query->paginate(12)->withQueryString();
 
-        // Kategorijos su produktų kiekiu (kad vartotojas matytų, kiek prekių
-        // kiekvienoje kategorijoje prieš filtro pritaikymą).
-        $categories = Category::active()->type('product')->orderBy('sort_order')
+        $categories = Category::active()->type('product')
+            ->whereNull('parent_id')
+            ->with(['children' => fn ($q) => $q->active()->orderBy('sort_order')
+                ->withCount(['products' => fn ($q2) => $q2->where('is_active', true)])])
             ->withCount(['products' => fn ($q) => $q->where('is_active', true)])
+            ->orderBy('sort_order')
             ->get();
 
-        // Prekės ženklai su produktų kiekiu — rodom tik aktyvius ir su bent 1 produktu.
         $brandCounts = Product::active()
             ->whereNotNull('brand')
             ->selectRaw('brand, COUNT(*) as cnt')

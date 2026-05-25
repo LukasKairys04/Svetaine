@@ -54,14 +54,11 @@
         <div class="section-block">
             <div class="section-label">Katalogas</div>
             <h3>Pratimai ({{ $sport->exercises->count() }})</h3>
-            {{-- Pratimų kortelės su hover detaliu tooltip'u vietoj atskiro puslapio.
-                 Užvedus pelę — rodoma viso pratimo informacija iškarto. --}}
-            <div class="row g-3">
+                        <div class="row g-3">
                 @foreach($sport->exercises as $ex)
                     <div class="col-md-6 col-lg-4">
                         <div class="exercise-card-hover card-clean exercise-card" tabindex="0">
-                            {{-- Pavadinimas su slash ir anglišku pavadinimu --}}
-                            <div class="exercise-link mb-2 d-block">
+<div class="exercise-link mb-2 d-block">
                                 {{ $ex->name }}<span class="english-name">{{ $ex->name_en ?? $ex->slug }}</span>
                             </div>
                             <div class="muscles">
@@ -70,9 +67,7 @@
                                 @endforeach
                             </div>
                             <div class="difficulty {{ $ex->difficulty }}">{{ $ex->difficulty }}</div>
-
-                            {{-- Hover tooltip su pilna informacija. --}}
-                            <div class="exercise-tooltip" role="tooltip">
+<div class="exercise-tooltip" role="tooltip">
                                 @if($ex->image)
                                     <img src="{{ $ex->image }}" alt="{{ $ex->name }}" class="tooltip-img" loading="lazy">
                                 @endif

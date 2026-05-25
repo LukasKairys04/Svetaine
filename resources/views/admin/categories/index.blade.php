@@ -49,7 +49,7 @@
 
             <table class="table align-middle m-0">
 
-                <thead class="table-light"><tr><th>Pavadinimas</th><th>Slug</th><th>Tipas</th><th>Produktų</th><th>Tvarka</th><th>Akt.</th><th></th></tr></thead>
+                <thead class="table-light"><tr><th>Pavadinimas</th><th>Tėvinė</th><th>Slug</th><th>Tipas</th><th>Produktų</th><th>Tvarka</th><th>Akt.</th><th></th></tr></thead>
 
                 <tbody>
 
@@ -57,7 +57,19 @@
 
                     <tr>
 
-                        <td><strong>{{ $c->name }}</strong><div class="small text-muted">{{ $c->description }}</div></td>
+                        <td>
+                            @if($c->parent_id)<span class="text-muted me-1">↳</span>@endif
+                            <strong>{{ $c->name }}</strong>
+                            <div class="small text-muted">{{ $c->description }}</div>
+                        </td>
+
+                        <td>
+                            @if($c->parent)
+                                <span class="badge bg-light text-dark">{{ $c->parent->name }}</span>
+                            @else
+                                <span class="text-muted">—</span>
+                            @endif
+                        </td>
 
                         <td><code>{{ $c->slug }}</code></td>
 
@@ -87,7 +99,7 @@
 
                 @empty
 
-                    <tr><td colspan="7" class="text-center text-muted py-4">Kategorijų nėra.</td></tr>
+                    <tr><td colspan="8" class="text-center text-muted py-4">Kategorijų nėra.</td></tr>
 
                 @endforelse
 

@@ -6,13 +6,12 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    // Produkto detalus puslapis su patvirtintais atsiliepimais ir susijusiomis prekėmis.
     public function show(string $slug)
     {
         $product = Product::active()
             ->where('slug', $slug)
             ->with([
-                'category',
+                'category.parent',
                 'reviews' => fn ($q) => $q->where('approved', true)->latest(),
                 'reviews.user',
             ])

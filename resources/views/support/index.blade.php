@@ -3,18 +3,14 @@
 
 @section('content')
 <section class="container my-4">
-
-    {{-- Page title --}}
-    <div class="mb-4">
+<div class="mb-4">
         <div class="section-label">Klientų aptarnavimas</div>
         <h1 class="fw-bold mb-1">Pagalba</h1>
         <p class="text-muted mb-0" style="max-width:640px">
             Turi klausimą apie užsakymą, pristatymą ar produktą? Čia rasi atsakymus į dažniausiai užduodamus klausimus arba gali susisiekti tiesiogiai.
         </p>
     </div>
-
-    {{-- Quick contact tiles --}}
-    <div class="support-contact-grid mb-5">
+<div class="support-contact-grid mb-5">
         <div class="support-tile">
             <div class="icon"><i class="bi bi-envelope"></i></div>
             <div class="label">El. paštas</div>
@@ -34,11 +30,8 @@
             <div class="hint">Atsiėmimas iš anksto susitarus</div>
         </div>
     </div>
-
-    {{-- Two-column: FAQ + contact form --}}
-    <div class="row g-4">
-        {{-- FAQ --}}
-        <div class="col-lg-7">
+<div class="row g-4">
+<div class="col-lg-7">
             <h3 class="mb-3">Dažniausiai užduodami klausimai</h3>
 
             <div class="faq">
@@ -72,9 +65,7 @@
                 </details>
             </div>
         </div>
-
-        {{-- Contact form --}}
-        <div class="col-lg-5">
+<div class="col-lg-5">
             <div class="support-form-card">
                 <h4 class="mb-1">Parašyk mums</h4>
                 <p class="text-muted small mb-3">Neradai atsakymo? Užpildyk formą ir atsakysime į tavo el. paštą.</p>

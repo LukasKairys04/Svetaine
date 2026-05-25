@@ -7,12 +7,7 @@
 @section('content')
 
 <section class="container my-4">
-
-
-
-    {{-- Hero: dark background with food image overlay --}}
-
-    <div class="nutrition-hero">
+<div class="nutrition-hero">
 
         <div>
 
@@ -25,12 +20,7 @@
         </div>
 
     </div>
-
-
-
-    {{-- Why nutrition matters — 4 short benefit points --}}
-
-    <div class="section-block" style="margin-top:0">
+<div class="section-block" style="margin-top:0">
 
         <div class="section-label">Kodėl tai svarbu</div>
 
@@ -85,12 +75,7 @@
         </div>
 
     </div>
-
-
-
-    {{-- Diet types — 4 cards with pros/cons --}}
-
-    <div class="section-block">
+<div class="section-block">
 
         <div class="diet-grid">
 
@@ -163,12 +148,7 @@
         </div>
 
     </div>
-
-
-
-    {{-- BMI calculator — fully client-side via Alpine-style JS --}}
-
-    <div class="section-block">
+<div class="section-block">
 
         <div class="section-label">Įrankis</div>
 
@@ -228,10 +208,7 @@
 
 
 
-                {{-- BMI skalė. Skaitiniai žymekliai (18,5 · 25 · 30) pozicionuoti absoliučiai
-
-                     ta pačia formule kaip ir markeris — BMI [10..40] → [0..100 %] juostos plotyje. --}}
-
+                
                 <div class="bmi-scale">
 
                     <div class="bmi-marker" id="bmi-marker" style="left:45%"></div>
@@ -283,12 +260,7 @@
         </div>
 
     </div>
-
-
-
-    {{-- CTA to full calorie planner --}}
-
-    <div class="cta-builder">
+<div class="cta-builder">
 
         <div>
 

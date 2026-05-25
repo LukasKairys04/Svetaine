@@ -16,22 +16,12 @@ use Illuminate\Database\Seeder;
 
 
 
-/**
-
- * ReviewSeeder — kiekvienam produktui sugeneruoja 3–6 realistiškus atsiliepimus
-
- * iš demo naudotojų rato. Reitingai svyruoja tarp 4 ir 5 žvaigždučių, kad
-
- * atitiktų vidutinį produkto rating'ą iš ProductSeeder.
-
- */
 
 class ReviewSeeder extends Seeder
 
 {
 
-    /** Bendro pobūdžio atsiliepimų šablonai (su placeholder'u {name} jei norėsime vardu kreiptis). */
-
+    
     protected array $templates = [
 
         ['Labai patiko — užsisakysiu dar.',                      'Veikia būtent taip, kaip aprašyta. Greitas pristatymas.'],

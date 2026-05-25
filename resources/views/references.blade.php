@@ -19,9 +19,7 @@
             Žemiau pateikiame pilną šaltinių sąrašą su nuorodomis į originalias publikacijas.
         </p>
     </div>
-
-    {{-- Kalorijų planuotojo šaltiniai --}}
-    <div class="citations-block mb-4">
+<div class="citations-block mb-4">
         <div class="section-label">Kalorijų planuotojas</div>
         <h3 class="mb-3">Mifflin-St Jeor, PAL, makroelementai</h3>
         <ol class="citations-list">
@@ -75,9 +73,7 @@
             </li>
         </ol>
     </div>
-
-    {{-- Treniruočių generatoriaus šaltiniai --}}
-    <div class="citations-block mb-4">
+<div class="citations-block mb-4">
         <div class="section-label">Treniruočių planas</div>
         <h3 class="mb-3">Tūris, dažnumas, RIR, poilsis</h3>
         <ol class="citations-list">
@@ -126,9 +122,7 @@
             </li>
         </ol>
     </div>
-
-    {{-- BMI ir kiti --}}
-    <div class="citations-block mb-4">
+<div class="citations-block mb-4">
         <div class="section-label">BMI ir kūno kompozicija</div>
         <h3 class="mb-3">Kūno masės indekso kategorijos</h3>
         <ol class="citations-list">

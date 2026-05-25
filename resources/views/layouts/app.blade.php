@@ -9,31 +9,26 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {{-- Inter įkraunam su 300 svoriu didelių antraščių plonumui. --}}
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/app.css?v=9">
     @stack('head')
 </head>
 <body class="bg-light d-flex flex-column min-vh-100 @if(request()->routeIs('admin.*')) admin-layout @endif">
-    {{-- Admin puslapiuose nerodom standartinio navbar — ten yra savas sidebar. --}}
-    @if(!request()->routeIs('admin.*'))
+@if(!request()->routeIs('admin.*'))
         @include('partials.navbar')
     @endif
 
     <main class="flex-grow-1">
         @yield('content')
     </main>
-
-    {{-- Admin puslapiuose nerodom footer ir floating cart. --}}
-    @if(!request()->routeIs('admin.*'))
+@if(!request()->routeIs('admin.*'))
         @include('partials.footer')
     @endif
 
     @if(!request()->routeIs('admin.*'))
-        {{-- Accessibility Settings Panel --}}
-        <div class="accessibility-panel">
+<div class="accessibility-panel">
             <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Prieinamumo nustatymai">
                 <i class="bi bi-universal-access"></i>
             </button>

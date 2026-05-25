@@ -6,15 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+        public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Google OAuth subject identifier — unikalus Google paskyrai.
             $table->string('google_id')->nullable()->unique()->after('email');
-            // Avataro URL iš Google paskyros (papildomai prie lokalaus `avatar`).
             $table->string('avatar_url')->nullable()->after('avatar');
         });
     }

@@ -21,7 +21,6 @@ return new class extends Migration
             $table->decimal('tax', 10, 2)->default(0);
             $table->decimal('total', 10, 2);
             $table->foreignId('promo_code_id')->nullable()->constrained('promo_codes')->nullOnDelete();
-            // Billing
             $table->string('billing_name');
             $table->string('billing_email');
             $table->string('billing_phone')->nullable();

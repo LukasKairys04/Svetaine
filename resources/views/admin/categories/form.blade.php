@@ -21,6 +21,14 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-5"><label class="form-label small">Tėvinė kategorija</label>
+                    <select name="parent_id" class="form-select">
+                        <option value="">— Nėra (pagrindinė) —</option>
+                        @foreach(\App\Models\Category::whereNull('parent_id')->orderBy('name')->get() as $parent)
+                            <option value="{{ $parent->id }}" @selected(old('parent_id', $category->parent_id) == $parent->id)>{{ $parent->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-12"><label class="form-label small">Aprašymas</label><textarea name="description" rows="2" class="form-control">{{ old('description', $category->description) }}</textarea></div>
                 <div class="col-md-6">
                     <label class="form-label small">Kategorijos nuotrauka</label>

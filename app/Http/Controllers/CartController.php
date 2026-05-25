@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    // Krepšelio puslapis su prekių sąrašu, santrauka ir pasiūlymais.
     public function index(CartService $krepselis)
     {
         $items = $krepselis->items();
-
-        // Parenkam 4 pasiūlymus. Jei krepšelyje kažkas yra — rodome produktus iš
-        // tų pačių kategorijų, bet be jau esamų krepšelyje. Kitu atveju — tiesiog
-        // populiariausius (pagal reitingų kiekį) produktus.
         $cartProductIds  = $items->pluck('product.id');
         $cartCategoryIds = \App\Models\Product::whereIn('id', $cartProductIds)
             ->pluck('category_id')->filter()->unique();
@@ -36,7 +31,6 @@ class CartController extends Controller
         ]);
     }
 
-    // Prekės pridėjimas į krepšelį. Kiekis neprivalomas — numatytasis 1.
     public function add(Request $request, CartService $krepselis)
     {
         $data = $request->validate([
@@ -48,7 +42,6 @@ class CartController extends Controller
         return back()->with('success', 'Prekė pridėta į krepšelį.');
     }
 
-    // Kiekio atnaujinimas. Jei qty=0 — prekė pašalinama per CartService::update().
     public function update(Request $request, CartService $krepselis)
     {
         $data = $request->validate([
@@ -60,7 +53,6 @@ class CartController extends Controller
         return back()->with('success', 'Krepšelis atnaujintas.');
     }
 
-    // Prekės pašalinimas iš krepšelio (iš tikrųjų update su qty=0).
     public function remove(Request $request, CartService $krepselis)
     {
         $data = $request->validate(['product_id' => 'required|exists:products,id']);
@@ -69,7 +61,6 @@ class CartController extends Controller
         return back()->with('success', 'Prekė pašalinta.');
     }
 
-    // Promo kodo pritaikymas arba pašalinimas. Tuščias kodas — pašalina aktyvų.
     public function applyPromo(Request $request, CartService $krepselis)
     {
         $data  = $request->validate(['code' => 'nullable|string|max:50']);

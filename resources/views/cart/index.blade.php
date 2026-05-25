@@ -6,8 +6,7 @@
     <h1 class="fw-bold mb-4"><i class="bi bi-cart3"></i> Krepšelis</h1>
 
     @if($items->isEmpty())
-        {{-- Tuščias krepšelis — rodom pasiūlymus, kad vartotojas rastų ką pirkti. --}}
-        <div class="empty-cart-card mb-4">
+<div class="empty-cart-card mb-4">
             <i class="bi bi-cart-x"></i>
             <h4>Krepšelis tuščias</h4>
             <p class="text-muted">Pradėk apsipirkimą — žemiau pasirinkom populiariausias prekes tau.</p>
@@ -116,9 +115,7 @@
                             Pereiti prie apmokėjimo <i class="bi bi-arrow-right"></i>
                         </a>
                     @else
-                        {{-- Neautentifikuotiems rodom raginimą prisijungti. Užsakyti galima tik
-                             prisijungusiems, nes užsakymą susiejam su naudotojo paskyra. --}}
-                        <div class="alert alert-light border mb-3 py-2 small">
+                                                <div class="alert alert-light border mb-3 py-2 small">
                             <i class="bi bi-info-circle text-primary"></i>
                             Užsakymui atlikti reikia prisijungti prie paskyros.
                         </div>
@@ -133,9 +130,7 @@
             </div>
         </div>
     </div>
-
-    {{-- Pasiūlymai (You might also like) — rodom visada, kai krepšelyje yra prekių. --}}
-    @if($suggestions->isNotEmpty())
+@if($suggestions->isNotEmpty())
         <div class="mt-5 cart-suggestions">
             <h5 class="fw-bold mb-3">Kiti pasiūlymai tau</h5>
             <div class="row g-3">

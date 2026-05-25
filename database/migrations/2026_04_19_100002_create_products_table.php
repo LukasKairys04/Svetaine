@@ -23,7 +23,6 @@ return new class extends Migration
             $table->json('gallery')->nullable();
             $table->decimal('rating', 3, 1)->default(0); // 0.0 - 5.0 step 0.1
             $table->integer('rating_count')->default(0);
-            // Nutrition facts (per serving)
             $table->string('serving_size')->nullable();
             $table->integer('servings_per_container')->nullable();
             $table->decimal('calories', 8, 2)->nullable();

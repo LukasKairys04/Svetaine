@@ -39,10 +39,9 @@ class CalculatorController extends Controller
             $gender = $request->input('gender');
             $h = (float) $request->input('height');
             $w = (float) $request->input('weight');
-            $activity = (float) $request->input('activity'); // 1.2, 1.375, 1.55, 1.725, 1.9
-            $goal = $request->input('goal'); // lose, maintain, gain
+            $activity = (float) $request->input('activity');
+            $goal = $request->input('goal');
 
-            // Mifflin-St Jeor
             $bmr = $gender === 'female'
                 ? 10 * $w + 6.25 * $h - 5 * $age - 161
                 : 10 * $w + 6.25 * $h - 5 * $age + 5;
@@ -53,7 +52,7 @@ class CalculatorController extends Controller
                 default => $tdee,
             };
             $calories = (int) round($calories);
-            $protein = (int) round($w * ($goal === 'gain' ? 2 : 1.8)); // g
+            $protein = (int) round($w * ($goal === 'gain' ? 2 : 1.8));
             $fat = (int) round(($calories * 0.25) / 9);
             $carbs = (int) round(($calories - $protein * 4 - $fat * 9) / 4);
 
@@ -69,7 +68,7 @@ class CalculatorController extends Controller
             $level = $request->input('level');
             $goal = $request->input('goal');
             $days = (int) $request->input('days');
-            $time = (int) $request->input('time'); // minutes per session
+            $time = (int) $request->input('time');
 
             $splits = [
                 3 => ['Full body A', 'Full body B', 'Full body C'],

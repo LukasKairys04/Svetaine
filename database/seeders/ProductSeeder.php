@@ -9,9 +9,6 @@ use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
-    // Fallback kategorinės nuotraukos — jei produktui nėra tikslios nuotraukos,
-    // naudojama kategorijos nuotrauka (patikimesnė už LoremFlickr, nepriklauso
-    // nuo išorinių paslaugų būsenos).
     protected array $categoryImages = [
         'sporto-papildai' => 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600&h=600&fit=crop&q=80',
         'mityba'          => 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=600&fit=crop&q=80',
@@ -20,45 +17,29 @@ class ProductSeeder extends Seeder
         'gerimai'         => 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=600&h=600&fit=crop&q=80',
     ];
 
-    // Konkrečios, kiekvienam produktui parinktos nuotraukos. Visos per Unsplash
-    // images CDN — palaiko `auto=format` ir `q` parametrus, todėl krauna greitai.
     protected array $productOverrides = [
-        // --- Sporto papildai ---
-        'whey-protein-gold-1kg'         => 'https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=600&h=600&fit=crop&q=80', // protein indelis
-        'kreatinas-monohidratas-500g'   => 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600&h=600&fit=crop&q=80', // miltelis šaukšte
-        'bcaa-211-400g'                 => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=600&h=600&fit=crop&q=80', // supplement bottle
-        'pre-workout-c4-300g'           => 'https://images.unsplash.com/photo-1594882645126-14020914d58d?w=600&h=600&fit=crop&q=80', // energy preworkout
-        'glutaminas-500g'               => 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop&q=80',   // white powder
+        'whey-protein-gold-1kg'         => 'https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=600&h=600&fit=crop&q=80',
+        'kreatinas-monohidratas-500g'   => 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600&h=600&fit=crop&q=80',
+        'bcaa-211-400g'                 => 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=600&h=600&fit=crop&q=80',
+        'pre-workout-c4-300g'           => 'https://images.unsplash.com/photo-1594882645126-14020914d58d?w=600&h=600&fit=crop&q=80',
+        'glutaminas-500g'               => 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop&q=80',
 
-        // --- Mityba ---
         'protein-bar-choco-60g'         => 'https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=600&h=600&fit=crop&q=80',
         'avizine-kose-su-baltymais-500g'=> 'https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?w=600&h=600&fit=crop&q=80',
         'riesutu-mix-250g'              => 'https://images.unsplash.com/photo-1599599810694-b5b37304c041?w=600&h=600&fit=crop&q=80',
         'energetinis-batonelis-50g'     => 'https://images.unsplash.com/photo-1571748982800-fa51082c2224?w=600&h=600&fit=crop&q=80',
-
-        // --- Sportas ---
-        'treniruociu-guma-set'          => 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&h=600&fit=crop&q=80', // resistance bands
-        'hanteliai-2x5kg'               => 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&h=600&fit=crop&q=80',
+        'treniruociu-guma-set'          => 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&h=600&fit=crop&q=80',        'hanteliai-2x5kg'               => 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&h=600&fit=crop&q=80',
         'jogos-kilimelis-premium'       => 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=600&h=600&fit=crop&q=80',
         'sokdyne-greitine'              => 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&h=600&fit=crop&q=80',
         'sporto-krepsys-40l'            => 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop&q=80',
-
-        // --- Vitaminai ---
         'vitaminas-d3-2000iu'           => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80',
         'omega-3-1000mg'                => 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80',
         'multivitaminai-sport'          => 'https://images.unsplash.com/photo-1626716493137-b67fe9501e76?w=600&h=600&fit=crop&q=80',
-
-        // --- Gėrimai ---
         'izotoninis-gerimas-500ml'      => 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600&h=600&fit=crop&q=80',
         'bcaa-gerimas-330ml'            => 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&h=600&fit=crop&q=80',
         'baltyminis-kokteilis-330ml'    => 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=600&h=600&fit=crop&q=80',
     ];
 
-    /**
-     * Kiekvienam produktui — trumpas (1 sakinys), konkretus aprašas
-     * ir šiek tiek ilgesnis description HTML (2–3 trumpi sakiniai).
-     * Formatas: [slug => [short, description_html]]
-     */
     protected function copy(string $slug): array
     {
         $map = [
@@ -149,44 +130,37 @@ class ProductSeeder extends Seeder
 
     public function run(): void
     {
-        $byType = Category::where('type', 'product')->pluck('id', 'slug');
+        $allCats = Category::where('type', 'product')->pluck('id', 'slug');
 
         $products = [
-            // Sporto papildai
-            ['Whey Protein Gold 1kg', 'sporto-papildai', 'Optimum Nutrition', 39.99, 34.99, 120, 4.8, ['calories'=>120,'protein'=>24,'carbs'=>3,'fat'=>1.5,'sugar'=>1,'sodium'=>50,'serving_size'=>'30g','servings_per_container'=>33]],
-            ['Kreatinas Monohidratas 500g', 'sporto-papildai', 'MyProtein', 19.99, null, 80, 4.7, ['calories'=>0,'protein'=>0,'carbs'=>0,'fat'=>0,'serving_size'=>'5g','servings_per_container'=>100]],
-            ['BCAA 2:1:1 400g', 'sporto-papildai', 'Scitec', 24.99, 21.99, 60, 4.5, ['calories'=>20,'protein'=>5,'carbs'=>0,'fat'=>0,'serving_size'=>'10g','servings_per_container'=>40]],
-            ['Pre-Workout C4 300g', 'sporto-papildai', 'Cellucor', 29.99, null, 45, 4.3, ['calories'=>5,'protein'=>0,'carbs'=>1,'fat'=>0,'serving_size'=>'6g','servings_per_container'=>50]],
-            ['Glutaminas 500g', 'sporto-papildai', 'Biotech', 22.99, null, 30, 4.4, ['calories'=>0,'protein'=>5,'carbs'=>0,'fat'=>0,'serving_size'=>'5g','servings_per_container'=>100]],
-            // Mityba
-            ['Protein Bar Choco 60g', 'mityba', 'Quest', 2.99, null, 500, 4.6, ['calories'=>200,'protein'=>20,'carbs'=>21,'fat'=>8,'sugar'=>1,'fiber'=>14,'sodium'=>220,'serving_size'=>'60g','servings_per_container'=>1]],
-            ['Avižinė Košė su Baltymais 500g', 'mityba', 'FitShop', 5.99, 4.99, 200, 4.5, ['calories'=>350,'protein'=>20,'carbs'=>55,'fat'=>6,'fiber'=>8,'serving_size'=>'100g','servings_per_container'=>5]],
-            ['Riešutų Mix 250g', 'mityba', 'NutriPro', 6.99, null, 150, 4.7, ['calories'=>580,'protein'=>18,'carbs'=>15,'fat'=>52,'fiber'=>7,'serving_size'=>'30g','servings_per_container'=>8]],
-            ['Energetinis Batonėlis 50g', 'mityba', 'Clif', 2.49, null, 400, 4.2, ['calories'=>240,'protein'=>9,'carbs'=>42,'fat'=>5,'sugar'=>20,'serving_size'=>'50g','servings_per_container'=>1]],
-            // Sportas
-            ['Treniruočių Guma Set', 'sportas', 'Fitness Lab', 14.99, null, 100, 4.6, []],
-            ['Hanteliai 2x5kg', 'sportas', 'PowerFit', 39.99, 34.99, 40, 4.8, []],
-            ['Jogos Kilimėlis Premium', 'sportas', 'YogaX', 24.99, null, 70, 4.5, []],
-            ['Šokdynė Greitinė', 'sportas', 'CrossPro', 9.99, null, 200, 4.3, []],
-            ['Sporto Krepšys 40L', 'sportas', 'SportLine', 29.99, null, 60, 4.4, []],
-            // Vitaminai
-            ['Vitaminas D3 2000IU', 'vitaminai', 'Solgar', 12.99, null, 150, 4.7, ['serving_size'=>'1 kapsulė','servings_per_container'=>60]],
-            ['Omega-3 1000mg', 'vitaminai', 'NOW', 16.99, 14.99, 120, 4.8, ['serving_size'=>'1 kapsulė','servings_per_container'=>90]],
-            ['Multivitaminai Sport', 'vitaminai', 'Universal', 19.99, null, 90, 4.5, ['serving_size'=>'2 tabletės','servings_per_container'=>60]],
-            // Gėrimai
-            ['Izotoninis Gėrimas 500ml', 'gerimai', 'Powerade', 1.99, null, 300, 4.2, ['calories'=>90,'carbs'=>22,'sugar'=>20,'sodium'=>200,'serving_size'=>'500ml','servings_per_container'=>1]],
-            ['BCAA Gėrimas 330ml', 'gerimai', 'Scitec', 2.49, null, 250, 4.3, ['calories'=>10,'protein'=>2,'serving_size'=>'330ml','servings_per_container'=>1]],
-            ['Baltyminis Kokteilis 330ml', 'gerimai', 'Weider', 3.49, 2.99, 180, 4.5, ['calories'=>150,'protein'=>25,'carbs'=>8,'fat'=>2,'serving_size'=>'330ml','servings_per_container'=>1]],
+            ['Whey Protein Gold 1kg', 'sporto-papildai-high-protein', 'Optimum Nutrition', 39.99, 34.99, 120, 4.8, ['calories'=>120,'protein'=>24,'carbs'=>3,'fat'=>1.5,'sugar'=>1,'sodium'=>50,'serving_size'=>'30g','servings_per_container'=>33]],
+            ['Kreatinas Monohidratas 500g', 'sporto-papildai-kreatinas', 'MyProtein', 19.99, null, 80, 4.7, ['calories'=>0,'protein'=>0,'carbs'=>0,'fat'=>0,'serving_size'=>'5g','servings_per_container'=>100]],
+            ['BCAA 2:1:1 400g', 'sporto-papildai-aminorugstys', 'Scitec', 24.99, 21.99, 60, 4.5, ['calories'=>20,'protein'=>5,'carbs'=>0,'fat'=>0,'serving_size'=>'10g','servings_per_container'=>40]],
+            ['Pre-Workout C4 300g', 'sporto-papildai-pre-workout', 'Cellucor', 29.99, null, 45, 4.3, ['calories'=>5,'protein'=>0,'carbs'=>1,'fat'=>0,'serving_size'=>'6g','servings_per_container'=>50]],
+            ['Glutaminas 500g', 'sporto-papildai-aminorugstys', 'Biotech', 22.99, null, 30, 4.4, ['calories'=>0,'protein'=>5,'carbs'=>0,'fat'=>0,'serving_size'=>'5g','servings_per_container'=>100]],
+            ['Protein Bar Choco 60g', 'mityba-high-protein', 'Quest', 2.99, null, 500, 4.6, ['calories'=>200,'protein'=>20,'carbs'=>21,'fat'=>8,'sugar'=>1,'fiber'=>14,'sodium'=>220,'serving_size'=>'60g','servings_per_container'=>1]],
+            ['Avižinė Košė su Baltymais 500g', 'mityba-high-protein', 'FitShop', 5.99, 4.99, 200, 4.5, ['calories'=>350,'protein'=>20,'carbs'=>55,'fat'=>6,'fiber'=>8,'serving_size'=>'100g','servings_per_container'=>5]],
+            ['Riešutų Mix 250g', 'mityba-low-fat', 'NutriPro', 6.99, null, 150, 4.7, ['calories'=>580,'protein'=>18,'carbs'=>15,'fat'=>52,'fiber'=>7,'serving_size'=>'30g','servings_per_container'=>8]],
+            ['Energetinis Batonėlis 50g', 'mityba-uzkandziai', 'Clif', 2.49, null, 400, 4.2, ['calories'=>240,'protein'=>9,'carbs'=>42,'fat'=>5,'sugar'=>20,'serving_size'=>'50g','servings_per_container'=>1]],
+            ['Treniruočių Guma Set', 'sportas-aksesuarai', 'Fitness Lab', 14.99, null, 100, 4.6, []],
+            ['Hanteliai 2x5kg', 'sportas-laisvi-svoriai', 'PowerFit', 39.99, 34.99, 40, 4.8, []],
+            ['Jogos Kilimėlis Premium', 'sportas-aksesuarai', 'YogaX', 24.99, null, 70, 4.5, []],
+            ['Šokdynė Greitinė', 'sportas-aksesuarai', 'CrossPro', 9.99, null, 200, 4.3, []],
+            ['Sporto Krepšys 40L', 'sportas-krepsiai-ir-ekipuote', 'SportLine', 29.99, null, 60, 4.4, []],
+            ['Vitaminas D3 2000IU', 'vitaminai-vitaminai-d-ir-c', 'Solgar', 12.99, null, 150, 4.7, ['serving_size'=>'1 kapsulė','servings_per_container'=>60]],
+            ['Omega-3 1000mg', 'vitaminai-omega-ir-riebalu-rugstys', 'NOW', 16.99, 14.99, 120, 4.8, ['serving_size'=>'1 kapsulė','servings_per_container'=>90]],
+            ['Multivitaminai Sport', 'vitaminai-kompleksai', 'Universal', 19.99, null, 90, 4.5, ['serving_size'=>'2 tabletės','servings_per_container'=>60]],
+            ['Izotoninis Gėrimas 500ml', 'gerimai-izotoniniai', 'Powerade', 1.99, null, 300, 4.2, ['calories'=>90,'carbs'=>22,'sugar'=>20,'sodium'=>200,'serving_size'=>'500ml','servings_per_container'=>1]],
+            ['BCAA Gėrimas 330ml', 'gerimai-baltyminiai-gerimai', 'Scitec', 2.49, null, 250, 4.3, ['calories'=>10,'protein'=>2,'serving_size'=>'330ml','servings_per_container'=>1]],
+            ['Baltyminis Kokteilis 330ml', 'gerimai-baltyminiai-gerimai', 'Weider', 3.49, 2.99, 180, 4.5, ['calories'=>150,'protein'=>25,'carbs'=>8,'fat'=>2,'serving_size'=>'330ml','servings_per_container'=>1]],
         ];
 
         foreach ($products as $idx => $p) {
             [$name, $catSlug, $brand, $price, $salePrice, $stock, $rating, $nutrition] = $p;
             $slug = Str::slug($name);
-            $catId = $byType[$catSlug] ?? $byType->first();
+            $catId = $allCats[$catSlug] ?? $allCats->first();
             [$short, $desc] = $this->copy($slug);
 
-            // Naudojam konkrečią produkto nuotrauką; jei jos nėra — kategorijos
-            // nuotrauką; kraštutiniu atveju — picsum.photos su stabiliu slug seed'u.
             $image = $this->productOverrides[$slug]
                 ?? ($this->categoryImages[$catSlug] ?? "https://picsum.photos/seed/{$slug}/600/600");
 

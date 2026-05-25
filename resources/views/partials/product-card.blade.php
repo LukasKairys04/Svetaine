@@ -1,39 +1,46 @@
 @props(['product'])
-{{-- Medical-inspired product card --}}
 @php
     $reviewsCount = (int) ($product->reviews_count ?? $product->reviews()->count());
     $reviewsAvg = (float) ($product->reviews_avg_rating ?? ($reviewsCount ? $product->reviews()->avg('rating') : 0));
 @endphp
 
 <div class="medical-product-card">
-    <a href="{{ route('product.show', $product->slug) }}" class="card-image">
-        <img src="{{ $product->image ?: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop' }}"
-             alt="{{ $product->name }}" loading="lazy">
+    <a href="{{ route('product.show', $product->slug) }}" class="card-image" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;min-height:200px;">
+        <i class="bi bi-box-seam" style="font-size:3rem;color:#bbb;"></i>
     </a>
 
     <div class="card-body">
         @if($product->category)
-            <div class="card-category">{{ $product->category->name }}</div>
+            <div class="card-category">
+                @if($product->category->parent)
+                    {{ $product->category->parent->name }} <i class="bi bi-chevron-right small"></i>
+                @endif
+                {{ $product->category->name }}
+            </div>
         @endif
         <h5 class="card-title">
             <a href="{{ route('product.show', $product->slug) }}" class="text-decoration-none text-dark">{{ $product->name }}</a>
         </h5>
 
+        @if($product->short_description)
+            <p class="card-text text-muted small mb-2">{{ Str::limit($product->short_description, 80) }}</p>
+        @endif
+
         <div class="product-reviews-mini mb-2">
-            <span class="stars">
+            <span class="stars text-warning">
                 @for($i = 1; $i <= 5; $i++)
                     <i class="bi {{ $reviewsAvg >= $i ? 'bi-star-fill' : ($reviewsAvg >= $i - 0.5 ? 'bi-star-half' : 'bi-star') }}"></i>
                 @endfor
             </span>
-            <span class="count">{{ number_format($reviewsAvg, 1) }} / 5 · {{ $reviewsCount }} atsil.</span>
+            <span class="count">{{ number_format($reviewsAvg, 1) }} ({{ $reviewsCount }})</span>
         </div>
 
         <div class="card-price">
             @if($product->sale_price)
                 <span class="text-muted text-decoration-line-through me-2">€{{ number_format($product->price, 2) }}</span>
-                <span class="text-primary">€{{ number_format($product->sale_price, 2) }}</span>
+                <span class="text-primary fw-bold">€{{ number_format($product->sale_price, 2) }}</span>
             @else
-                <span class="text-primary">€{{ number_format($product->price, 2) }}</span>
+                <span class="text-primary fw-bold">€{{ number_format($product->price, 2) }}</span>
             @endif
         </div>
         <div class="card-footer">

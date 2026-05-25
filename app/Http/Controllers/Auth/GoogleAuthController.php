@@ -10,28 +10,10 @@ use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
 
-/**
- * Google / Gmail OAuth prisijungimas.
- *
- * Srautas:
- *   1. `GET /auth/google`          → redirect į Google sutikimų langą
- *   2. Google grąžina vartotoją į  → `GET /auth/google/callback`
- *   3. Čia susikuriam arba paimam lokalų User pagal el. pašto adresą,
- *      užlogginam ir grąžinam į `next` URL (arba pagrindinį).
- *
- * Credentials reikia įvesti .env faile:
- *   GOOGLE_CLIENT_ID=xxxxx
- *   GOOGLE_CLIENT_SECRET=xxxxx
- *   GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback
- *
- * Jei credentials nėra — redirectas į login puslapį su klaidos pranešimu,
- * kad vartotojas galėtų prisijungti įprastu būdu.
- */
 class GoogleAuthController extends Controller
 {
     public function redirect(Request $request)
     {
-        // Išsaugom grįžimo adresą sesijoje, kad po OAuth grįžtume kur reikia.
         if ($request->filled('next')) {
             session(['auth.next' => $request->query('next')]);
         }
@@ -58,8 +40,6 @@ class GoogleAuthController extends Controller
                 ->withErrors(['email' => 'Google prisijungimas nepavyko. Pabandyk dar kartą arba naudok įprastą formą.']);
         }
 
-        // Surandam arba susikuriam lokalų naudotoją. Jei paskyra jau yra — tiesiog
-        // atnaujinam google_id, kad kitą kartą greičiau atpažintume.
         $user = User::where('email', $googleUser->getEmail())->first();
 
         if ($user) {
@@ -72,8 +52,6 @@ class GoogleAuthController extends Controller
             $user = User::create([
                 'name' => $googleUser->getName() ?: Str::before($googleUser->getEmail(), '@'),
                 'email' => $googleUser->getEmail(),
-                // OAuth vartotojai neturi slaptažodžio — dedam atsitiktinį hash,
-                // kad per klaidą niekas neprisijungtų įprastu būdu.
                 'password' => bcrypt(Str::random(40)),
                 'google_id' => $googleUser->getId(),
                 'avatar_url' => $googleUser->getAvatar(),

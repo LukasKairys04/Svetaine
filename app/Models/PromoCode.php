@@ -4,14 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/*
- |--------------------------------------------------------------------------
- | PromoCode modelis
- |--------------------------------------------------------------------------
- | Nuolaidų kodai su dviem tipais: 'percent' (procentinė) ir 'fixed' (fiksuota
- | suma). Turi galiojimo laiko, minimalios sumos ir naudojimo limito apribojimus.
- | isValid() tikrina visą logiką; discountFor() grąžina tikslų nuolaidos dydį.
- */
 class PromoCode extends Model
 {
     protected $guarded = [];
@@ -24,7 +16,6 @@ class PromoCode extends Model
         'min_order' => 'decimal:2',
     ];
 
-    // Patikrina ar kodas gali būti naudojamas: aktyvus, datos, limitas, min. suma.
     public function isValid(?float $subtotal = null): bool
     {
         if (!$this->is_active) return false;
@@ -35,7 +26,6 @@ class PromoCode extends Model
         return true;
     }
 
-    // Apskaičiuoja nuolaidos sumą konkretiems pirkimams. percent tipo max = 100%.
     public function discountFor(float $subtotal): float
     {
         if (!$this->isValid($subtotal)) return 0;

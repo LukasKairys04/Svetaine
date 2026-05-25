@@ -7,16 +7,8 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    /**
-     * Home page.
-     *
-     * Rodo hero, kategorijas ir rekomenduojamas prekes.
-     * Naujienos ir testimonials sekcijos pašalintos pagal užsakovo prašymą.
-     */
     public function index()
     {
-        // Statinis klientų atsiliepimų rinkinys — rodom Flawless tipo kortelėse.
-        // Vėliau galima perkelti į DB; tačiau homepage'ui pakanka konstantų.
         $testimonials = [
             [
                 'name'   => 'Justė M.',
@@ -36,16 +28,14 @@ class HomeController extends Controller
         ];
 
         return view('home', [
-            // Visos produktų kategorijos, išskyrus „Mityba" ir „Sportas" — jos turi atskirus puslapius.
             'categories' => Category::active()->type('product')
+                ->whereNull('parent_id')
                 ->whereNotIn('slug', ['mityba', 'sportas'])
                 ->orderBy('sort_order')
                 ->take(3)
                 ->get(),
-            // „New arrivals" stiliaus populiariosios prekės — išrinktos kaip featured.
-            'featured' => Product::active()->with('category')->featured()->latest()->take(8)->get(),
-            // „Most loved" — pagal reitingą ir balsų skaičių.
-            'topRated' => Product::active()->with('category')
+            'featured' => Product::active()->with('category.parent')->featured()->latest()->take(8)->get(),
+            'topRated' => Product::active()->with('category.parent')
                 ->where('rating_count', '>', 0)
                 ->orderByDesc('rating')
                 ->orderByDesc('rating_count')

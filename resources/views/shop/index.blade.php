@@ -43,11 +43,9 @@
     </nav>
 
     <div class="shop-layout">
-        {{-- Filtrai (sidebar) --}}
-        <aside class="shop-filters">
+<aside class="shop-filters">
             <form method="GET" action="{{ route('shop.index') }}" id="shopFilters">
-                {{-- Paieška visada viršuje. --}}
-                <div class="filter-block">
+<div class="filter-block">
                     <label class="filter-label">Paieška</label>
                     <div class="search-wrap">
                         <i class="bi bi-search"></i>
@@ -55,22 +53,40 @@
                         <div class="search-suggest" id="shopSearchSuggest" hidden></div>
                     </div>
                 </div>
-
-                {{-- Kategorija kaip dropdown (paspaudi ir pasirenki). --}}
                 <details class="filter-block filter-accordion" open>
                     <summary class="filter-title">Kategorija</summary>
-                    <select name="category" class="form-select mt-2">
+                    <select name="category" class="form-select mt-2" onchange="document.querySelector('[name=subcategory]').value=''; this.form.submit();">
                         <option value="">Visos kategorijos</option>
                         @foreach($categories as $c)
                             <option value="{{ $c->slug }}" @selected(request('category') === $c->slug)>
-                                {{ $c->name }} ({{ $c->products_count }})
+                                {{ $c->name }} ({{ $c->products_count + $c->children->sum('products_count') }})
                             </option>
                         @endforeach
                     </select>
                 </details>
 
-                {{-- Prekės ženklai kaip checkbox'ai — galima pasirinkti kelis. --}}
-                @if($brandCounts->isNotEmpty())
+                @php
+                    $activeCat = $categories->firstWhere('slug', request('category'));
+                @endphp
+                @if($activeCat && $activeCat->children->isNotEmpty())
+                <details class="filter-block filter-accordion" open>
+                    <summary class="filter-title">Subkategorija</summary>
+                    <div class="filter-list-scroll mt-2">
+                        <label class="filter-radio">
+                            <input type="radio" name="subcategory" value="" @checked(!request('subcategory'))>
+                            <span>Visos</span>
+                        </label>
+                        @foreach($activeCat->children as $sub)
+                            <label class="filter-radio">
+                                <input type="radio" name="subcategory" value="{{ $sub->slug }}" @checked(request('subcategory') === $sub->slug)>
+                                <span>{{ $sub->name }}</span>
+                                <span class="count">{{ $sub->products_count }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+                @endif
+@if($brandCounts->isNotEmpty())
                     <details class="filter-block filter-accordion" @if(!empty($selectedBrands)) open @endif>
                         <summary class="filter-title">Prekės ženklas</summary>
                         <div class="filter-list-scroll mt-2">
@@ -84,9 +100,7 @@
                         </div>
                     </details>
                 @endif
-
-                {{-- Kainos intervalas — du input'ai, apačioje rodomi galimi ribos. --}}
-                <details class="filter-block filter-accordion" open>
+<details class="filter-block filter-accordion" open>
                     <summary class="filter-title">Kaina</summary>
                     <div class="price-inputs mt-2">
                         <input type="number" name="min_price" value="{{ request('min_price') }}"
@@ -101,9 +115,7 @@
                         Visos prekės: €{{ number_format($priceBounds['min'], 2) }} – €{{ number_format($priceBounds['max'], 2) }}
                     </div>
                 </details>
-
-                {{-- Minimalus reitingas — clickable žvaigždučių eilutės. --}}
-                <details class="filter-block filter-accordion" @if(request('rating')) open @endif>
+<details class="filter-block filter-accordion" @if(request('rating')) open @endif>
                     <summary class="filter-title">Minimalus reitingas</summary>
                     <label class="filter-radio">
                         <input type="radio" name="rating" value="" @checked(!request('rating'))>
@@ -121,9 +133,7 @@
                         </label>
                     @endforeach
                 </details>
-
-                {{-- Kiti filtrai --}}
-                <details class="filter-block filter-accordion" @if(request('in_stock') || request('on_sale')) open @endif>
+<details class="filter-block filter-accordion" @if(request('in_stock') || request('on_sale')) open @endif>
                     <summary class="filter-title">Papildomai</summary>
                     <label class="filter-check">
                         <input type="checkbox" name="in_stock" value="1" @checked(request('in_stock'))>
@@ -134,9 +144,7 @@
                         <span>Tik akcija</span>
                     </label>
                 </details>
-
-                {{-- Mobiliam: pateikimo mygtukas. Desktop'e auto-submit'inamas per JS. --}}
-                <div class="filter-actions">
+<div class="filter-actions">
                     <button type="submit" class="btn btn-primary w-100">Pritaikyti</button>
                     @if(request()->except('page', 'sort'))
                         <a href="{{ route('shop.index') }}" class="btn btn-outline-secondary w-100 mt-2">Atstatyti visus</a>
@@ -144,18 +152,14 @@
                 </div>
             </form>
         </aside>
-
-        {{-- Produktų tinklelis --}}
-        <div class="shop-results">
-            {{-- Viršutinė juosta: rastų kiekis + rūšiavimas --}}
-            <div class="shop-toolbar">
+<div class="shop-results">
+<div class="shop-toolbar">
                 <div class="result-count">
                     Rasta <strong>{{ $products->total() }}</strong>
                     {{ $products->total() === 1 ? 'produktas' : ($products->total() % 10 >= 2 && $products->total() % 10 <= 9 && !($products->total() % 100 >= 11 && $products->total() % 100 <= 19) ? 'produktai' : 'produktų') }}
                 </div>
                 <form method="GET" class="sort-form">
-                    {{-- Perkeliam visus esamus filtrus, kad rūšiuojant jie išliktų. --}}
-                    @foreach(request()->except('sort', 'page') as $k => $v)
+@foreach(request()->except('sort', 'page') as $k => $v)
                         @if(is_array($v))
                             @foreach($v as $vv)
                                 <input type="hidden" name="{{ $k }}[]" value="{{ $vv }}">
@@ -174,9 +178,7 @@
                     </select>
                 </form>
             </div>
-
-            {{-- Aktyvūs filtrų čipsai --}}
-            @if(!empty($activeChips))
+@if(!empty($activeChips))
                 <div class="active-chips">
                     @foreach($activeChips as $chip)
                         <a href="{{ $removeUrl($chip['key'], $chip['value'] ?? null) }}" class="chip">

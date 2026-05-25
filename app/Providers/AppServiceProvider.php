@@ -17,9 +17,6 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Share product categories with all views (for navbar dropdown).
-        // "Mityba" ir "Sportas" kategorijos paslepiamos iš Prekės dropdown'o,
-        // nes navbar'e jos turi atskirus meniu punktus, vedančius į turinio puslapius.
         View::composer('partials.navbar', function ($view) {
             $view->with('navProductCategories',
                 Category::where('type', 'product')

@@ -3,9 +3,7 @@
 
 @section('content')
 <section class="container my-4 account-page">
-
-    {{-- Antraštė su vartotojo inicialais ir atsijungimo mygtuku --}}
-    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
+<div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
         <div class="d-flex align-items-center gap-3">
             <div class="account-avatar">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
             <div>
@@ -27,9 +25,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
-
-    {{-- Navigacija: Profilis | Užsakymai --}}
-    <ul class="nav nav-pills mb-4 account-tabs" id="accountTabs">
+<ul class="nav nav-pills mb-4 account-tabs" id="accountTabs">
         <li class="nav-item">
             <a class="nav-link {{ !request('tab') || request('tab') === 'profilis' ? 'active' : '' }}"
                href="{{ route('account.index') }}?tab=profilis">
@@ -46,9 +42,7 @@
             </a>
         </li>
     </ul>
-
-    {{-- PROFILIO SKYRIUS --}}
-    @if(!request('tab') || request('tab') === 'profilis')
+@if(!request('tab') || request('tab') === 'profilis')
 
         <div class="card account-card mb-4">
             <div class="card-body">
@@ -138,9 +132,7 @@
                 </form>
             </div>
         </div>
-
-    {{-- UŽSAKYMŲ SKYRIUS --}}
-    @elseif(request('tab') === 'uzsakymai')
+@elseif(request('tab') === 'uzsakymai')
 
         @if($orders->isEmpty())
             <div class="card account-card">

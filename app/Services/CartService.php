@@ -9,20 +9,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-/*
- |--------------------------------------------------------------------------
- | CartService — dvi saugojimo strategijos
- |--------------------------------------------------------------------------
- | Prisijungęs vartotojas: prekių sąrašas saugomas DB lentelėje `cart_items`.
- | Svečias: sąrašas saugomas sesijoje kaip [product_id => qty] masyvas.
- | Promo kodas visada saugomas sesijoje (abu atvejai).
- */
 class CartService
 {
-    protected const SESSION_KEY = 'cart';    // Sesijos raktas svečio krepšeliui.
-    protected const PROMO_KEY   = 'cart_promo'; // Sesijos raktas aktyviam promo kodui.
+    protected const SESSION_KEY = 'cart';
+    protected const PROMO_KEY   = 'cart_promo';
 
-    // Grąžina visą krepšelio turinį kaip kolekciją objektų {product, qty, subtotal}.
     public function items(): Collection
     {
         if (Auth::check()) {
@@ -33,7 +24,7 @@ class CartService
                 ->values();
         }
 
-        $raw = Session::get(self::SESSION_KEY, []); // [product_id => qty]
+        $raw = Session::get(self::SESSION_KEY, []);
         if (empty($raw)) return collect();
         $products = \App\Models\Product::whereIn('id', array_keys($raw))->get()->keyBy('id');
         return collect($raw)->map(function ($qty, $pid) use ($products) {
@@ -48,19 +39,16 @@ class CartService
         })->filter()->values();
     }
 
-    // Bendras prekių kiekis krepšelyje (suma visų qty).
     public function count(): int
     {
         return (int) $this->items()->sum('qty');
     }
 
-    // Statinis variantas — naudojamas Blade view'uose be DI (pvz., navbar badge).
     public static function countStatic(): int
     {
         return (new self())->count();
     }
 
-    // Prekių pridėjimas. Jei prekiė jau yra — kiekis susumuojamas, neperrašomas.
     public function add(int $productId, int $qty = 1): void
     {
         $qty = max(1, $qty);
@@ -76,7 +64,6 @@ class CartService
         }
     }
 
-    // Kiekio keitimas. qty=0 veikia kaip pašalinimas.
     public function update(int $productId, int $qty): void
     {
         $qty = max(0, $qty);
@@ -97,13 +84,11 @@ class CartService
         }
     }
 
-    // Prekiės pašalinimas — patogumo metodas, kviečia update(..., 0).
     public function remove(int $productId): void
     {
         $this->update($productId, 0);
     }
 
-    // Viško išvalymas: DB eilutės + sesija + promo kodas.
     public function clear(): void
     {
         if (Auth::check()) {
@@ -113,13 +98,11 @@ class CartService
         Session::forget(self::PROMO_KEY);
     }
 
-    // Tarpinė suma be nuolaidų ir pristatymo.
     public function subtotal(): float
     {
         return (float) $this->items()->sum('subtotal');
     }
 
-    // Promo kodo nustatymas. Tikrina galiojimą ir min. sumą. Grąžina null jei negalioja.
     public function setPromo(?string $code): ?PromoCode
     {
         if (!$code) {
@@ -135,7 +118,6 @@ class CartService
         return $promo;
     }
 
-    // Grąžina aktyvų promo kodą iš sesijos. Jei negalioja — automatiškai pašalina.
     public function promo(): ?PromoCode
     {
         $code = Session::get(self::PROMO_KEY);
@@ -148,14 +130,12 @@ class CartService
         return $promo;
     }
 
-    // Nuolaidos suma eurais pagal aktyvų promo kodą.
     public function discount(): float
     {
         $promo = $this->promo();
         return $promo ? $promo->discountFor($this->subtotal()) : 0.0;
     }
 
-    // Pristatymo kaina: nemokamas nuo 50 €, kitu atveju 3,99 €. Tuščias krepšelis = 0.
     public function shipping(): float
     {
         $sub = $this->subtotal();
@@ -163,13 +143,11 @@ class CartService
         return $sub >= 50 ? 0.0 : 3.99;
     }
 
-    // Galutinė suma: subtotal − nuolaida + pristatymas. Negali būti neigiama.
     public function total(): float
     {
         return max(0.0, $this->subtotal() - $this->discount() + $this->shipping());
     }
 
-    // Visi reikalingi duomenys checkout ir krepšelio puslapiams viename masyve.
     public function summary(): array
     {
         return [

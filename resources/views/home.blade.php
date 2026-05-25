@@ -5,9 +5,6 @@
 
 
 @section('content')
-
-{{-- MEDICAL HERO — Clean blue gradient with search --}}
-
 <section class="medical-hero">
 
     <div class="container">
@@ -19,12 +16,7 @@
                 <h1>Jūsų sveikata.<br>Jūsų jėga.<br><span style="color: var(--fs-primary);">Mūsų misija.</span></h1>
 
                 <p class="lead">Aukštos kokybės vitaminai, maisto papildai ir sporto mityba vienoje vietoje.</p>
-
-
-
-                {{-- Deep Search Bar --}}
-
-                <form class="deep-search mb-4" id="homeSearchForm" method="GET" action="{{ route('shop.index') }}">
+<form class="deep-search mb-4" id="homeSearchForm" method="GET" action="{{ route('shop.index') }}">
 
                     <input type="search" id="homeSearchInput" name="q" class="search-input" placeholder="Ieškoti produktų, kategorijų arba ingredientų...">
 
@@ -53,11 +45,6 @@
     </div>
 
 </section>
-
-
-
-{{-- KATEGORIJOS — 3 vizualūs blokai --}}
-
 @if($categories->isNotEmpty())
 
 <section class="container my-5 py-4">
@@ -89,11 +76,6 @@
 </section>
 
 @endif
-
-
-
-{{-- FEATURED PRODUCTS — Medical Style Grid --}}
-
 @if($featured->isNotEmpty())
 
 <section class="container my-5 py-4">
@@ -133,11 +115,6 @@
 </section>
 
 @endif
-
-
-
-{{-- NEWSLETTER --}}
-
 <section class="py-5">
 
     <div class="container">
