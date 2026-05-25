@@ -43,5 +43,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3">{{ $messages->links() }}</div>
+    <div class="mt-3 d-flex justify-content-center">{{ $messages->links() }}</div>
 @endsection

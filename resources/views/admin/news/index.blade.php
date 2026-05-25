@@ -28,5 +28,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3">{{ $news->links() }}</div>
+    <div class="mt-3 d-flex justify-content-center">{{ $news->links() }}</div>
 @endsection

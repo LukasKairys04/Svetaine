@@ -36,8 +36,8 @@
                     <option value="out" @selected(request('stock') === 'out')>Nėra</option>
                 </select>
             </div>
-            <div class="col-lg-2 col-md-12 d-flex gap-2">
-                <button class="btn btn-primary flex-fill">Filtruoti</button>
+            <div class="col-12 col-md-auto d-flex gap-2">
+                <button class="btn btn-primary">Filtruoti</button>
                 <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Valyti</a>
             </div>
         </div>
@@ -89,5 +89,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3">{{ $products->links() }}</div>
+    <div class="mt-3 d-flex justify-content-center">{{ $products->links() }}</div>
 @endsection
