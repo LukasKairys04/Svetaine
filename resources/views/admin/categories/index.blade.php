@@ -111,7 +111,7 @@
 
     </div>
 
-    <div class="mt-3 d-flex justify-content-center">{{ $categories->links() }}</div>
+    <div class="mt-3">{{ $categories->links('vendor.pagination.admin') }}</div>
 
 @endsection
 

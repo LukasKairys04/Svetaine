@@ -77,5 +77,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3 d-flex justify-content-center">{{ $reviews->links() }}</div>
+    <div class="mt-3">{{ $reviews->links('vendor.pagination.admin') }}</div>
 @endsection

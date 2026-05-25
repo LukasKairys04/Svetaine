@@ -27,5 +27,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3 d-flex justify-content-center">{{ $plans->links() }}</div>
+    <div class="mt-3">{{ $plans->links('vendor.pagination.admin') }}</div>
 @endsection

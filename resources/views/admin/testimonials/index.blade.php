@@ -33,5 +33,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3 d-flex justify-content-center">{{ $testimonials->links() }}</div>
+    <div class="mt-3">{{ $testimonials->links('vendor.pagination.admin') }}</div>
 @endsection

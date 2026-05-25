@@ -89,5 +89,5 @@
             </table>
         </div>
     </div>
-    <div class="mt-3 d-flex justify-content-center">{{ $products->links() }}</div>
+    <div class="mt-3">{{ $products->links('vendor.pagination.admin') }}</div>
 @endsection
