@@ -133,11 +133,13 @@
 
                         <p class="text-muted">Gaukite naujausius pasiūlymus ir sveikatos patarimus tiesiai į savo el. paštą</p>
 
-                        <form class="row g-2 justify-content-center">
+                        <div id="newsletter-success" class="alert alert-success d-none"><i class="bi bi-check-circle me-2"></i>Ačiū! Jūs sėkmingai užsiprenumeravote.</div>
+
+                        <form class="row g-2 justify-content-center" id="newsletter-form" onsubmit="subscribeNewsletter(event)">
 
                             <div class="col-md-8">
 
-                                <input type="email" class="form-control form-control-lg" placeholder="Įveskite savo el. paštą">
+                                <input type="email" class="form-control form-control-lg" placeholder="Įveskite savo el. paštą" required>
 
                             </div>
 
@@ -152,6 +154,8 @@
                             </div>
 
                         </form>
+
+                        <script>function subscribeNewsletter(e){e.preventDefault();document.getElementById('newsletter-form').classList.add('d-none');document.getElementById('newsletter-success').classList.remove('d-none');}</script>
 
                     </div>
 
