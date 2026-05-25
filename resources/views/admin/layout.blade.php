@@ -320,7 +320,7 @@
                 <i class="bi bi-star"></i> Produktų atsiliepimai
             </a>
             <a href="{{ route('admin.testimonials.index') }}" class="admin-nav-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
-                <i class="bi bi-chat-quote"></i> Svetainės atsiliepimai
+                <i class="bi bi-star"></i> Atsiliepimai
             </a>
         </div>
 

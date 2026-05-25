@@ -10,12 +10,14 @@ class ProductController extends Controller
     {
         $product = Product::active()
             ->where('slug', $slug)
-            ->with([
-                'category.parent',
-                'reviews' => fn ($q) => $q->where('approved', true)->latest(),
-                'reviews.user',
-            ])
+            ->with(['category.parent'])
             ->firstOrFail();
+
+        $reviews = $product->reviews()
+            ->where('approved', true)
+            ->with('user')
+            ->latest()
+            ->paginate(5, ['*'], 'reviews_page');
 
         $related = Product::active()
             ->where('category_id', $product->category_id)
@@ -24,6 +26,6 @@ class ProductController extends Controller
             ->take(3)
             ->get();
 
-        return view('shop.show', compact('product', 'related'));
+        return view('shop.show', compact('product', 'related', 'reviews'));
     }
 }

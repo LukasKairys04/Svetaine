@@ -10,8 +10,8 @@
         if ($simpleDescription === '') {
             $simpleDescription = 'Tai papildas, skirtas kasdieniam vartojimui pagal tavo mitybos ir sporto tikslus.';
         }
-        $reviewsCount = $product->reviews->count();
-        $avg          = $reviewsCount ? round($product->reviews->avg('rating'), 1) : (float) $product->rating;
+        $reviewsCount = $reviews->total();
+        $avg          = $reviewsCount ? round($reviews->avg('rating'), 1) : (float) $product->rating;
     @endphp
 
     <nav aria-label="breadcrumb">
@@ -46,11 +46,11 @@
                     </div>
                 </div>
 
-                @if($product->reviews->isEmpty())
+                @if($reviews->isEmpty())
                     <p class="text-muted">Kol kas nėra atsiliepimų.</p>
                 @else
                     <div class="review-list">
-                        @foreach($product->reviews as $rev)
+                        @foreach($reviews as $rev)
                             <div class="review-item">
                                 <div class="review-head">
                                     <div class="review-avatar">{{ mb_strtoupper(mb_substr($rev->user->name ?? '?', 0, 1)) }}</div>
@@ -69,6 +69,7 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="mt-3">{{ $reviews->links() }}</div>
                 @endif
             </div>
         </div>
