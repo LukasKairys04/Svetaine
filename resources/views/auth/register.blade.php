@@ -22,7 +22,7 @@
                 <div class="mb-3">
                     <label class="form-label">Slaptažodis</label>
                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
-                    <div class="form-text small">Mažiausiai 8 simboliai</div>
+                    <div class="form-text small">Mažiausiai 8 simboliai, bent 1 didžioji raidė ir 1 skaičius</div>
                     @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="mb-3">

@@ -123,6 +123,11 @@ a:hover { color: var(--fs-primary); }
     border-color: var(--fs-primary-dark);
     color: #fff;
 }
+.btn-primary:disabled, .btn-primary.disabled {
+    background: var(--fs-primary);
+    border-color: var(--fs-primary);
+    color: #fff;
+}
 
 .btn-outline-primary {
     background: transparent;
