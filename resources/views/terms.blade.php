@@ -20,9 +20,6 @@
             <h4>Privatumo politika</h4>
             <p>Registracijos ir užsakymo metu pateikti duomenys naudojami paskyrai, užsakymams ir svetainės funkcionalumui užtikrinti. Duomenys neturėtų būti perduodami tretiesiems asmenims, išskyrus atvejus, kai to reikia paslaugai suteikti arba reikalauja teisės aktai.</p>
 
-            <h4>Slapukai</h4>
-            <p>Svetainėje gali būti naudojami būtini slapukai ir naršyklės saugykla, kad veiktų prisijungimas, krepšelis, prieinamumo nustatymai ir slapukų sutikimo pranešimas.</p>
-
             <h4>Kontaktai</h4>
             <p class="mb-0">Kilus klausimams galite susisiekti el. paštu <a href="mailto:info@fitshop.lt">info@fitshop.lt</a>.</p>
         </div>

@@ -1,4 +1,4 @@
-:root {
+﻿:root {
 
     --fs-primary: #34a853;
     --fs-primary-dark: #2d8f47;
@@ -820,7 +820,7 @@ a:hover { color: var(--fs-primary); }
 .split-card-v2:hover { border-color: var(--fs-dark); }
 .split-card-v2.selected { border-color: var(--fs-accent); background: #fffbfb; }
 .split-card-v2.selected::after {
-    content: '✓'; position: absolute; top: 1rem; right: 1rem;
+    content: 'ā“'; position: absolute; top: 1rem; right: 1rem;
     width: 28px; height: 28px; border-radius: 50%;
     background: var(--fs-accent); color: #fff;
     display: flex; align-items: center; justify-content: center;
@@ -1339,7 +1339,7 @@ a:hover { color: var(--fs-primary); }
     line-height: 1.4;
 }
 .diet-card .pc-col.pros li::before { content: '+'; position: absolute; left: 0; color: #059669; font-weight: 700; }
-.diet-card .pc-col.cons li::before { content: '−'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+.diet-card .pc-col.cons li::before { content: 'ā’'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
 
 .sport-proscons {
     background: #fff;
@@ -1372,7 +1372,7 @@ a:hover { color: var(--fs-primary); }
     line-height: 1.5;
 }
 .sport-proscons .pc-col.pros li::before { content: '+'; position: absolute; left: 0; color: #059669; font-weight: 700; }
-.sport-proscons .pc-col.cons li::before { content: '−'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+.sport-proscons .pc-col.cons li::before { content: 'ā’'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
 
 .diet-card .actions { display: flex; gap: .5rem; margin-top: auto; }
 .diet-card .btn-outline { flex: 1; padding: .55rem .9rem; border: 1px solid var(--fs-border); background: #fff; color: var(--fs-dark); font-weight: 600; font-size: .875rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all .12s; }
@@ -1453,8 +1453,8 @@ a:hover { color: var(--fs-primary); }
     transform: translateX(-50%);
     white-space: nowrap;
 }
-.bmi-scale-labels span:first-child { transform: none; }              /* 10 — kairys kraštas */
-.bmi-scale-labels span:last-child  { transform: translateX(-100%); } /* 40+ — dešinys kraštas */
+.bmi-scale-labels span:first-child { transform: none; }              /* 10 ā€” kairys kraÅtas */
+.bmi-scale-labels span:last-child  { transform: translateX(-100%); } /* 40+ ā€” deÅinys kraÅtas */
 .bmi-note { color: var(--fs-muted); font-size: .8rem; line-height: 1.5; margin-top: 1rem; margin-bottom: 0; }
 
 .planner-grid {
@@ -1701,7 +1701,7 @@ a:hover { color: var(--fs-primary); }
     color: #94a3b8;
     transition: transform .2s;
 }
-.faq details[open] summary::after { content: '−'; color: var(--fs-primary); }
+.faq details[open] summary::after { content: 'ā’'; color: var(--fs-primary); }
 .faq .body {
     padding: 0 1.15rem 1rem;
     color: #475569;
@@ -1879,7 +1879,7 @@ a:hover { color: var(--fs-primary); }
     margin-bottom: .4rem;
 }
 
-/* Paieškos laukelio wrap'eris su search ikona. */
+/* PaieÅkos laukelio wrap'eris su search ikona. */
 .search-wrap { position: relative; }
 .search-wrap i {
     position: absolute;
@@ -1920,7 +1920,7 @@ a:hover { color: var(--fs-primary); }
 }
 .filter-radio:hover, .filter-check:hover { color: var(--fs-primary); }
 
-/* Žvaigždučių eilutė filtro label'yje. */
+/* Å½vaigÅ¾duÄ¨iÅ³ eilutÄ— filtro label'yje. */
 .stars-inline { display: inline-flex; align-items: center; gap: .15rem; }
 .stars-inline .bi-star-fill, .stars-inline .bi-star-half { color: #f59e0b; }
 .stars-inline .bi-star { color: #e2e8f0; }
@@ -1947,7 +1947,7 @@ a:hover { color: var(--fs-primary); }
     border-radius: 10px;
 }
 
-/* Viršutinė juosta: rezultatų kiekis + rūšiavimas. */
+/* VirÅutinÄ— juosta: rezultatÅ³ kiekis + rÅ«Åiavimas. */
 .shop-toolbar {
     display: flex;
     justify-content: space-between;
@@ -1979,7 +1979,7 @@ a:hover { color: var(--fs-primary); }
     border-radius: 10px;
 }
 
-/* Aktyvių filtrų „čipsai" — pašalinimas paspaudus. */
+/* AktyviÅ³ filtrÅ³ ā€˛Ä¨ipsai" ā€” paÅalinimas paspaudus. */
 .active-chips {
     display: flex;
     flex-wrap: wrap;
@@ -2009,7 +2009,7 @@ a:hover { color: var(--fs-primary); }
 }
 .chip-clear:hover { background: var(--fs-dark); color: #fff; border-color: var(--fs-dark); }
 
-/* Tuščių rezultatų būsena. */
+/* TuÅÄ¨iÅ³ rezultatÅ³ bÅ«sena. */
 .empty-state-card {
     background: #fff;
     border: 1px solid var(--fs-border);
@@ -2024,7 +2024,7 @@ a:hover { color: var(--fs-primary); }
 }
 .empty-state-card h5 { font-weight: 700; }
 
-/* Google (Gmail) OAuth mygtukas — sutampa su Google brand guidelines (baltas fonas, pilkas rėmas). */
+/* Google (Gmail) OAuth mygtukas ā€” sutampa su Google brand guidelines (baltas fonas, pilkas rÄ—mas). */
 .btn-google {
     display: inline-flex;
     align-items: center;
@@ -2048,7 +2048,7 @@ a:hover { color: var(--fs-primary); }
 }
 .btn-google svg { flex-shrink: 0; }
 
-/* „arba" skirtukas tarp OAuth ir įprastos formos. */
+/* ā€˛arba" skirtukas tarp OAuth ir ÄÆprastos formos. */
 .or-divider {
     display: flex;
     align-items: center;
@@ -2067,7 +2067,7 @@ a:hover { color: var(--fs-primary); }
     background: var(--fs-border);
 }
 
-/* Tuščio krepšelio būsena — prieš pasiūlymų sąrašą. */
+/* TuÅÄ¨io krepÅelio bÅ«sena ā€” prieÅ pasiÅ«lymÅ³ sÄ…raÅÄ…. */
 .empty-cart-card {
     background: #fff;
     border: 1px solid var(--fs-border);
@@ -2685,7 +2685,7 @@ body.large-text .medical-hero h1 {
     font-size: 0.8125rem;
 }
 .exercise-tooltip .tooltip-list li::before {
-    content: '✓';
+    content: 'ā“';
     position: absolute;
     left: 0;
     color: var(--fs-medical-teal);
@@ -3655,74 +3655,99 @@ body {
     }
 }
 
-.cookie-consent {
-    position: fixed;
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 1080;
-    max-width: 760px;
-    margin: 0 auto;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, .12);
-    border-radius: 18px;
-    box-shadow: 0 18px 55px rgba(0, 0, 0, .18);
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-.cookie-consent[hidden] {
-    display: none !important;
-}
-.cookie-consent p {
-    margin: .25rem 0 0;
-    color: #6c757d;
-    font-size: .92rem;
-}
-.cookie-actions {
-    display: flex;
-    gap: .5rem;
-    flex-shrink: 0;
-}
-@media (max-width: 575.98px) {
-    .cookie-consent {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .cookie-actions {
-        justify-content: stretch;
-    }
-    .cookie-actions .btn {
-        flex: 1;
-    }
-}
-
 .medical-navbar {
     z-index: 1100;
 }
 .navbar .dropdown-menu {
     z-index: 1150;
 }
-.cookie-consent {
-    left: auto;
-    right: 1.25rem;
-    bottom: 1.25rem;
-    max-width: 360px;
-    margin: 0;
-    align-items: flex-start;
-    flex-direction: column;
-    z-index: 1090;
+/* Final responsive fixes */
+.medical-navbar {
+    z-index: 1300 !important;
 }
-.cookie-actions {
-    width: 100%;
-    justify-content: flex-end;
+.navbar .dropdown-menu {
+    z-index: 1350 !important;
 }
-@media (max-width: 575.98px) {
-    .cookie-consent {
-        left: 1rem;
-        right: 1rem;
-        max-width: none;
+
+@media (max-width: 991.98px) {
+    .navbar {
+        padding: .65rem 0 !important;
+    }
+    .navbar-brand {
+        font-size: 1.15rem !important;
+    }
+    .navbar-collapse {
+        padding-top: .85rem;
+    }
+    .navbar-nav {
+        align-items: stretch !important;
+        gap: .2rem;
+    }
+    .navbar .nav-link {
+        padding: .75rem .25rem !important;
+        letter-spacing: .08em;
+    }
+    .navbar .nav-link.active::after {
+        display: none;
+    }
+    .nav-icons {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: .75rem;
+    }
+    .deep-search {
+        width: 100% !important;
+        margin-top: .75rem;
     }
 }
+
+@media (max-width: 767.98px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .hero-wrap {
+        min-height: 420px;
+    }
+    .hero-inner {
+        padding: 3rem 1rem;
+    }
+    .medical-product-card .card-image,
+    .medical-product-card .card-image img {
+        min-height: 160px !important;
+        height: 170px !important;
+    }
+    .medical-product-card .card-body {
+        padding: 1rem !important;
+    }
+    .medical-product-card .card-title {
+        font-size: 1rem !important;
+    }
+    .medical-product-card .card-footer {
+        flex-direction: column;
+    }
+    .table-responsive table {
+        min-width: 640px;
+    }
+    .cart-summary-card {
+        margin-top: 1rem;
+    }
+    .accessibility-panel {
+        bottom: 1rem;
+        left: 1rem;
+        z-index: 1190;
+    }
+    .accessibility-menu {
+        min-width: calc(100vw - 2rem);
+        max-width: calc(100vw - 2rem);
+    }
+}
+
+@media (max-width: 575.98px) {
+.medical-product-card .card-image,
+    .medical-product-card .card-image img {
+        min-height: 140px !important;
+        height: 150px !important;
+    }
+}
+
