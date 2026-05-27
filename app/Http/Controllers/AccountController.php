@@ -24,12 +24,12 @@ class AccountController extends Controller
 
         $data = $request->validate([
             'name'       => ['required', 'string', 'max:255', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
-            'email'      => 'required|email|max:255|unique:users,email,' . $user->id,
-            'phone'      => 'nullable|string|max:50',
-            'address'    => 'nullable|string|max:255',
-            'city'       => 'nullable|string|max:120',
-            'zip'        => 'nullable|string|max:20',
-            'country'    => 'nullable|string|max:120',
+            'email'      => 'required|email:rfc,dns|max:255|unique:users,email,' . $user->id,
+            'phone'      => 'nullable|string|max:50|regex:/^[+]?[0-9\s\-()]{7,20}$/',
+            'address'    => ['nullable', 'string', 'max:255', 'min:5', 'regex:/[\pL0-9]/u'],
+            'city'       => ['nullable', 'string', 'max:120', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
+            'zip'        => 'nullable|string|max:20|regex:/^(LT-)?\d{5}$/i',
+            'country'    => ['nullable', 'string', 'max:120', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
             'gender'     => 'nullable|in:male,female,other',
             'birthdate'  => 'nullable|date',
             'height_cm'  => 'nullable|numeric|min:50|max:260',
@@ -37,6 +37,14 @@ class AccountController extends Controller
         ], [
             'name.regex' => 'Varde gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
             'name.min' => 'Vardas turi būti bent 2 simboliai.',
+            'phone.regex' => 'Telefono numeris netinkamas.',
+            'address.min' => 'Adresas turi būti bent 5 simboliai.',
+            'address.regex' => 'Adrese turi būti raidžių arba skaičių.',
+            'city.regex' => 'Miesto pavadinime gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
+            'city.min' => 'Miestas turi būti bent 2 simboliai.',
+            'zip.regex' => 'Pašto kodas turi būti formato 12345 arba LT-12345.',
+            'country.regex' => 'Šalies pavadinime gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
+            'country.min' => 'Šalis turi būti bent 2 simboliai.',
         ]);
 
         $user->update($data);

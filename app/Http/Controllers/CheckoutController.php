@@ -30,11 +30,11 @@ class CheckoutController extends Controller
     {
         $data = $request->validate([
             'billing_name' => ['required', 'string', 'max:255', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
-            'billing_email' => 'required|email|max:255',
+            'billing_email' => 'required|email:rfc,dns|max:255',
             'billing_phone' => 'nullable|string|max:50|regex:/^[+]?[0-9\s\-()]{7,20}$/',
-            'billing_address' => 'required|string|max:255|min:5',
+            'billing_address' => ['required', 'string', 'max:255', 'min:5', 'regex:/[\pL0-9]/u'],
             'billing_city' => ['required', 'string', 'max:120', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
-            'billing_zip' => 'required|string|max:20|regex:/^[a-zA-Z0-9\s\-]{3,10}$/',
+            'billing_zip' => 'required|string|max:20|regex:/^(LT-)?\d{5}$/i',
             'billing_country' => ['required', 'string', 'max:120', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
             'notes' => 'nullable|string|max:1000',
             'payment_method' => 'required|in:card,bank,paypal,cod',
@@ -43,12 +43,18 @@ class CheckoutController extends Controller
             'billing_name.min' => 'Vardas turi būti bent 2 simboliai.',
             'billing_phone.regex' => 'Telefono numeris netinkamas.',
             'billing_address.min' => 'Adresas turi būti bent 5 simboliai.',
+            'billing_address.regex' => 'Adrese turi būti raidžių arba skaičių.',
             'billing_city.regex' => 'Miesto pavadinime gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
             'billing_city.min' => 'Miestas turi būti bent 2 simboliai.',
-            'billing_zip.regex' => 'Pašto kodas netinkamas.',
+            'billing_zip.regex' => 'Pašto kodas turi būti formato 12345 arba LT-12345.',
             'billing_country.regex' => 'Šalies pavadinime gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
             'billing_country.min' => 'Šalis turi būti bent 2 simboliai.',
         ]);
+
+        if (Auth::check()) {
+            $data['billing_name'] = Auth::user()->name;
+            $data['billing_email'] = Auth::user()->email;
+        }
 
         try {
             // papildomai patikrinama ar krepšelis dar nėra tuščias

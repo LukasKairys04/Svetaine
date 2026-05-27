@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="lt">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +25,7 @@
     </main>
 @if(!request()->routeIs('admin.*'))
         @include('partials.footer')
+        @include('partials.cookie-consent')
     @endif
 
     @if(!request()->routeIs('admin.*'))
@@ -157,7 +158,21 @@
         });
 
         loadA11y();
+
+        const cookieConsent = document.getElementById('cookieConsent');
+        const cookieAccept = document.getElementById('cookieAccept');
+        if (cookieConsent && !localStorage.getItem('cookie_consent')) {
+            cookieConsent.hidden = false;
+        }
+        if (cookieAccept) {
+            cookieAccept.addEventListener('click', function () {
+                localStorage.setItem('cookie_consent', 'accepted');
+                cookieConsent.hidden = true;
+            });
+        }
     </script>
     @stack('scripts')
 </body>
 </html>
+
+

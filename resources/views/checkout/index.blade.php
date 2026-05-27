@@ -92,7 +92,7 @@
 
                         <label class="form-label small">Vardas, pavardė *</label>
 
-                        <input type="text" name="billing_name" value="{{ old('billing_name', $user?->name) }}" class="form-control @error('billing_name') is-invalid @enderror" required>
+                        <input type="text" name="billing_name" value="{{ old('billing_name', $user?->name) }}" class="form-control @error('billing_name') is-invalid @enderror" @auth readonly @endauth required>
 
                         @error('billing_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
@@ -102,7 +102,7 @@
 
                         <label class="form-label small">El. paštas *</label>
 
-                        <input type="email" name="billing_email" value="{{ old('billing_email', $user?->email) }}" class="form-control @error('billing_email') is-invalid @enderror" required>
+                        <input type="email" name="billing_email" value="{{ old('billing_email', $user?->email) }}" class="form-control @error('billing_email') is-invalid @enderror" @auth readonly @endauth required>
 
                         @error('billing_email')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
@@ -112,7 +112,8 @@
 
                         <label class="form-label small">Telefonas</label>
 
-                        <input type="text" name="billing_phone" value="{{ old('billing_phone', $user?->phone) }}" class="form-control">
+                        <input type="text" name="billing_phone" value="{{ old('billing_phone', $user?->phone) }}" class="form-control @error('billing_phone') is-invalid @enderror">
+                        @error('billing_phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
                     </div>
 
@@ -120,7 +121,8 @@
 
                         <label class="form-label small">Šalis *</label>
 
-                        <input type="text" name="billing_country" value="{{ old('billing_country', $user?->country ?? 'Lietuva') }}" class="form-control" required>
+                        <input type="text" name="billing_country" value="{{ old('billing_country', $user?->country ?? 'Lietuva') }}" class="form-control @error('billing_country') is-invalid @enderror" required>
+                        @error('billing_country')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
                     </div>
 
@@ -138,7 +140,8 @@
 
                         <label class="form-label small">Miestas *</label>
 
-                        <input type="text" name="billing_city" value="{{ old('billing_city', $user?->city) }}" class="form-control" required>
+                        <input type="text" name="billing_city" value="{{ old('billing_city', $user?->city) }}" class="form-control @error('billing_city') is-invalid @enderror" required>
+                        @error('billing_city')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
                     </div>
 
@@ -146,7 +149,8 @@
 
                         <label class="form-label small">Pašto kodas *</label>
 
-                        <input type="text" name="billing_zip" value="{{ old('billing_zip', $user?->zip) }}" class="form-control" required>
+                        <input type="text" name="billing_zip" value="{{ old('billing_zip', $user?->zip) }}" class="form-control @error('billing_zip') is-invalid @enderror" required>
+                        @error('billing_zip')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
                     </div>
 

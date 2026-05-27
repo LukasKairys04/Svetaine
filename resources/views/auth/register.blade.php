@@ -29,6 +29,13 @@
                     <label class="form-label">Pakartokite slaptažodį</label>
                     <input type="password" name="password_confirmation" class="form-control" required>
                 </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" name="terms" value="1" id="terms" class="form-check-input @error('terms') is-invalid @enderror" required>
+                    <label for="terms" class="form-check-label small">
+                        Sutinku su <a href="{{ route('terms') }}" target="_blank">naudojimosi sąlygomis ir privatumo politika</a>
+                    </label>
+                    @error('terms')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                </div>
                 <button type="submit" class="btn btn-primary w-100" id="registerBtn">
                     Registruotis
                 </button>

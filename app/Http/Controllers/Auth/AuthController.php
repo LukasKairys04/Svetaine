@@ -46,9 +46,11 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
             'email' => 'required|email|max:255|unique:users',
             'password' => ['required', 'string', 'min:8', 'max:64', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+            'terms' => 'accepted',
         ], [
             'name.regex' => 'Varde gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
             'name.min' => 'Vardas turi būti bent 2 simboliai.',
+            'terms.accepted' => 'Norėdami registruotis turite sutikti su naudojimosi sąlygomis.',
         ]);
 
         $User = User::create([

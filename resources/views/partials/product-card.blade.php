@@ -47,6 +47,9 @@
                 <span class="text-primary fw-bold">€{{ number_format($product->price, 2) }}</span>
             @endif
         </div>
+        <div class="small {{ $product->stock > 0 ? 'text-success' : 'text-danger' }} mb-2">
+            {{ $product->stock > 0 ? 'Likutis: ' . $product->stock . ' vnt.' : 'Išparduota' }}
+        </div>
         <div class="card-footer">
             <a href="{{ route('product.show', $product->slug) }}" class="btn btn-outline-primary btn-sm flex-fill">
                 <i class="bi bi-eye me-1"></i>Peržiūrėti
