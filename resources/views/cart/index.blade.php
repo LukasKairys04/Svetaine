@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="card shadow-sm sticky-top cart-summary-card" style="top:1rem">
+                <div class="card shadow-sm cart-summary-card">
                     <div class="card-body">
                         <h5 class="mb-3">Užsakymo suvestinė</h5>
 

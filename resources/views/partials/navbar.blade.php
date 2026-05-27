@@ -1,21 +1,3 @@
-
-<div class="top-bar d-none d-lg-block">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <i class="bi bi-telephone"></i> +370 600 00000 (demo) |
-                <i class="bi bi-envelope"></i> info@fitshop.lt (demo) |
-                <i class="bi bi-geo-alt"></i> Vilnius, Lietuva (demo)
-            </div>
-            <div>
-                <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <nav class="navbar navbar-expand-lg sticky-top medical-navbar">
     <div class="container">
 <a class="navbar-brand" href="{{ route('home') }}">

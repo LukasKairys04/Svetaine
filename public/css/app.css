@@ -3698,3 +3698,31 @@ body {
         flex: 1;
     }
 }
+
+.medical-navbar {
+    z-index: 1100;
+}
+.navbar .dropdown-menu {
+    z-index: 1150;
+}
+.cookie-consent {
+    left: auto;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    max-width: 360px;
+    margin: 0;
+    align-items: flex-start;
+    flex-direction: column;
+    z-index: 1090;
+}
+.cookie-actions {
+    width: 100%;
+    justify-content: flex-end;
+}
+@media (max-width: 575.98px) {
+    .cookie-consent {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+}

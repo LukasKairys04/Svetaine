@@ -7,7 +7,6 @@
                 <a href="{{ route('nutrition.index') }}">Mityba</a>
                 <a href="{{ route('sports.index') }}">Sportas</a>
                 <a href="{{ route('support.index') }}">Apie mus</a>
-                <a href="{{ route('terms') }}">Naudojimosi sąlygos</a>
             </div>
             <div class="small text-muted mt-2">
                 © {{ date('Y') }} PapildaiOnline. Visos teisės saugomos.
