@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\PromoCode;
+use DomainException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -53,13 +54,25 @@ class CartService
     {
         $qty = max(1, $qty);
         $product = Product::findOrFail($productId);
+        if (!$product->is_active || $product->stock <= 0) {
+            throw new DomainException('Šios prekės šiuo metu nėra sandėlyje.');
+        }
+
         if (Auth::check()) {
             $item = CartItem::firstOrNew(['user_id' => Auth::id(), 'product_id' => $product->id]);
-            $item->qty = ($item->qty ?? 0) + $qty;
+            $newQty = ($item->qty ?? 0) + $qty;
+            if ($newQty > $product->stock) {
+                throw new DomainException('Sandėlyje liko tik ' . $product->stock . ' vnt. šios prekės.');
+            }
+            $item->qty = $newQty;
             $item->save();
         } else {
             $cart = Session::get(self::SESSION_KEY, []);
-            $cart[$product->id] = ($cart[$product->id] ?? 0) + $qty;
+            $newQty = ($cart[$product->id] ?? 0) + $qty;
+            if ($newQty > $product->stock) {
+                throw new DomainException('Sandėlyje liko tik ' . $product->stock . ' vnt. šios prekės.');
+            }
+            $cart[$product->id] = $newQty;
             Session::put(self::SESSION_KEY, $cart);
         }
     }
@@ -67,6 +80,11 @@ class CartService
     public function update(int $productId, int $qty): void
     {
         $qty = max(0, $qty);
+        $product = Product::findOrFail($productId);
+        if ($qty > $product->stock) {
+            throw new DomainException('Sandėlyje liko tik ' . $product->stock . ' vnt. šios prekės.');
+        }
+
         if (Auth::check()) {
             $item = CartItem::where('user_id', Auth::id())->where('product_id', $productId)->first();
             if (!$item) return;

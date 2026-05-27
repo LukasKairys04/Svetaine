@@ -5,8 +5,12 @@
 @endphp
 
 <div class="medical-product-card">
-    <a href="{{ route('product.show', $product->slug) }}" class="card-image" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;min-height:200px;">
-        <i class="bi bi-box-seam" style="font-size:3rem;color:#bbb;"></i>
+    <a href="{{ route('product.show', $product->slug) }}" class="card-image" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;min-height:200px;overflow:hidden;">
+        @if($product->image)
+            <img src="{{ $product->image }}" alt="{{ $product->name }}" style="width:100%;height:220px;object-fit:cover;">
+        @else
+            <i class="bi bi-box-seam" style="font-size:3rem;color:#bbb;"></i>
+        @endif
     </a>
 
     <div class="card-body">
@@ -47,7 +51,7 @@
             <a href="{{ route('product.show', $product->slug) }}" class="btn btn-outline-primary btn-sm flex-fill">
                 <i class="bi bi-eye me-1"></i>Peržiūrėti
             </a>
-            <form method="POST" action="{{ route('cart.add') }}" class="m-0 flex-fill" @disabled($product->stock <= 0)>
+            <form method="POST" action="{{ route('cart.add') }}" class="m-0 flex-fill">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <button type="submit" class="btn btn-primary btn-sm w-100" @disabled($product->stock <= 0)>

@@ -22,16 +22,22 @@ class SportController extends Controller
 
     public function builder(Request $request)
     {
+        // paimami visi pratimai ir jų sporto šakos
         $exercises = Exercise::with('sport')->orderBy('name')->get();
+
+        // surenkamos unikalios raumenų grupės
         $muscleGroups = $exercises->pluck('muscle_groups')->filter()->flatten()->unique()->sort()->values();
 
         $importedPlan = null;
+
+        // jei pasirinktas planas, jis įkeliamas į plano kūrėją
         if ($request->filled('from_plan')) {
             $sourcePlan = SportPlan::where('slug', $request->string('from_plan')->toString())
                 ->with(['exercises' => fn ($q) => $q->orderBy('sport_plan_exercises.day')->orderBy('sport_plan_exercises.sort_order')])
                 ->first();
 
             if ($sourcePlan) {
+                // plano pratimai sugrupuojami pagal dienas
                 $schedule = $sourcePlan->exercises
                     ->groupBy('pivot.day')
                     ->sortKeys()
@@ -52,7 +58,10 @@ class SportController extends Controller
                         ];
                     })->values()->all();
 
+                // nustatomas dienų skaičius nuo 2 iki 6
                 $days = max(2, min(6, count($schedule) ?: (int) $sourcePlan->days_per_week));
+
+                // jei trūksta dienų, pridedamos tuščios
                 while (count($schedule) < $days) {
                     $schedule[] = ['name' => 'Diena ' . (count($schedule) + 1), 'exercises' => []];
                 }
@@ -70,13 +79,21 @@ class SportController extends Controller
 
     public function show(string $slug)
     {
-        $sport = Sport::where('slug', $slug)->with(['exercises', 'plans' => fn($q) => $q->where('is_active', true)])->firstOrFail();
+        // rodomas konkretus sportas su pratimais ir planais
+        $sport = Sport::where('slug', $slug)
+            ->with(['exercises', 'plans' => fn($q) => $q->where('is_active', true)])
+            ->firstOrFail();
+
         return view('sports.show', compact('sport'));
     }
 
     public function plan(string $slug)
     {
-        $plan = SportPlan::where('slug', $slug)->with(['sport', 'exercises'])->firstOrFail();
+        // rodomas konkretus sporto planas
+        $plan = SportPlan::where('slug', $slug)
+            ->with(['sport', 'exercises'])
+            ->firstOrFail();
+
         return view('sports.plan', compact('plan'));
     }
 }

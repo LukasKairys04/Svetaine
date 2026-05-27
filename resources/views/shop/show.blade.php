@@ -31,8 +31,12 @@
     <div class="row g-5">
 
         <div class="col-lg-6">
-            <div class="rounded-4 shadow-sm d-flex align-items-center justify-content-center" style="background:#f5f5f5;min-height:350px;">
-                <i class="bi bi-box-seam" style="font-size:5rem;color:#bbb;"></i>
+            <div class="rounded-4 shadow-sm d-flex align-items-center justify-content-center overflow-hidden" style="background:#f5f5f5;min-height:350px;">
+                @if($product->image)
+                    <img src="{{ $product->image }}" alt="{{ $product->name }}" style="width:100%;height:420px;object-fit:cover;">
+                @else
+                    <i class="bi bi-box-seam" style="font-size:5rem;color:#bbb;"></i>
+                @endif
             </div>
 
             <div class="mt-4">

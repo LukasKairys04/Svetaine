@@ -43,9 +43,12 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255', 'min:2', 'regex:/^[\pL\s\'-]+$/u'],
             'email' => 'required|email|max:255|unique:users',
             'password' => ['required', 'string', 'min:8', 'max:64', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+        ], [
+            'name.regex' => 'Varde gali būti tik raidės, tarpai, brūkšneliai ir apostrofai.',
+            'name.min' => 'Vardas turi būti bent 2 simboliai.',
         ]);
 
         $User = User::create([

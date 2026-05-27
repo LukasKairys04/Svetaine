@@ -1,12 +1,5 @@
-/* ============================================================
-   Dizaino sistema — „Flawless" inspired, švarus minimalus look'as.
-   Balti / beveik balti fonai, rožinis akcentas, ploni šrifto
-   svoriai ir didelės tarpų zonos. Visos spalvos apibrėžtos čia,
-   kad visi senesni komponentai (jie naudoja `--fs-*`) automatiškai
-   atsinaujintų.
-   ============================================================ */
 :root {
-    /* Light Green Theme */
+
     --fs-primary: #34a853;
     --fs-primary-dark: #2d8f47;
     --fs-primary-soft: #eaf7ee;
@@ -15,17 +8,17 @@
     --fs-medical-teal: #34a853;
     --fs-medical-dark: #153823;
 
-    /* Neutralūs tonai — beveik juoda tekstui, švelnūs pilkumai fonams. */
+
     --fs-dark: #111111;
     --fs-ink: #1a1a1a;
     --fs-muted: #8a8a8e;
     --fs-subtle: #b8b8bd;
 
-    /* Fonai — balta pagrindinė, subtilus pilkas sekcijoms, pilkesnis produktams. */
+
     --fs-bg: #ffffff;
     --fs-bg-soft: #f7f7fa;
-    --fs-bg-alt: #f4f5f7;           /* produktų plytelės, kortelės */
-    --fs-tint: #f8f4f6;             /* labai subtilus rožinis tonas testimonial sekcijoms */
+    --fs-bg-alt: #f4f5f7;          
+    --fs-tint: #f8f4f6;            
     --fs-border: #ececee;
 
     --fs-radius: 4px;
@@ -36,7 +29,6 @@
     --fs-shadow-md: 0 4px 14px rgba(0, 0, 0, .06);
     --fs-shadow-lg: 0 20px 60px rgba(0, 0, 0, .12);
 
-    /* Tipografija — Inter pagrindinė, su plonesniu svoriu antraštėms. */
     --fs-font-sans: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
     --fs-font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 }
@@ -49,10 +41,8 @@ body {
     font-size: 15px;
     line-height: 1.6;
 }
-/* Bootstrap `bg-light` ant <body> būna — perrašom į balta. */
 body.bg-light { background: var(--fs-bg) !important; }
 
-/* Antraštės — ploni svoriai, dideli tarpai, minimal letter-spacing. */
 h1, h2, h3, h4, h5, h6 {
     color: var(--fs-dark);
     letter-spacing: -0.01em;
@@ -69,7 +59,6 @@ a:hover { color: var(--fs-primary); }
 
 .text-muted { color: var(--fs-muted) !important; }
 
-/* „Eyebrow" — smulkus uppercase tekstas virš antraščių. */
 .eyebrow, .section-label {
     display: inline-block;
     font-size: .7rem;
@@ -80,7 +69,6 @@ a:hover { color: var(--fs-primary); }
     margin-bottom: 1rem;
 }
 
-/* Didelės centruotos sekcijos antraštės (kaip reference). */
 .section-title {
     font-weight: 300;
     letter-spacing: -0.01em;
@@ -97,9 +85,7 @@ a:hover { color: var(--fs-primary); }
 .section-heading { text-align: center; margin-bottom: 3rem; }
 .section-heading .section-title { margin-bottom: .75rem; }
 
-/* ============================================================
-   MYGTUKAI — minimalūs, kampuoti, su uppercase tekstu.
-   ============================================================ */
+
 .btn {
     font-weight: 500;
     font-size: .78rem;
@@ -172,9 +158,6 @@ a:hover { color: var(--fs-primary); }
 .btn-outline-danger { border-color: var(--fs-border); color: var(--fs-muted); }
 .btn-outline-danger:hover { background: #fee; color: #c00; border-color: #fcc; }
 
-/* ============================================================
-   NAVBAR — minimalus, baltas, su uppercase link'ais.
-   ============================================================ */
 .navbar {
     border-bottom: 1px solid var(--fs-border);
     box-shadow: none !important;
@@ -224,7 +207,6 @@ a:hover { color: var(--fs-primary); }
 .navbar .dropdown-item:hover { background: var(--fs-bg-soft); color: var(--fs-primary); }
 .navbar .dropdown-item-text { padding: .55rem 1.1rem; font-size: .8rem; }
 
-/* „Ikonos" juosta dešinėje — person, cart. */
 .nav-icons { display: flex; align-items: center; gap: .4rem; }
 .nav-icon-btn {
     width: 40px; height: 40px;
@@ -251,7 +233,6 @@ a:hover { color: var(--fs-primary); }
     padding: 0 4px;
 }
 
-/* Paieška navbar'e — pakeičiam į inline minimal. */
 .navbar form.d-flex .input-group { background: var(--fs-bg-soft); border-radius: var(--fs-radius-pill); overflow: hidden; }
 .navbar form.d-flex .form-control {
     border: 0; background: transparent;
@@ -264,16 +245,12 @@ a:hover { color: var(--fs-primary); }
 }
 .navbar form.d-flex .btn:hover { color: var(--fs-primary); background: transparent; }
 
-/* ============================================================
-   HERO — didelis paveikslėlis su tamsiu gradient'u ir elegantiška antrašte.
-   Hero'ą darom pilnam pločiui (full-bleed), be container wrap'erio.
-   ============================================================ */
+
 .hero-wrap {
     position: relative;
     min-height: 560px;
     color: #fff;
     overflow: hidden;
-    /* Tamsus overlay ant fitness treniruotės nuotraukos. */
     background:
         linear-gradient(120deg, rgba(40,40,45,.7) 0%, rgba(60,60,70,.55) 50%, rgba(80,80,90,.35) 100%),
         url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80') center/cover no-repeat;
@@ -306,8 +283,7 @@ a:hover { color: var(--fs-primary); }
 }
 .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
 
-/* Sena `.hero` klasė — paliekam tam atveju, jei kiti puslapiai ja naudojasi.
-   Dabar ji irgi atitinka naują aesthetic'ą. */
+
 .hero {
     position: relative;
     background: linear-gradient(135deg, #2b2b30 0%, #55555c 100%);
@@ -324,9 +300,7 @@ a:hover { color: var(--fs-primary); }
 .hero h1 { color: #fff; font-weight: 300; }
 .hero .lead { color: rgba(255,255,255,.85); font-weight: 400; }
 
-/* ============================================================
-   PRODUKTO KORTELĖ — pilka kvadratinė plytelė, minimalus tekstas po ja.
-   ============================================================ */
+
 .product-card {
     background: transparent;
     border: 0;
@@ -379,9 +353,8 @@ a:hover { color: var(--fs-primary); }
 }
 .product-card .price-old { text-decoration: line-through; color: var(--fs-subtle); font-weight: 400; margin-right: .4rem; font-size: .85rem; }
 .product-card .price-new { color: var(--fs-primary); font-weight: 500; }
-.product-card .rating { display: none; } /* paliekam švarų look'ą — reitingas detaliame puslapyje */
+.product-card .rating { display: none; } 
 
-/* Akcijos ženklas */
 .product-badge {
     position: absolute;
     top: .75rem; left: .75rem;
@@ -396,7 +369,6 @@ a:hover { color: var(--fs-primary); }
     z-index: 2;
 }
 
-/* „Add to cart" mini mygtukas viršuj — hover'yje (kaip reference). */
 .product-card .quick-add {
     position: absolute;
     top: .75rem; right: .75rem;
@@ -417,12 +389,10 @@ a:hover { color: var(--fs-primary); }
 .product-card .quick-add:hover { background: var(--fs-primary); color: #fff; }
 .product-card .quick-add i { font-size: 1rem; }
 
-/* Old rating styling perrašyta detaliam puslapiui */
 .rating { color: var(--fs-primary); font-size: .85rem; }
 .price-old { text-decoration: line-through; color: var(--fs-subtle); font-size: .9em; }
 .price-new { color: var(--fs-primary); font-weight: 600; }
 
-/* Kategorijų kortelės (home) — tas pats kvadratinis stilius. */
 .category-card {
     border: 0;
     border-radius: 0;
@@ -450,9 +420,7 @@ a:hover { color: var(--fs-primary); }
 .plan-pros li::marker { color: var(--fs-primary); }
 .plan-cons li::marker { color: var(--fs-muted); }
 
-/* ============================================================
-   TESTIMONIALS SEKCIJA — subtilus rožinis fonas, centruotos citatos.
-   ============================================================ */
+
 .testimonials-section {
     background: var(--fs-tint);
     padding: 5rem 0;
@@ -492,9 +460,7 @@ a:hover { color: var(--fs-primary); }
     margin: 0 auto;
 }
 
-/* ============================================================
-   FLOATING CART BUTTON — apatinis dešinysis rožinis burbulas.
-   ============================================================ */
+
 .floating-cart {
     position: fixed;
     right: 1.75rem;
@@ -530,9 +496,7 @@ a:hover { color: var(--fs-primary); }
     border: 2px solid #fff;
 }
 
-/* ============================================================
-   FOOTER — tamsus, bet mažiau dominuojantis.
-   ============================================================ */
+
 .footer-dark {
     background: #1a1a1a;
     color: #9a9a9f;
@@ -562,9 +526,6 @@ a:hover { color: var(--fs-primary); }
 .footer-dark ul li a:hover { color: #fff; }
 .footer-dark hr { border-color: #2a2a2a !important; }
 
-/* ============================================================
-   FORMOS — switch į kampuotą minimal style.
-   ============================================================ */
 .form-control, .form-select {
     border: 1px solid var(--fs-border);
     border-radius: var(--fs-radius);
@@ -581,7 +542,6 @@ a:hover { color: var(--fs-primary); }
 .form-label { font-size: .8rem; font-weight: 500; color: var(--fs-dark); margin-bottom: .4rem; }
 .form-check-input:checked { background-color: var(--fs-primary); border-color: var(--fs-primary); }
 
-/* Breadcrumb — minimal. */
 .breadcrumb {
     font-size: .75rem;
     text-transform: uppercase;
@@ -594,7 +554,6 @@ a:hover { color: var(--fs-primary); }
 .breadcrumb-item.active { color: var(--fs-dark); }
 .breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--fs-subtle); }
 
-/* Alerts — švelnesni. */
 .alert {
     border-radius: var(--fs-radius);
     border: 1px solid var(--fs-border);
@@ -606,7 +565,6 @@ a:hover { color: var(--fs-primary); }
 .alert-info { background: var(--fs-tint); border-color: var(--fs-accent-2); color: var(--fs-dark); }
 .alert-danger { background: #fdf2f4; border-color: #f5c6cf; color: #8b1d2d; }
 
-/* Badges */
 .badge {
     font-weight: 500;
     letter-spacing: .08em;
@@ -616,7 +574,6 @@ a:hover { color: var(--fs-primary); }
 .badge.bg-danger { background: var(--fs-primary) !important; }
 .badge.bg-primary-subtle { background: var(--fs-primary-soft) !important; color: var(--fs-primary) !important; }
 
-/* Tables */
 .table { color: var(--fs-dark); font-size: .88rem; }
 .table thead th {
     font-size: .7rem;
@@ -628,7 +585,6 @@ a:hover { color: var(--fs-primary); }
 }
 .table tbody tr { border-color: var(--fs-border); }
 
-/* Cards (bendros) */
 .card {
     border: 1px solid var(--fs-border);
     border-radius: var(--fs-radius);
@@ -641,7 +597,6 @@ a:hover { color: var(--fs-primary); }
     font-weight: 500;
 }
 
-/* Pagination — minimal. */
 .pagination .page-link {
     color: var(--fs-dark);
     border-color: var(--fs-border);
@@ -673,7 +628,6 @@ a:hover { color: var(--fs-primary); }
 .footer-dark a { color: #d1d5db; text-decoration: none; }
 .footer-dark a:hover { color: #fff; }
 
-/* ===== Sports page ===== */
 .sports-hero {
     position: relative;
     border-radius: 20px;
@@ -730,7 +684,6 @@ a:hover { color: var(--fs-primary); }
     border-color: var(--fs-dark);
     color: #fff;
 }
-/* Custom sport tab pane switcher (pakeičia Bootstrap .tab-pane naudojimą). */
 .sport-pane { display: none; }
 .sport-pane.active { display: block; animation: fadeIn .25s ease-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
@@ -848,7 +801,6 @@ a:hover { color: var(--fs-primary); }
     margin-bottom: .8rem;
 }
 
-/* Split cards */
 .split-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 @media (max-width: 1100px) {
     .split-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -898,7 +850,6 @@ a:hover { color: var(--fs-primary); }
     font-weight: 600;
 }
 
-/* Days picker v2 */
 .days-picker-v2 {
     background: #fff;
     border: 1px solid var(--fs-border);
@@ -971,10 +922,8 @@ a:hover { color: var(--fs-primary); }
 }
 .cta-builder .btn-cta:hover { background: #dc2626; transform: translateX(2px); }
 
-/* ===== Builder page ===== */
 .builder-wrapper { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
 
-/* Mokslinio generatoriaus panelė — vizualiai išryškinta spalvingu borderiu. */
 .generator-panel {
     background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
     border: 1px solid var(--fs-border);
@@ -1038,7 +987,6 @@ a:hover { color: var(--fs-primary); }
     .gen-actions .btn-generate { width: 100%; justify-content: center; display: flex; align-items: center; gap: .5rem; }
 }
 
-/* Sugeneruoto plano gairės po spustelėjimo */
 .gen-summary {
     margin-top: 1.25rem;
     padding-top: 1.25rem;
@@ -1192,7 +1140,6 @@ a:hover { color: var(--fs-primary); }
 }
 .empty-state i { font-size: 2.5rem; color: var(--fs-border); margin-bottom: .75rem; display: block; }
 
-/* Explanation grid — 3 columns on desktop, 2 on tablet, 1 on mobile. */
 .help-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1225,7 +1172,6 @@ a:hover { color: var(--fs-primary); }
 .help-card h6 { font-weight: 700; margin-bottom: .45rem; font-size: .975rem; }
 .help-card p { color: var(--fs-muted); font-size: .875rem; line-height: 1.55; margin: 0; }
 
-/* Print styles — the user wanted printing to only output the plan content. */
 @media print {
     @page { margin: 12mm; }
     body { background: #fff !important; }
@@ -1249,7 +1195,6 @@ a:hover { color: var(--fs-primary); }
 }
 .print-only { display: none; }
 
-/* ===== Nutrition page ===== */
 .nutrition-hero {
     position: relative;
     border-radius: 20px;
@@ -1273,7 +1218,6 @@ a:hover { color: var(--fs-primary); }
 .nutrition-hero h1 { color: #fff; font-weight: 800; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; }
 .nutrition-hero p { color: #cbd5e1; font-size: 1.1rem; max-width: 580px; margin-bottom: 0; }
 
-/* Intro benefits */
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1291,7 +1235,6 @@ a:hover { color: var(--fs-primary); }
 .benefit-item h6 { font-weight: 700; margin-bottom: .35rem; }
 .benefit-item p { color: var(--fs-muted); font-size: .875rem; line-height: 1.5; margin: 0; }
 
-/* Diet cards (expandable) */
 .diet-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1300,7 +1243,6 @@ a:hover { color: var(--fs-primary); }
 @media (max-width: 992px) { .diet-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) { .diet-grid { grid-template-columns: 1fr; } }
 
-/* Sporto tipų grid — 3 kolonos desktop'e (6 elementai = 2 eilutės po 3). */
 .sports-grid { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 1024px) { .sports-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px)  { .sports-grid { grid-template-columns: 1fr; } }
@@ -1362,7 +1304,7 @@ a:hover { color: var(--fs-primary); }
 }
 .diet-card details > summary::-webkit-details-marker { display: none; }
 .diet-card details > summary::after {
-    content: '\F282'; /* bi-chevron-down */
+    content: '\F282'; 
     font-family: 'bootstrap-icons';
     margin-left: auto;
     transition: transform .2s;
@@ -1399,7 +1341,6 @@ a:hover { color: var(--fs-primary); }
 .diet-card .pc-col.pros li::before { content: '+'; position: absolute; left: 0; color: #059669; font-weight: 700; }
 .diet-card .pc-col.cons li::before { content: '−'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
 
-/* Sport tab: Pros / Cons — rodomi tiesiogiai, tokiu pat stiliumi kaip mitybos kortelėse. */
 .sport-proscons {
     background: #fff;
     border: 1px solid var(--fs-border);
@@ -1439,7 +1380,6 @@ a:hover { color: var(--fs-primary); }
 .diet-card .btn-solid { flex: 1; padding: .55rem .9rem; background: #10b981; color: #fff; font-weight: 600; font-size: .875rem; border-radius: 8px; text-decoration: none; text-align: center; border: 1px solid #10b981; transition: all .12s; }
 .diet-card .btn-solid:hover { background: #059669; border-color: #059669; }
 
-/* BMI calculator */
 .bmi-panel {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1479,12 +1419,7 @@ a:hover { color: var(--fs-primary); }
 .bmi-cat-over { color: #a16207; background: #fef3c7; }
 .bmi-cat-obese { color: #b91c1c; background: #fee2e2; }
 
-/* BMI skalės spalvotoji juosta.
-   Markeris žymi BMI diapazone [10..40] → [0..100%]. Todėl ir spalvų ribos apskaičiuotos ta pačia formule:
-     <18,5 → 0 %–28,33 %   (mėlyna, per mažas svoris)
-     18,5–25 → 28,33 %–50 %  (žalia, normalus)
-     25–30   → 50 %–66,67 %  (geltona, antsvoris)
-     30+     → 66,67 %–100 % (raudona, nutukimas) */
+
 .bmi-scale {
     height: 10px;
     background: linear-gradient(90deg,
@@ -1506,8 +1441,6 @@ a:hover { color: var(--fs-primary); }
     transform: translateX(-50%);
     transition: left .3s ease;
 }
-/* BMI skalės label'ai absoliučiai pozicionuoti prie spalvų ribų,
-   kad vizualiai sutaptų su gradient stop'ais ir markerio pozicija. */
 .bmi-scale-labels {
     position: relative;
     height: 1rem;
@@ -1524,7 +1457,6 @@ a:hover { color: var(--fs-primary); }
 .bmi-scale-labels span:last-child  { transform: translateX(-100%); } /* 40+ — dešinys kraštas */
 .bmi-note { color: var(--fs-muted); font-size: .8rem; line-height: 1.5; margin-top: 1rem; margin-bottom: 0; }
 
-/* ===== Calorie planner ===== */
 .planner-grid {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -1591,7 +1523,6 @@ a:hover { color: var(--fs-primary); }
 .planner-kcal .unit { font-size: 1rem; color: #94a3b8; font-weight: 500; margin-left: .5rem; }
 .planner-goal-label { color: #cbd5e1; font-size: .875rem; margin-bottom: 1.25rem; }
 
-/* BMR/TDEE/Tikslas suvestinė — 3 kolonų mikro lentelė po pagrindine kcal reikšme. */
 .energy-breakdown {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1606,7 +1537,6 @@ a:hover { color: var(--fs-primary); }
 .energy-breakdown span { display: block; color: #94a3b8; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .15rem; }
 .energy-breakdown strong { display: block; color: #fff; font-size: 1.1rem; font-weight: 700; }
 
-/* Info ikonėlė prie form label'ų — hover rodo tooltip'ą iš title atributo. */
 .hint-icon {
     display: inline-flex;
     align-items: center;
@@ -1623,7 +1553,6 @@ a:hover { color: var(--fs-primary); }
 }
 .hint-icon:hover { background: var(--fs-primary); color: #fff; }
 
-/* Vandens rekomendacijos kortelė */
 .water-card {
     display: flex;
     align-items: center;
@@ -1647,7 +1576,6 @@ a:hover { color: var(--fs-primary); }
 .water-card .water-value { color: #fff; font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
 .water-card .water-hint { color: #94a3b8; font-size: .7rem; margin-top: .15rem; }
 
-/* Įspėjimai (deficitas per didelis, baltymų trūkumas, ir pan.) */
 .planner-warnings { display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0; }
 .planner-warnings .warning-item {
     display: flex;
@@ -1663,7 +1591,6 @@ a:hover { color: var(--fs-primary); }
 }
 .planner-warnings .warning-item i { color: #facc15; flex-shrink: 0; margin-top: .1rem; }
 
-/* Mokslinių šaltinių sąrašas po planuotoju */
 .citations-block {
     background: #fff;
     border: 1px solid var(--fs-border);
@@ -1718,7 +1645,6 @@ a:hover { color: var(--fs-primary); }
     border-top: 1px solid rgba(255,255,255,.1);
 }
 
-/* ===== Support page ===== */
 .support-contact-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1797,9 +1723,7 @@ a:hover { color: var(--fs-primary); }
     .support-form-card { position: static; }
 }
 
-/* ===== Pratimo kortelė su hover tooltip'u (vietoj atskiro puslapio) =====
-   Kortelė veikia kaip paprasta card; užvedus pelę arba gavus focus — iš viršaus
-   „iššoka" tooltip'as su pilna pratimo informacija. CSS only, be JS. */
+
 .exercise-card-hover {
     position: relative;
     cursor: pointer;
@@ -1834,7 +1758,6 @@ a:hover { color: var(--fs-primary); }
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
 }
-/* Trikampis-rodyklė prie tooltip'o apačios. */
 .exercise-tooltip::after {
     content: '';
     position: absolute;
@@ -1900,7 +1823,6 @@ a:hover { color: var(--fs-primary); }
 .tooltip-list li { margin-bottom: .15rem; }
 .tooltip-how { font-size: .78rem; color: var(--fs-muted); line-height: 1.5; margin: 0; }
 
-/* Mobiliam — tooltip'as rodomas po kortele, o ne virš, ir išnaudoja visą plotą. */
 @media (max-width: 576px) {
     .exercise-tooltip {
         width: calc(100% + 2px);
@@ -1916,7 +1838,6 @@ a:hover { color: var(--fs-primary); }
     .exercise-tooltip::after { display: none; }
 }
 
-/* ===== Parduotuvės filtras (sidebar + rezultatų tinklelis) ===== */
 .shop-layout {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -1979,7 +1900,6 @@ a:hover { color: var(--fs-primary); }
 }
 .search-wrap input:focus { outline: none; border-color: var(--fs-primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, .12); }
 
-/* Radio/checkbox filtro įrašai — klikiami visi, ne tik dėžutės. */
 .filter-radio, .filter-check {
     display: flex;
     align-items: center;

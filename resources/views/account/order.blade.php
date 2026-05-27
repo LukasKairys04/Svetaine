@@ -29,12 +29,36 @@
                         </div>
                     </div>
 
+                    @php $canReview = $uzsakymas->payment_status === 'paid' && $uzsakymas->status === 'completed'; @endphp
                     <h6 class="mt-3">Prekės</h6>
                     <table class="table">
-                        <thead><tr><th>Prekė</th><th>Kiekis</th><th>Kaina</th><th>Viso</th></tr></thead>
+                        <thead><tr><th>Prekė</th><th>Kiekis</th><th>Kaina</th><th>Viso</th><th>Atsiliepimas</th></tr></thead>
                         <tbody>
                         @foreach($uzsakymas->items as $i)
-                            <tr><td>{{ $i->product_name }}</td><td>{{ $i->qty }}</td><td>€{{ number_format($i->price, 2) }}</td><td>€{{ number_format($i->subtotal, 2) }}</td></tr>
+                            <tr>
+                                <td>{{ $i->product_name }}</td>
+                                <td>{{ $i->qty }}</td>
+                                <td>€{{ number_format($i->price, 2) }}</td>
+                                <td>€{{ number_format($i->subtotal, 2) }}</td>
+                                <td style="min-width:260px">
+                                    @if($canReview && $i->product)
+                                        <form method="POST" action="{{ route('account.order-items.review', $i) }}" class="d-grid gap-2">
+                                            @csrf
+                                            <select name="rating" class="form-select form-select-sm" required>
+                                                <option value="">Įvertinimas</option>
+                                                @for($rating = 5; $rating >= 1; $rating--)
+                                                    <option value="{{ $rating }}">{{ $rating }} / 5</option>
+                                                @endfor
+                                            </select>
+                                            <input type="text" name="title" class="form-control form-control-sm" placeholder="Trumpas pavadinimas">
+                                            <textarea name="comment" class="form-control form-control-sm" rows="2" placeholder="Parašyk atsiliepimą" required></textarea>
+                                            <button class="btn btn-sm btn-primary">Palikti atsiliepimą</button>
+                                        </form>
+                                    @else
+                                        <span class="small text-muted">Atsiliepimą galima palikti, kai užsakymas apmokėtas ir gautas.</span>
+                                    @endif
+                                </td>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>

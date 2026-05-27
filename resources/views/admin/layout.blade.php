@@ -281,7 +281,7 @@
         <div class="admin-nav-section">
             <div class="admin-nav-label">Valdymas</div>
             <a href="{{ route('admin.dashboard') }}" class="admin-nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="bi bi-grid"></i> Dashboard
+                <i class="bi bi-grid"></i> Skydelis
             </a>
         </div>
 
@@ -289,6 +289,9 @@
             <div class="admin-nav-label">Parduotuvė</div>
             <a href="{{ route('admin.products.index') }}" class="admin-nav-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
                 <i class="bi bi-box"></i> Produktai
+            </a>
+            <a href="{{ route('admin.inventory.index') }}" class="admin-nav-item {{ request()->routeIs('admin.inventory.*') ? 'active' : '' }}">
+                <i class="bi bi-boxes"></i> Sandėlis
             </a>
             <a href="{{ route('admin.categories.index') }}" class="admin-nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
                 <i class="bi bi-tag"></i> Kategorijos
@@ -312,10 +315,7 @@
         </div>
 
         <div class="admin-nav-section">
-            <div class="admin-nav-label">Pagalba</div>
-            <a href="{{ route('admin.support.index') }}" class="admin-nav-item {{ request()->routeIs('admin.support.*') ? 'active' : '' }}">
-                <i class="bi bi-chat-left"></i> Žinutės
-            </a>
+            <div class="admin-nav-label">Atsiliepimai</div>
             <a href="{{ route('admin.reviews.index') }}" class="admin-nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
                 <i class="bi bi-star"></i> Atsiliepimai
             </a>
@@ -331,7 +331,7 @@
 
     <main class="admin-main">
         <div class="admin-header">
-            <h1>@yield('title', 'Dashboard')</h1>
+            <h1>@yield('title', 'Skydelis')</h1>
             <div class="admin-user">
                 <span>{{ auth()->user()->name ?? 'Admin' }}</span>
                 <form method="POST" action="{{ route('logout') }}" class="m-0">

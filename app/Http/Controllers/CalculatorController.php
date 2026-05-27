@@ -14,26 +14,35 @@ class CalculatorController extends Controller
     public function bmi(Request $request)
     {
         $result = null;
+
+        // skaičiuojama tik tada, kai įvestas ūgis ir svoris
         if ($request->filled(['height', 'weight'])) {
             $h = (float) $request->input('height') / 100;
             $w = (float) $request->input('weight');
+
             if ($h > 0) {
                 $bmi = round($w / ($h * $h), 2);
+
+                // pagal bmi parenkama svorio kategorija
                 $cat = match (true) {
                     $bmi < 18.5 => ['Per mažas svoris', 'warning'],
                     $bmi < 25 => ['Normalus svoris', 'success'],
                     $bmi < 30 => ['Antsvoris', 'warning'],
                     default => ['Nutukimas', 'danger'],
                 };
+
                 $result = ['bmi' => $bmi, 'label' => $cat[0], 'color' => $cat[1]];
             }
         }
+
         return view('calculators.bmi', compact('result'));
     }
 
     public function nutrition(Request $request)
     {
         $result = null;
+
+        // skaičiuojama tik tada, kai užpildyti visi reikalingi laukai
         if ($request->filled(['age', 'gender', 'height', 'weight', 'activity', 'goal'])) {
             $age = (int) $request->input('age');
             $gender = $request->input('gender');
@@ -42,15 +51,21 @@ class CalculatorController extends Controller
             $activity = (float) $request->input('activity');
             $goal = $request->input('goal');
 
+            // bmr skaičiuojamas pagal mifflin-st jeor formulę
             $bmr = $gender === 'female'
                 ? 10 * $w + 6.25 * $h - 5 * $age - 161
                 : 10 * $w + 6.25 * $h - 5 * $age + 5;
+
+            // tdee parodo apytikslį dienos kalorijų poreikį
             $tdee = $bmr * $activity;
+
             $calories = match ($goal) {
                 'lose' => $tdee - 500,
                 'gain' => $tdee + 400,
                 default => $tdee,
             };
+
+            // apskaičiuojami makroelementai
             $calories = (int) round($calories);
             $protein = max(50, (int) round($w * ($goal === 'gain' ? 2 : 1.8)));
             $fat = max(20, (int) round(($calories * 0.25) / 9));
@@ -58,18 +73,22 @@ class CalculatorController extends Controller
 
             $result = compact('bmr', 'tdee', 'calories', 'protein', 'fat', 'carbs');
         }
+
         return view('calculators.nutrition', compact('result'));
     }
 
     public function sportPlan(Request $request)
     {
         $result = null;
+
+        // planas sudaromas tik tada, kai vartotojas užpildo visus laukus
         if ($request->filled(['level', 'goal', 'days', 'time'])) {
             $level = $request->input('level');
             $goal = $request->input('goal');
             $days = (int) $request->input('days');
             $time = (int) $request->input('time');
 
+            // treniruočių splitas parenkamas pagal dienų skaičių
             $splits = [
                 3 => ['Full body A', 'Full body B', 'Full body C'],
                 4 => ['Upper', 'Lower', 'Upper', 'Lower'],
@@ -77,19 +96,25 @@ class CalculatorController extends Controller
                 6 => ['Push', 'Pull', 'Legs', 'Push', 'Pull', 'Legs'],
             ];
             $split = $splits[$days] ?? $splits[3];
+
+            // cardio rekomendacija pagal tikslą
             $cardio = match ($goal) {
                 'weight_loss' => '3–4x per savaitę 20–30 min HIIT arba 45 min LISS',
                 'endurance' => '4–5x per savaitę bėgimas / dviratis',
                 default => '1–2x per savaitę 15–20 min cardio',
             };
+
+            // pakartojimų intervalas pagal tikslą
             $repsRange = match ($goal) {
                 'strength' => '4–6',
                 'hypertrophy' => '8–12',
                 'endurance' => '15–20',
                 default => '8–12',
             };
+
             $result = compact('level', 'goal', 'days', 'time', 'split', 'cardio', 'repsRange');
         }
+
         return view('calculators.sport-plan', compact('result'));
     }
 }

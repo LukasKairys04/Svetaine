@@ -15,7 +15,7 @@
         <h1 class="fw-bold">Kuo remiasi mūsų skaičiuoklės</h1>
         <p class="text-muted">
             Kalorijų ir treniruočių planuotojai nenaudoja atsitiktinių formulių — jų parametrai
-            paimti iš šiuolaikinių (2016–2024 m.) meta-analizių ir sporto mokslo gairių.
+            paimti iš šiuolaikinių (2016-2024 m.) meta-analizių ir sporto mokslo gairių.
             Žemiau pateikiame pilną šaltinių sąrašą su nuorodomis į originalias publikacijas.
         </p>
     </div>
@@ -54,7 +54,7 @@
                 <strong>Roth C ir kt. (2022).</strong>
                 Effects of moderate vs high energy deficits on body composition and strength
                 in trained individuals. <em>Sports, 10(11), 171.</em>
-                Rekomenduojamo svorio metimo greičio (0.5–1 % / sav.) šaltinis.
+                Rekomenduojamo svorio metimo greičio (0.5-1 % / sav.) šaltinis.
                 <a href="https://pubmed.ncbi.nlm.nih.gov/36422940/" target="_blank" rel="noopener">Skaityti</a>
             </li>
             <li>

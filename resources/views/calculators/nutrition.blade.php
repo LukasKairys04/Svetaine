@@ -34,7 +34,7 @@
                             <option value="1.2">Sėdimas (mažai judėjimo)</option>
                             <option value="1.375">Lengvas (1–3 treniruotės/sav.)</option>
                             <option value="1.55" selected>Vidutinis (3–5/sav.)</option>
-                            <option value="1.725">Aktyvus (6–7/sav.)</option>
+                            <option value="1.725">Aktyvus (6–7/sav.)</option> 
                             <option value="1.9">Labai aktyvus / fizinis darbas</option>
                         </select>
                     </div>

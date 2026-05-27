@@ -42,7 +42,7 @@
                     <a class="nav-link @if(request()->routeIs('sports.*')) active @endif" href="{{ route('sports.index') }}">Sportas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(request()->routeIs('support.*')) active @endif" href="{{ route('support.index') }}">Pagalba</a>
+                    <a class="nav-link @if(request()->routeIs('support.*')) active @endif" href="{{ route('support.index') }}">Apie mus</a>
                 </li>
             </ul>
 <div class="d-flex align-items-center gap-3">

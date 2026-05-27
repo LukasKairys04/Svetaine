@@ -21,6 +21,12 @@ class AdminImage
         }
 
         $source = self::createImage($file->getPathname(), (string) $file->getMimeType());
+        if (!$source) {
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            return '/uploads/' . trim($folder, '/') . '/' . $filename;
+        }
+
         $target = imagecreatetruecolor($width, $height);
 
         imagealphablending($target, true);
@@ -48,7 +54,15 @@ class AdminImage
         $filename = Str::uuid() . '.webp';
         $path = $directory . DIRECTORY_SEPARATOR . $filename;
 
-        imagewebp($target, $path, 82);
+        if (! imagewebp($target, $path, 82)) {
+            imagedestroy($source);
+            imagedestroy($target);
+
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $file->move($directory, $filename);
+            return '/uploads/' . trim($folder, '/') . '/' . $filename;
+        }
+
         imagedestroy($source);
         imagedestroy($target);
 

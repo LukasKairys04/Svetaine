@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Dashboard')
+@section('title', 'Skydelis')
 
 @section('admin')
     <div class="admin-dashboard-wrap">

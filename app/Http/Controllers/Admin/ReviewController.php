@@ -1,7 +1,5 @@
 <?php
 
-// Admin: produktų atsiliepimų valdymas (peržiūra, redagavimas, šalinimas)
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -12,8 +10,10 @@ class ReviewController extends Controller
 {
     public function index(Request $request)
     {
+        // rodomas atsiliepimų sąrašas su vartotoju ir produktu
         $query = Review::with(['user', 'product'])->latest();
 
+        // paieška pagal vartotoją, produktą arba komentarą
         if ($search = $request->input('search')) {
             $query->where(function ($q) use ($search) {
                 $q->whereHas('user', fn($u) => $u->where('name', 'like', "%$search%"))
@@ -22,39 +22,50 @@ class ReviewController extends Controller
             });
         }
 
+        // filtras pagal įvertinimą
         if ($rating = $request->input('rating')) {
             $query->where('rating', $rating);
         }
 
+        // filtras pagal patvirtinimo būseną
         if ($request->input('approved') !== null && $request->input('approved') !== '') {
             $query->where('approved', $request->boolean('approved'));
         }
 
         $reviews = $query->paginate(25)->withQueryString();
+
         return view('admin.reviews.index', compact('reviews'));
     }
 
     public function edit(Review $review)
     {
+        // atsiliepimo redagavimo forma
         $review->load(['user', 'product']);
+
         return view('admin.reviews.edit', compact('review'));
     }
 
     public function update(Request $request, Review $review)
     {
+        // patikrinami atsiliepimo duomenys
         $data = $request->validate([
             'rating'   => 'required|integer|min:1|max:5',
             'title'    => 'nullable|string|max:255',
             'comment'  => 'nullable|string|max:3000',
             'approved' => 'boolean',
         ]);
+
+        // atnaujinamas atsiliepimas
         $review->update($data);
+
         return redirect()->route('admin.reviews.index')->with('success', 'Atsiliepimas atnaujintas.');
     }
 
     public function destroy(Review $review)
     {
+        // ištrinamas atsiliepimas
         $review->delete();
+
         return back()->with('success', 'Atsiliepimas pašalintas.');
     }
 }

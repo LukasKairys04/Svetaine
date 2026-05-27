@@ -19,8 +19,8 @@ Route::view('/saltiniai', 'references')->name('references');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/search', [ShopController::class, 'search'])->name('shop.search');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
-Route::post('/product/{slug}/review', [\App\Http\Controllers\ReviewController::class, 'store'])
-    ->middleware('auth')->name('product.review');
+Route::post('/account/order-items/{orderItem}/review', [\App\Http\Controllers\ReviewController::class, 'store'])
+    ->middleware('auth')->name('account.order-items.review');
 
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
@@ -57,7 +57,6 @@ Route::prefix('calculators')->name('calculators.')->group(function () {
 });
 
 Route::get('/support', [SupportController::class, 'index'])->name('support.index');
-Route::post('/support', [SupportController::class, 'submit'])->name('support.submit');
 Route::post('/support/testimonial', [SupportController::class, 'testimonial'])->name('support.testimonial');
 
 Route::middleware('guest')->group(function () {
@@ -82,17 +81,14 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except(['show']);
+        Route::get('inventory', [\App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('inventory.index');
+        Route::put('inventory/{product}', [\App\Http\Controllers\Admin\InventoryController::class, 'update'])->name('inventory.update');
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
-        Route::resource('news', \App\Http\Controllers\Admin\NewsController::class)->except(['show']);
         Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
         Route::put('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('orders.update');
         Route::resource('nutrition-plans', \App\Http\Controllers\Admin\NutritionPlanController::class)->except(['show'])->parameters(['nutrition-plans' => 'plan']);
         Route::resource('sport-plans', \App\Http\Controllers\Admin\SportPlanController::class)->except(['show'])->parameters(['sport-plans' => 'plan']);
-        Route::get('support', [\App\Http\Controllers\Admin\SupportController::class, 'index'])->name('support.index');
-        Route::get('support/{message}', [\App\Http\Controllers\Admin\SupportController::class, 'show'])->name('support.show');
-        Route::put('support/{message}', [\App\Http\Controllers\Admin\SupportController::class, 'update'])->name('support.update');
-        Route::delete('support/{message}', [\App\Http\Controllers\Admin\SupportController::class, 'destroy'])->name('support.destroy');
         Route::get('testimonials', [\App\Http\Controllers\Admin\TestimonialController::class, 'index'])->name('testimonials.index');
         Route::put('testimonials/{testimonial}', [\App\Http\Controllers\Admin\TestimonialController::class, 'update'])->name('testimonials.update');
         Route::delete('testimonials/{testimonial}', [\App\Http\Controllers\Admin\TestimonialController::class, 'destroy'])->name('testimonials.destroy');

@@ -6,7 +6,7 @@
                 <a href="{{ route('shop.index') }}">Parduotuvė</a>
                 <a href="{{ route('nutrition.index') }}">Mityba</a>
                 <a href="{{ route('sports.index') }}">Sportas</a>
-                <a href="{{ route('support.index') }}">Kontaktai</a>
+                <a href="{{ route('support.index') }}">Apie mus</a>
             </div>
             <div class="small text-muted mt-2">
                 © {{ date('Y') }} PapildaiOnline. Visos teisės saugomos.
