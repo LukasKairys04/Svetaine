@@ -194,7 +194,7 @@
 
                 <h6>Poilsio trukmė tarp serijų</h6>
 
-                <p>Raumenų augimui poilsio trukmė daro realią įtaką progresui, todėl plane ją sekame atskirai.</p>
+                <p>Poilsio intervalai tarp serijų gali turėti įtakos raumenų augimui, todėl plane jie sekami atskirai.</p>
 
                 <span>Singer et al., 2024</span>
 
@@ -204,7 +204,7 @@
 
                 <h6>Artumas iki nesėkmės (RIR)</h6>
 
-                <p>RIR metodas padeda dozuoti apkrovą ir valdyti nuovargį neprarandant efektyvumo.</p>
+                <p>RIR metodas padeda reguliuoti treniruotės intensyvumą pagal tai, kiek pakartojimų lieka iki nesėkmės.</p>
 
                 <span>Robinson et al., 2024</span>
 
@@ -212,21 +212,21 @@
 
             <a class="evidence-item" href="https://journals.physiology.org/doi/full/10.1152/japplphysiol.00476.2024" target="_blank" rel="noopener">
 
-                <h6>Treniruočių tūrio didinimas</h6>
+                <h6>Treniruočių tūris</h6>
 
-                <p>Savaitinis tūris turi tiesioginę įtaką progresui, todėl planą verta didinti etapais.</p>
+                <p>Savaitinis treniruočių tūris svarbus progresui, tačiau didesnis tūris ne visada reiškia geresnį rezultatą.</p>
 
-                <span>Remmert et al., 2024</span>
+                <span>Barsuhn et al., 2025</span>
 
             </a>
 
             <a class="evidence-item" href="https://pubmed.ncbi.nlm.nih.gov/36196347/" target="_blank" rel="noopener">
 
-                <h6>Tūris ir dažnis per savaitę</h6>
+                <h6>Fizinio pajėgumo vertinimas</h6>
 
-                <p>Rezultatams svarbi ne viena treniruotė, o savaitinis tūris ir nuoseklus dažnis.</p>
+                <p>Anaerobinio pajėgumo vertinimas gali būti atliekamas taikant sportui artimus lauko testus.</p>
 
-                <span>Baz-Valle et al., 2022</span>
+                <span>Parnow et al., 2022</span>
 
             </a>
 
@@ -234,9 +234,9 @@
 
                 <h6>Dažnis per savaitę</h6>
 
-                <p>Daugumai tikslų efektyvu treniruoti raumenų grupes bent 2 kartus per savaitę.</p>
+                <p>Raumenų grupes rekomenduojama treniruoti bent du kartus per savaitę siekiant geresnių raumenų augimo rezultatų.</p>
 
-                <span>Schoenfeld et al., 2016/2022</span>
+                <span>Schoenfeld et al., 2016</span>
 
             </a>
 
