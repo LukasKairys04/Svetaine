@@ -200,28 +200,28 @@
         <div class="evidence-grid">
             <a class="evidence-item" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8978023/" target="_blank" rel="noopener">
                 <h6>Baltymų norma aktyviems</h6>
-                <p>Aktyviai sportuojantiems efektyvi baltymų norma dažniausiai prasideda nuo 1,6 g/kg.</p>
+                <p>Aktyviai sportuojantiems baltymų kiekis siejamas su liesos kūno masės palaikymu ir augimu.</p>
                 <span>Nunes et al., 2022</span>
             </a>
             <a class="evidence-item" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9012799/" target="_blank" rel="noopener">
                 <h6>Deficitas ir raumenų išsaugojimas</h6>
-                <p>Per greitas kalorijų mažinimas didina liesos masės nuostolių riziką.</p>
+                <p>Kalorijų deficito metu pasipriešinimo treniruotės ir pakankamas baltymų kiekis gali padėti mažinti liesos masės praradimą.</p>
                 <span>Roth et al., 2022</span>
             </a>
             <a class="evidence-item" href="https://pubmed.ncbi.nlm.nih.gov/34623696/" target="_blank" rel="noopener">
                 <h6>Energijos trūkumas</h6>
-                <p>Didelis energijos deficitas blogina kūno kompozicijos progresą net treniruojantis.</p>
-                <span>Murphy &amp; Koehler, 2021</span>
+                <p>Ilgalaikis energijos deficitas gali riboti liesos masės augimą net treniruojantis.</p>
+                <span>Murphy &amp; Koehler, 2022</span>
             </a>
-            <a class="evidence-item" href="https://pubmed.ncbi.nlm.nih.gov/36169010/" target="_blank" rel="noopener">
-                <h6>Skysčių poreikiai sportuojant</h6>
-                <p>Skysčių poreikį reikia koreguoti pagal kūno masę, prakaitavimą ir fizinį krūvį.</p>
-                <span>Perrier et al., 2022</span>
+            <a class="evidence-item" href="https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1397090/full" target="_blank" rel="noopener">
+                <h6>Baltymų vartojimo laikas</h6>
+                <p>Bendras dienos baltymų kiekis yra svarbesnis už tikslų jų vartojimo laiką.</p>
+                <span>Lak et al., 2024</span>
             </a>
-            <a class="evidence-item" href="https://pubmed.ncbi.nlm.nih.gov/37530886/" target="_blank" rel="noopener">
-                <h6>Metaanalizės apie kūno kompoziciją</h6>
-                <p>Kūno kompozicijai svarbiausia nuoseklus kalorijų valdymas ir pakankamas baltymų kiekis.</p>
-                <span>Ashtary-Larky et al., 2023</span>
+            <a class="evidence-item" href="https://pubmed.ncbi.nlm.nih.gov/35215506/" target="_blank" rel="noopener">
+                <h6>Angliavandeniai treniruotėms</h6>
+                <p>Angliavandenių kiekis gali būti svarbus treniruočių atlikimui, ypač kai treniruočių apimtis yra didesnė.</p>
+                <span>Henselmans et al., 2022</span>
             </a>
         </div>
     </div>
