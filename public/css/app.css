@@ -3772,17 +3772,16 @@ body {
 .a11y-reset {
     min-height: 38px;
 }
-/* === Aukšto kontrasto režimas (WCAG AAA: geltonas ant juodo, 19.5:1) === */
-body.high-contrast,
-body.high-contrast main,
-body.high-contrast section,
-body.high-contrast .container,
-body.high-contrast aside,
-body.high-contrast article,
-body.high-contrast div,
-body.high-contrast nav,
-body.high-contrast header,
-body.high-contrast footer,
+/* === Aukšto kontrasto režimas (sustiprintas šviesus variantas, WCAG AAA 21:1) === */
+/* Idėja: išlaikyti originalų dizainą, bet sustiprinti tekstą iki juodo,
+   fonus padaryti grynai baltus, pridėti storesnius rėmus ir pabrauktas nuorodas. */
+
+body.high-contrast {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+/* Visi konteineriai — grynai baltas fonas, be šešėlių, gradientų */
 body.high-contrast .card,
 body.high-contrast .medical-product-card,
 body.high-contrast .checkout-section,
@@ -3790,42 +3789,37 @@ body.high-contrast .checkout-aside,
 body.high-contrast .checkout-main,
 body.high-contrast .cart-summary-card,
 body.high-contrast .accessibility-menu,
-body.high-contrast .accessibility-panel,
-body.high-contrast .navbar,
-body.high-contrast .medical-navbar,
-body.high-contrast .footer-dark,
 body.high-contrast .empty-cart-card,
 body.high-contrast .empty-state-card,
 body.high-contrast .alert,
 body.high-contrast .dropdown-menu,
 body.high-contrast .modal-content,
 body.high-contrast .toast,
-body.high-contrast .breadcrumb,
-body.high-contrast table,
-body.high-contrast thead,
-body.high-contrast tbody,
-body.high-contrast tr,
-body.high-contrast td,
-body.high-contrast th,
-body.high-contrast .table,
-body.high-contrast .table-light,
 body.high-contrast .nutrition-label,
 body.high-contrast .review-item,
 body.high-contrast .filter-block,
-body.high-contrast .shop-filters,
-body.high-contrast .account-tabs,
-body.high-contrast .nav-pills,
-body.high-contrast .accessibility-toggle {
-    background: #000 !important;
-    background-color: #000 !important;
+body.high-contrast .shop-filters {
+    background: #fff !important;
     background-image: none !important;
-    color: #ffeb3b !important;
-    border-color: #ffeb3b !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
     box-shadow: none !important;
-    text-shadow: none !important;
 }
 
-/* Visi tekstiniai elementai — ryški geltona */
+/* Navbar / footer */
+body.high-contrast .navbar,
+body.high-contrast .medical-navbar {
+    background: #fff !important;
+    border-bottom: 3px solid #000 !important;
+    box-shadow: none !important;
+}
+body.high-contrast .footer-dark {
+    background: #fff !important;
+    color: #000 !important;
+    border-top: 3px solid #000 !important;
+}
+
+/* Tekstai — viskas juoda, jokių pilkų atspalvių */
 body.high-contrast,
 body.high-contrast h1,
 body.high-contrast h2,
@@ -3843,229 +3837,283 @@ body.high-contrast dd,
 body.high-contrast strong,
 body.high-contrast em,
 body.high-contrast b,
-body.high-contrast i,
 body.high-contrast .lead,
 body.high-contrast .text-muted,
 body.high-contrast .small,
 body.high-contrast .text-dark,
-body.high-contrast .text-primary,
-body.high-contrast .text-success,
-body.high-contrast .text-danger,
-body.high-contrast .text-warning,
-body.high-contrast .text-info,
 body.high-contrast .text-secondary,
-body.high-contrast .badge,
-body.high-contrast .breadcrumb-item,
 body.high-contrast .form-text,
-body.high-contrast .invalid-feedback,
 body.high-contrast .form-label,
 body.high-contrast .card-title,
 body.high-contrast .card-text,
 body.high-contrast .card-category,
 body.high-contrast .card-price,
 body.high-contrast .product-reviews-mini,
-body.high-contrast .stars,
-body.high-contrast .rating,
-body.high-contrast .nav-link,
-body.high-contrast .navbar-brand,
-body.high-contrast .navbar-brand span,
-body.high-contrast .dropdown-item,
 body.high-contrast .review-title,
 body.high-contrast .review-comment,
 body.high-contrast .filter-title,
 body.high-contrast .filter-label,
-body.high-contrast .filter-radio,
-body.high-contrast .filter-check,
 body.high-contrast .price-hint,
 body.high-contrast .result-count,
-body.high-contrast .chip,
-body.high-contrast h4 span,
-body.high-contrast a {
-    color: #ffeb3b !important;
-    background-color: transparent !important;
-    -webkit-text-fill-color: #ffeb3b !important;
+body.high-contrast .breadcrumb-item,
+body.high-contrast .breadcrumb-item.active,
+body.high-contrast .navbar-brand,
+body.high-contrast .navbar-brand span,
+body.high-contrast .dropdown-item-text {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
 }
 
-/* Nuorodos — pabraukimas privalomas */
+/* Bootstrap spalvotos žymės — keičiame į stiprias, prieinamas spalvas */
+body.high-contrast .text-primary {
+    color: #0033cc !important;
+    -webkit-text-fill-color: #0033cc !important;
+}
+body.high-contrast .text-success {
+    color: #006400 !important;
+    -webkit-text-fill-color: #006400 !important;
+}
+body.high-contrast .text-danger {
+    color: #b00000 !important;
+    -webkit-text-fill-color: #b00000 !important;
+}
+body.high-contrast .text-warning {
+    color: #8a6d00 !important;
+    -webkit-text-fill-color: #8a6d00 !important;
+}
+
+/* Nuorodos — tamsiai mėlynos su privalomu pabraukimu */
 body.high-contrast a,
 body.high-contrast .nav-link,
 body.high-contrast .breadcrumb-item a,
-body.high-contrast .dropdown-item {
-    color: #ffeb3b !important;
+body.high-contrast .dropdown-item,
+body.high-contrast .chip {
+    color: #0033cc !important;
+    -webkit-text-fill-color: #0033cc !important;
     text-decoration: underline !important;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px !important;
 }
 body.high-contrast a:hover,
 body.high-contrast a:focus,
 body.high-contrast .nav-link:hover {
-    color: #fff !important;
-    background: #1a1a1a !important;
-    text-decoration: underline !important;
+    color: #001a66 !important;
+    background: #f0f4ff !important;
 }
 body.high-contrast .nav-link.active {
     color: #fff !important;
-    background: #333 !important;
-    border: 2px solid #ffeb3b !important;
+    background: #000 !important;
+    text-decoration: none !important;
 }
 
-/* Mygtukai — juodas fonas, geltonas rėmas + tekstas */
+/* Mygtukai — visi su 2px rėmu, jokių gradientų / šešėlių */
 body.high-contrast .btn,
-body.high-contrast button,
+body.high-contrast button.btn,
 body.high-contrast .a11y-btn,
 body.high-contrast .a11y-reset {
-    background: #000 !important;
-    color: #ffeb3b !important;
-    border: 2px solid #ffeb3b !important;
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    text-decoration: none !important;
     text-shadow: none !important;
     box-shadow: none !important;
+    font-weight: 600;
 }
 body.high-contrast .btn:hover,
 body.high-contrast .btn:focus,
-body.high-contrast button:hover,
 body.high-contrast .a11y-btn:hover {
-    background: #ffeb3b !important;
-    color: #000 !important;
-    border-color: #ffeb3b !important;
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
 }
 body.high-contrast .btn-primary,
-body.high-contrast .a11y-btn.active,
-body.high-contrast .btn-primary:not(:disabled):not(.disabled) {
-    background: #ffeb3b !important;
-    color: #000 !important;
-    border: 2px solid #ffeb3b !important;
+body.high-contrast .a11y-btn.active {
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 2px solid #000 !important;
     font-weight: 700;
 }
-body.high-contrast .btn-primary:hover {
-    background: #fff !important;
-    color: #000 !important;
+body.high-contrast .btn-primary:hover,
+body.high-contrast .btn-primary:focus {
+    background: #0033cc !important;
+    border-color: #0033cc !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
 }
 body.high-contrast .btn-outline-primary,
 body.high-contrast .btn-outline-secondary,
 body.high-contrast .btn-outline-danger {
-    background: #000 !important;
-    color: #ffeb3b !important;
-    border: 2px solid #ffeb3b !important;
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
 }
-body.high-contrast .btn:disabled,
-body.high-contrast .btn.disabled {
-    opacity: .5 !important;
+body.high-contrast .btn-outline-danger {
+    color: #b00000 !important;
+    border-color: #b00000 !important;
+}
+body.high-contrast .btn-outline-danger:hover {
+    background: #b00000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
 }
 
-/* Formų laukai — juodas fonas, geltonas tekstas, geltonas rėmas */
+/* Formų laukai — baltas fonas, juodas tekstas, 2px rėmas */
 body.high-contrast input,
 body.high-contrast textarea,
 body.high-contrast select,
 body.high-contrast .form-control,
 body.high-contrast .form-select,
 body.high-contrast .search-input {
-    background: #000 !important;
-    color: #ffeb3b !important;
-    border: 2px solid #ffeb3b !important;
-    -webkit-text-fill-color: #ffeb3b !important;
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    border: 2px solid #000 !important;
+    box-shadow: none !important;
 }
 body.high-contrast input::placeholder,
 body.high-contrast textarea::placeholder,
 body.high-contrast .form-control::placeholder {
-    color: #cccc00 !important;
+    color: #555 !important;
     opacity: 1 !important;
 }
 body.high-contrast input:focus,
 body.high-contrast textarea:focus,
-body.high-contrast select:focus {
-    outline: 3px solid #fff !important;
+body.high-contrast select:focus,
+body.high-contrast .form-control:focus {
+    outline: 3px solid #0033cc !important;
     outline-offset: 2px;
+    border-color: #000 !important;
 }
 body.high-contrast .form-check-input {
-    background: #000 !important;
-    border: 2px solid #ffeb3b !important;
+    background: #fff !important;
+    border: 2px solid #000 !important;
 }
 body.high-contrast .form-check-input:checked {
-    background: #ffeb3b !important;
-    border-color: #ffeb3b !important;
+    background: #000 !important;
+    border-color: #000 !important;
 }
 
-/* Įspėjimai / žymos */
+/* Įspėjimai */
 body.high-contrast .alert {
-    background: #000 !important;
-    color: #ffeb3b !important;
-    border: 2px solid #ffeb3b !important;
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
 }
+body.high-contrast .alert-success {
+    border-left: 6px solid #006400 !important;
+}
+body.high-contrast .alert-danger {
+    border-left: 6px solid #b00000 !important;
+}
+body.high-contrast .alert-warning {
+    border-left: 6px solid #8a6d00 !important;
+}
+
+/* Žymos / kortelių žvaigždutės */
 body.high-contrast .badge,
 body.high-contrast .nav-icon-badge {
-    background: #ffeb3b !important;
-    color: #000 !important;
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
     border: 1px solid #000 !important;
     font-weight: 700;
 }
-
-/* Žvaigždutės ir ikonos — geltonos */
-body.high-contrast .bi,
-body.high-contrast i[class*="bi-"],
 body.high-contrast .stars,
 body.high-contrast .stars i,
-body.high-contrast .rating i {
-    color: #ffeb3b !important;
+body.high-contrast .rating i.bi-star-fill,
+body.high-contrast .rating i.bi-star-half {
+    color: #8a6d00 !important;
+}
+body.high-contrast .rating i.bi-star {
+    color: #555 !important;
 }
 
-/* Vaizdai — šiek tiek pritildomi, kad netrukdytų skaitymui */
-body.high-contrast img {
-    filter: contrast(1.1) brightness(.9);
-    border: 2px solid #ffeb3b;
-}
-
-/* Hero ir produktų kortelių antraštės — be gradientų */
+/* Hero — be gradientų ir spalvoto fono */
 body.high-contrast .medical-hero,
 body.high-contrast .hero-wrap,
 body.high-contrast .hero-inner {
-    background: #000 !important;
+    background: #fff !important;
     background-image: none !important;
+    color: #000 !important;
 }
 body.high-contrast .medical-hero h1,
 body.high-contrast .medical-hero h1 span {
-    color: #ffeb3b !important;
+    color: #000 !important;
     background: none !important;
     -webkit-background-clip: initial !important;
     background-clip: initial !important;
-    -webkit-text-fill-color: #ffeb3b !important;
+    -webkit-text-fill-color: #000 !important;
 }
 
 /* Lentelės */
+body.high-contrast .table {
+    color: #000 !important;
+    border-color: #000 !important;
+}
 body.high-contrast .table > :not(caption) > * > * {
-    background: #000 !important;
-    color: #ffeb3b !important;
-    border-color: #ffeb3b !important;
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+body.high-contrast .table-light,
+body.high-contrast .table thead th {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+    border-bottom: 2px solid #000 !important;
 }
 
-/* Dropdown */
+/* Dropdown / breadcrumb */
 body.high-contrast .dropdown-menu {
-    background: #000 !important;
-    border: 2px solid #ffeb3b !important;
+    background: #fff !important;
+    border: 2px solid #000 !important;
 }
 body.high-contrast .dropdown-divider {
-    border-top-color: #ffeb3b !important;
+    border-top-color: #000 !important;
+}
+body.high-contrast .breadcrumb {
+    background: transparent !important;
 }
 
-/* Linijos / horizontalūs skirtukai */
+/* Linijos */
 body.high-contrast hr {
-    border-top: 2px solid #ffeb3b !important;
+    border-top: 2px solid #000 !important;
     opacity: 1 !important;
 }
 
 /* Fokuso žymeklis ryškus */
 body.high-contrast :focus-visible {
-    outline: 3px solid #fff !important;
+    outline: 3px solid #0033cc !important;
     outline-offset: 3px !important;
 }
 
-/* Aktyvių filtrų čipai */
+/* Filtrų čipai */
 body.high-contrast .chip {
-    background: #000 !important;
-    color: #ffeb3b !important;
-    border: 2px solid #ffeb3b !important;
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    border: 2px solid #000 !important;
+    text-decoration: none !important;
 }
 body.high-contrast .chip-clear {
-    background: #ffeb3b !important;
-    color: #000 !important;
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+}
+
+/* Accessibility panelės elementai */
+body.high-contrast .accessibility-toggle {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #000 !important;
+}
+body.high-contrast .accessibility-toggle:hover {
+    background: #0033cc !important;
+}
+
+/* Vaizdams pridedamas plonas rėmas, kad neištrintų ant balto */
+body.high-contrast img {
+    border: 1px solid #000;
 }
 body.reduced-motion *,
 body.reduced-motion *::before,
