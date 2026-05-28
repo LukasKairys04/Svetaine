@@ -42,8 +42,14 @@
         </ol>
     </nav>
 
+    <button type="button" class="btn btn-outline-primary w-100 mb-3 d-lg-none shop-filters-toggle"
+            data-bs-toggle="collapse" data-bs-target="#shopFiltersWrap"
+            aria-expanded="false" aria-controls="shopFiltersWrap">
+        <i class="bi bi-funnel me-1"></i> Filtrai
+    </button>
+
     <div class="shop-layout">
-<aside class="shop-filters">
+<aside class="shop-filters collapse d-lg-block" id="shopFiltersWrap">
             <form method="GET" action="{{ route('shop.index') }}" id="shopFilters">
 <div class="filter-block">
                     <label class="filter-label">Paieška</label>

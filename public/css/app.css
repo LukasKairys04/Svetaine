@@ -2549,17 +2549,7 @@ a:hover { color: var(--fs-primary); }
     border-color: #cde2d4;
 }
 
-/* High Contrast Mode */
-body.high-contrast {
-    --fs-primary: #0066cc;
-    --fs-primary-dark: #004499;
-    --fs-bg: #ffffff;
-    --fs-ink: #000000;
-}
-body.high-contrast .medical-navbar {
-    background: #ffffff;
-    border-bottom: 3px solid #000;
-}
+/* High Contrast Mode — pilna versija žemiau (geltonas ant juodo) */
 
 /* Large Text Mode */
 body.large-text {
@@ -3751,3 +3741,514 @@ body {
     }
 }
 
+
+/* Accessibility improvements */
+:focus-visible {
+    outline: 3px solid #0d6efd !important;
+    outline-offset: 3px !important;
+}
+.accessibility-panel {
+    z-index: 1400 !important;
+}
+.accessibility-toggle {
+    width: 3.25rem !important;
+    height: 3.25rem !important;
+}
+.accessibility-toggle:focus-visible,
+.a11y-btn:focus-visible,
+.a11y-reset:focus-visible {
+    outline-color: #ffc107 !important;
+}
+.accessibility-menu {
+    max-width: min(92vw, 380px);
+}
+.a11y-option {
+    gap: 1rem;
+}
+.a11y-option label {
+    font-weight: 600;
+}
+.a11y-btn,
+.a11y-reset {
+    min-height: 38px;
+}
+/* === Aukšto kontrasto režimas (WCAG AAA: geltonas ant juodo, 19.5:1) === */
+body.high-contrast,
+body.high-contrast main,
+body.high-contrast section,
+body.high-contrast .container,
+body.high-contrast aside,
+body.high-contrast article,
+body.high-contrast div,
+body.high-contrast nav,
+body.high-contrast header,
+body.high-contrast footer,
+body.high-contrast .card,
+body.high-contrast .medical-product-card,
+body.high-contrast .checkout-section,
+body.high-contrast .checkout-aside,
+body.high-contrast .checkout-main,
+body.high-contrast .cart-summary-card,
+body.high-contrast .accessibility-menu,
+body.high-contrast .accessibility-panel,
+body.high-contrast .navbar,
+body.high-contrast .medical-navbar,
+body.high-contrast .footer-dark,
+body.high-contrast .empty-cart-card,
+body.high-contrast .empty-state-card,
+body.high-contrast .alert,
+body.high-contrast .dropdown-menu,
+body.high-contrast .modal-content,
+body.high-contrast .toast,
+body.high-contrast .breadcrumb,
+body.high-contrast table,
+body.high-contrast thead,
+body.high-contrast tbody,
+body.high-contrast tr,
+body.high-contrast td,
+body.high-contrast th,
+body.high-contrast .table,
+body.high-contrast .table-light,
+body.high-contrast .nutrition-label,
+body.high-contrast .review-item,
+body.high-contrast .filter-block,
+body.high-contrast .shop-filters,
+body.high-contrast .account-tabs,
+body.high-contrast .nav-pills,
+body.high-contrast .accessibility-toggle {
+    background: #000 !important;
+    background-color: #000 !important;
+    background-image: none !important;
+    color: #ffeb3b !important;
+    border-color: #ffeb3b !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Visi tekstiniai elementai — ryški geltona */
+body.high-contrast,
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast h5,
+body.high-contrast h6,
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast small,
+body.high-contrast label,
+body.high-contrast li,
+body.high-contrast dt,
+body.high-contrast dd,
+body.high-contrast strong,
+body.high-contrast em,
+body.high-contrast b,
+body.high-contrast i,
+body.high-contrast .lead,
+body.high-contrast .text-muted,
+body.high-contrast .small,
+body.high-contrast .text-dark,
+body.high-contrast .text-primary,
+body.high-contrast .text-success,
+body.high-contrast .text-danger,
+body.high-contrast .text-warning,
+body.high-contrast .text-info,
+body.high-contrast .text-secondary,
+body.high-contrast .badge,
+body.high-contrast .breadcrumb-item,
+body.high-contrast .form-text,
+body.high-contrast .invalid-feedback,
+body.high-contrast .form-label,
+body.high-contrast .card-title,
+body.high-contrast .card-text,
+body.high-contrast .card-category,
+body.high-contrast .card-price,
+body.high-contrast .product-reviews-mini,
+body.high-contrast .stars,
+body.high-contrast .rating,
+body.high-contrast .nav-link,
+body.high-contrast .navbar-brand,
+body.high-contrast .navbar-brand span,
+body.high-contrast .dropdown-item,
+body.high-contrast .review-title,
+body.high-contrast .review-comment,
+body.high-contrast .filter-title,
+body.high-contrast .filter-label,
+body.high-contrast .filter-radio,
+body.high-contrast .filter-check,
+body.high-contrast .price-hint,
+body.high-contrast .result-count,
+body.high-contrast .chip,
+body.high-contrast h4 span,
+body.high-contrast a {
+    color: #ffeb3b !important;
+    background-color: transparent !important;
+    -webkit-text-fill-color: #ffeb3b !important;
+}
+
+/* Nuorodos — pabraukimas privalomas */
+body.high-contrast a,
+body.high-contrast .nav-link,
+body.high-contrast .breadcrumb-item a,
+body.high-contrast .dropdown-item {
+    color: #ffeb3b !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px;
+}
+body.high-contrast a:hover,
+body.high-contrast a:focus,
+body.high-contrast .nav-link:hover {
+    color: #fff !important;
+    background: #1a1a1a !important;
+    text-decoration: underline !important;
+}
+body.high-contrast .nav-link.active {
+    color: #fff !important;
+    background: #333 !important;
+    border: 2px solid #ffeb3b !important;
+}
+
+/* Mygtukai — juodas fonas, geltonas rėmas + tekstas */
+body.high-contrast .btn,
+body.high-contrast button,
+body.high-contrast .a11y-btn,
+body.high-contrast .a11y-reset {
+    background: #000 !important;
+    color: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+body.high-contrast .btn:hover,
+body.high-contrast .btn:focus,
+body.high-contrast button:hover,
+body.high-contrast .a11y-btn:hover {
+    background: #ffeb3b !important;
+    color: #000 !important;
+    border-color: #ffeb3b !important;
+}
+body.high-contrast .btn-primary,
+body.high-contrast .a11y-btn.active,
+body.high-contrast .btn-primary:not(:disabled):not(.disabled) {
+    background: #ffeb3b !important;
+    color: #000 !important;
+    border: 2px solid #ffeb3b !important;
+    font-weight: 700;
+}
+body.high-contrast .btn-primary:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+body.high-contrast .btn-outline-primary,
+body.high-contrast .btn-outline-secondary,
+body.high-contrast .btn-outline-danger {
+    background: #000 !important;
+    color: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+}
+body.high-contrast .btn:disabled,
+body.high-contrast .btn.disabled {
+    opacity: .5 !important;
+}
+
+/* Formų laukai — juodas fonas, geltonas tekstas, geltonas rėmas */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select,
+body.high-contrast .form-control,
+body.high-contrast .form-select,
+body.high-contrast .search-input {
+    background: #000 !important;
+    color: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+    -webkit-text-fill-color: #ffeb3b !important;
+}
+body.high-contrast input::placeholder,
+body.high-contrast textarea::placeholder,
+body.high-contrast .form-control::placeholder {
+    color: #cccc00 !important;
+    opacity: 1 !important;
+}
+body.high-contrast input:focus,
+body.high-contrast textarea:focus,
+body.high-contrast select:focus {
+    outline: 3px solid #fff !important;
+    outline-offset: 2px;
+}
+body.high-contrast .form-check-input {
+    background: #000 !important;
+    border: 2px solid #ffeb3b !important;
+}
+body.high-contrast .form-check-input:checked {
+    background: #ffeb3b !important;
+    border-color: #ffeb3b !important;
+}
+
+/* Įspėjimai / žymos */
+body.high-contrast .alert {
+    background: #000 !important;
+    color: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+}
+body.high-contrast .badge,
+body.high-contrast .nav-icon-badge {
+    background: #ffeb3b !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    font-weight: 700;
+}
+
+/* Žvaigždutės ir ikonos — geltonos */
+body.high-contrast .bi,
+body.high-contrast i[class*="bi-"],
+body.high-contrast .stars,
+body.high-contrast .stars i,
+body.high-contrast .rating i {
+    color: #ffeb3b !important;
+}
+
+/* Vaizdai — šiek tiek pritildomi, kad netrukdytų skaitymui */
+body.high-contrast img {
+    filter: contrast(1.1) brightness(.9);
+    border: 2px solid #ffeb3b;
+}
+
+/* Hero ir produktų kortelių antraštės — be gradientų */
+body.high-contrast .medical-hero,
+body.high-contrast .hero-wrap,
+body.high-contrast .hero-inner {
+    background: #000 !important;
+    background-image: none !important;
+}
+body.high-contrast .medical-hero h1,
+body.high-contrast .medical-hero h1 span {
+    color: #ffeb3b !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #ffeb3b !important;
+}
+
+/* Lentelės */
+body.high-contrast .table > :not(caption) > * > * {
+    background: #000 !important;
+    color: #ffeb3b !important;
+    border-color: #ffeb3b !important;
+}
+
+/* Dropdown */
+body.high-contrast .dropdown-menu {
+    background: #000 !important;
+    border: 2px solid #ffeb3b !important;
+}
+body.high-contrast .dropdown-divider {
+    border-top-color: #ffeb3b !important;
+}
+
+/* Linijos / horizontalūs skirtukai */
+body.high-contrast hr {
+    border-top: 2px solid #ffeb3b !important;
+    opacity: 1 !important;
+}
+
+/* Fokuso žymeklis ryškus */
+body.high-contrast :focus-visible {
+    outline: 3px solid #fff !important;
+    outline-offset: 3px !important;
+}
+
+/* Aktyvių filtrų čipai */
+body.high-contrast .chip {
+    background: #000 !important;
+    color: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+}
+body.high-contrast .chip-clear {
+    background: #ffeb3b !important;
+    color: #000 !important;
+}
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+}
+body.reduced-motion .medical-product-card:hover,
+body.reduced-motion .accessibility-toggle:hover {
+    transform: none !important;
+}
+@media (max-width: 575.98px) {
+    .accessibility-panel {
+        left: .75rem !important;
+        bottom: .75rem !important;
+    }
+    .accessibility-menu {
+        left: 0 !important;
+        min-width: calc(100vw - 1.5rem) !important;
+        max-width: calc(100vw - 1.5rem) !important;
+        padding: 1rem !important;
+    }
+    .a11y-option {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* === Bendri mobilūs (telefono / mažo m dydžio) patobulinimai === */
+
+/* Navbar mobile search formos pločio kontrolė */
+.medical-navbar .mobile-search {
+    width: 100%;
+}
+.medical-navbar .mobile-search .search-input {
+    width: 100%;
+}
+
+/* Shop filtrai mobiliam: rodome kaip block, kai bootstrap collapse atveria */
+@media (max-width: 991.98px) {
+    .shop-filters.collapse:not(.show) {
+        display: none !important;
+    }
+    .shop-filters.collapse.show {
+        display: block !important;
+    }
+    .shop-filters {
+        position: static !important;
+        max-height: none !important;
+        margin-bottom: 1rem;
+    }
+    .shop-filters-toggle {
+        font-weight: 600;
+    }
+}
+
+/* Checkout: ant mažo ekrano informacijos kortelė po forma */
+@media (max-width: 991.98px) {
+    .checkout-card-split {
+        display: flex !important;
+        flex-direction: column;
+    }
+    .checkout-main {
+        order: 1;
+    }
+    .checkout-aside {
+        order: 2;
+    }
+}
+
+/* Krepšelio lentelė: jei netelpa, leidžiame slinkimą ir mažinam padding */
+@media (max-width: 575.98px) {
+    .table-responsive table {
+        font-size: .9rem;
+    }
+    .table-responsive td,
+    .table-responsive th {
+        padding: .55rem .4rem;
+    }
+    .cart-summary-card .card-body {
+        padding: 1rem;
+    }
+    .cart-summary-total {
+        font-size: 1.1rem !important;
+    }
+}
+
+/* Paskyros tabai — horizontalus scroll vietoj kelių eilučių */
+@media (max-width: 575.98px) {
+    .account-tabs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: .25rem;
+    }
+    .account-tabs .nav-item {
+        flex-shrink: 0;
+    }
+    .account-tabs .nav-link {
+        white-space: nowrap;
+    }
+}
+
+/* Produkto puslapis: užtikrinti, kad mažam ekrane info būtų pirma */
+@media (max-width: 991.98px) {
+    .product-reviews-block {
+        margin-top: 2rem;
+    }
+}
+
+/* Tap-target minimumas mobiliam (WCAG ≥ 44px) */
+@media (max-width: 575.98px) {
+    .btn,
+    .nav-link,
+    .form-control,
+    .form-select {
+        min-height: 42px;
+    }
+    .btn-sm {
+        min-height: 36px;
+    }
+    .navbar-toggler {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Hero ant telefono: mažesnė padangos */
+@media (max-width: 575.98px) {
+    .medical-hero {
+        padding: 2rem 0 1.5rem !important;
+        text-align: center;
+    }
+    .medical-hero h1 {
+        font-size: 1.6rem !important;
+        line-height: 1.25;
+    }
+    .medical-hero .lead {
+        font-size: .95rem;
+    }
+}
+
+/* Produkto kortelės žvaigždutės ir kaina – kompaktiškiau */
+@media (max-width: 575.98px) {
+    .medical-product-card .card-title {
+        font-size: .95rem !important;
+    }
+    .medical-product-card .card-price {
+        font-size: 1rem;
+    }
+    .product-reviews-mini {
+        font-size: .8rem;
+    }
+}
+
+/* Footer mobile: centruoti linkai */
+@media (max-width: 575.98px) {
+    .footer-minimal .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .75rem 1rem;
+    }
+}
+
+/* Accessibility panelės mygtukas ant telefono – paprastesnė pozicija */
+@media (max-width: 575.98px) {
+    .accessibility-toggle {
+        width: 2.85rem !important;
+        height: 2.85rem !important;
+        font-size: 1.1rem !important;
+    }
+}
+
+/* Toast pranešimai – kad neuždengtų accessibility mygtuko */
+@media (max-width: 575.98px) {
+    .toast-container.position-fixed.bottom-0.end-0 {
+        bottom: 5rem !important;
+        padding: .5rem !important;
+    }
+    .toast-container .toast {
+        max-width: calc(100vw - 1rem);
+    }
+}

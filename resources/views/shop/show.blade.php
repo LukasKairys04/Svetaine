@@ -30,7 +30,7 @@
 
     <div class="row g-5">
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 order-1">
             <div class="rounded-4 shadow-sm d-flex align-items-center justify-content-center overflow-hidden" style="background:#f5f5f5;min-height:350px;">
                 @if($product->image)
                     <img src="{{ $product->image }}" alt="{{ $product->name }}" style="width:100%;height:420px;object-fit:cover;">
@@ -39,7 +39,7 @@
                 @endif
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 product-reviews-block">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3 class="m-0">Atsiliepimai @if($reviewsCount)<span class="text-muted fs-6">({{ $reviewsCount }})</span>@endif</h3>
                     <div class="rating fs-5">
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 order-0 order-lg-2">
             <div class="small text-muted">{{ $product->brand }}</div>
             <h1 class="fw-bold">{{ $product->name }}</h1>
 

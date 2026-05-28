@@ -10,6 +10,10 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
+            <form class="d-lg-none deep-search mobile-search mb-2" role="search" method="GET" action="{{ route('shop.index') }}">
+                <input type="search" name="q" value="{{ request('q') }}" class="search-input" placeholder="Ieškoti produktų..." aria-label="Paieška">
+                <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
+            </form>
 <ul class="navbar-nav mx-lg-auto align-items-lg-center">
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('home')) active @endif" href="{{ route('home') }}">Pradžia</a>
