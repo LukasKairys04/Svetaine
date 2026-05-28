@@ -92,7 +92,7 @@
                 <a href="https://pubmed.ncbi.nlm.nih.gov/36196347/" target="_blank" rel="noopener">Skaityti</a>
             </li>
             <li>
-                <strong>Androulakis-Korakakis P ir kt. (2024).</strong>
+                <strong>Singer A ir kt. (2024).</strong>
                 Give it a rest: a systematic review with Bayesian meta-analysis on the effect of
                 inter-set rest interval duration on muscle hypertrophy.
                 <em>Frontiers in Sports and Active Living.</em>

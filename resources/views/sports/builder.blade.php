@@ -196,7 +196,7 @@
 
                 <p>Raumenų augimui poilsio trukmė daro realią įtaką progresui, todėl plane ją sekame atskirai.</p>
 
-                <span>Androulakis-Korakakis et al., 2024</span>
+                <span>Singer et al., 2024</span>
 
             </a>
 
