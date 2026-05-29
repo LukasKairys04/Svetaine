@@ -220,13 +220,13 @@
 
             </a>
 
-            <a class="evidence-item" href="https://pubmed.ncbi.nlm.nih.gov/36196347/" target="_blank" rel="noopener">
+            <a class="evidence-item" href="https://www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2022.949021/full" target="_blank" rel="noopener">
 
-                <h6>Fizinio pajėgumo vertinimas</h6>
+                <h6>Treniruočių plano kintamieji</h6>
 
-                <p>Anaerobinio pajėgumo vertinimas gali būti atliekamas taikant sportui artimus lauko testus.</p>
+                <p>Treniruočių plane svarbu įvertinti krūvį, pratimų pasirinkimą, treniruočių dažnį ir bendrą treniruočių apimtį.</p>
 
-                <span>Parnow et al., 2022</span>
+                <span>Bernárdez-Vázquez et al., 2022</span>
 
             </a>
 
