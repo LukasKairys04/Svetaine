@@ -28,7 +28,6 @@ class HomeController extends Controller
         ];
 
         return view('home', [
-            // pagrindiniame puslapi rodomos 3 aktyvios pagrindinės produktų kategorijos.
             'categories' => Category::active()->type('product')
                 ->whereNull('parent_id')
                 ->whereNotIn('slug', ['mityba', 'sportas'])
@@ -36,7 +35,6 @@ class HomeController extends Controller
                 ->take(3)
                 ->get(),
 
-            // išskirtiniai ir geriausiai įvertinti produktai pagrindinio puslapio blokams.
             'featured' => Product::active()->with('category.parent')->featured()->latest()->take(8)->get(),
             'topRated' => Product::active()->with('category.parent')
                 ->where('rating_count', '>', 0)

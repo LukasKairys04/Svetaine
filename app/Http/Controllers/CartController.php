@@ -12,12 +12,10 @@ class CartController extends Controller
     {
         $items = $krepselis->items();
 
-        // paimami krepšelyje esančių produktų ir kategorijų id
         $cartProductIds  = $items->pluck('product.id');
         $cartCategoryIds = \App\Models\Product::whereIn('id', $cartProductIds)
             ->pluck('category_id')->filter()->unique();
 
-        // parenkami rekomenduojami produktai pagal tas pačias kategorijas
         $suggestions = \App\Models\Product::query()
             ->where('is_active', true)
             ->where('stock', '>', 0)
@@ -37,7 +35,6 @@ class CartController extends Controller
 
     public function add(Request $request, CartService $krepselis)
     {
-        // patikrinama ar produktas egzistuoja ir kiekis yra tinkamas
         $data = $request->validate([
             'product_id' => 'required|exists:products,id',
             'qty'        => 'nullable|integer|min:1|max:99',
@@ -54,7 +51,6 @@ class CartController extends Controller
 
     public function update(Request $request, CartService $krepselis)
     {
-        // patikrinamas produkto id ir naujas kiekis
         $data = $request->validate([
             'product_id' => 'required|exists:products,id',
             'qty'        => 'required|integer|min:0|max:99',
@@ -71,7 +67,6 @@ class CartController extends Controller
 
     public function remove(Request $request, CartService $krepselis)
     {
-        // patikrinama, kuri prekė turi būti pašalinta
         $data = $request->validate(['product_id' => 'required|exists:products,id']);
 
         $krepselis->remove($data['product_id']);
@@ -80,10 +75,7 @@ class CartController extends Controller
 
     public function applyPromo(Request $request, CartService $krepselis)
     {
-        // patikrinamas įvestas promo kodas
         $data  = $request->validate(['code' => 'nullable|string|max:50']);
-
-        // bandoma pritaikyti promo kodą
         $promo = $krepselis->setPromo($data['code'] ?? null);
 
         if ($data['code'] ?? null) {

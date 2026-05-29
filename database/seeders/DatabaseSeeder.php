@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             ReviewSeeder::class,
             TestimonialSeeder::class,
-            SupportMessageSeeder::class,
             PromoCodeSeeder::class,
             NutritionSeeder::class,
             SportSeeder::class,

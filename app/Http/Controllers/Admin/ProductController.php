@@ -13,10 +13,8 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        // rodomas produktų sąrašas su kategorija
         $query = Product::with('category');
 
-        // paieška pagal pavadinimą, brandą, slug arba trumpą aprašymą
         if ($q = $request->input('q')) {
             $query->where(fn($w) => $w
                 ->where('name', 'like', "%{$q}%")
@@ -25,7 +23,6 @@ class ProductController extends Controller
                 ->orWhere('short_description', 'like', "%{$q}%"));
         }
 
-        // filtrai pagal kategoriją, statusą, featured ir likutį
         if ($cat = $request->input('category_id')) $query->where('category_id', $cat);
         if ($request->filled('status')) $query->where('is_active', $request->input('status') === 'active');
         if ($request->filled('featured')) $query->where('featured', $request->input('featured') === '1');
@@ -43,7 +40,6 @@ class ProductController extends Controller
 
     public function create()
     {
-        // naujo produkto forma su pradinėmis reikšmėmis
         return view('admin.products.form', [
             'product' => new Product(['is_active' => true, 'stock' => 0, 'rating' => 0]),
             'categories' => Category::where('type', 'product')->orderBy('name')->get(),
@@ -52,7 +48,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // sukuriamas naujas produktas
         $data = $this->validated($request);
         Product::create($data);
 
@@ -61,7 +56,6 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        // produkto redagavimo forma
         return view('admin.products.form', [
             'product' => $product,
             'categories' => Category::where('type', 'product')->orderBy('name')->get(),
@@ -70,7 +64,6 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        // atnaujinamas pasirinktas produktas
         $data = $this->validated($request, $product);
         $product->update($data);
 
@@ -79,7 +72,6 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // ištrinamas pasirinktas produktas
         $product->delete();
 
         return back()->with('success', 'Produktas pašalintas.');
@@ -89,7 +81,6 @@ class ProductController extends Controller
     {
         $id = $product?->id;
 
-        // bendras produkto validavimas kūrimui ir redagavimui
         $data = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
@@ -118,19 +109,15 @@ class ProductController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        // jei slug neįvestas, jis sugeneruojamas iš produkto pavadinimo
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
 
-        // numatytos reikšmės, jei jos nebuvo įvestos
         $data['rating'] = $data['rating'] ?? 0;
         $data['rating_count'] = $data['rating_count'] ?? 0;
         $data['stock'] = $data['stock'] ?? 0;
 
-        // checkbox reikšmės paverčiamos į true/false
         $data['featured'] = $request->boolean('featured');
         $data['is_active'] = $request->boolean('is_active');
 
-        // jei įkeltas paveikslėlis, jis apdorojamas ir išsaugomas
         if ($request->hasFile('image_file')) {
             $data['image'] = AdminImage::store($request->file('image_file'), 'products', 800, 800);
         }

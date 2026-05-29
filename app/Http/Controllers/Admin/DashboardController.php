@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\SupportMessage;
 use App\Models\Testimonial;
 use App\Models\User;
 
@@ -19,7 +18,6 @@ class DashboardController extends Controller
                 'users' => User::count(),
                 'orders' => Order::count(),
                 'revenue' => Order::where('payment_status', 'paid')->sum('total'),
-                'pending_support' => SupportMessage::where('status', 'new')->count(),
                 'pending_testimonials' => Testimonial::where('approved', false)->count(),
             ],
             'orderStatus' => [

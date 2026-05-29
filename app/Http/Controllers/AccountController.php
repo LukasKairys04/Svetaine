@@ -19,7 +19,6 @@ class AccountController extends Controller
 
     public function update(Request $request)
     {
-        // atnaujinama vartotojo paskyros informacija
         $user = Auth::user();
 
         $data = $request->validate([
@@ -53,7 +52,6 @@ class AccountController extends Controller
 
     public function password(Request $request)
     {
-        // pakeičiamas slaptažodis, prieš tai patikrinus seną
         $user = Auth::user();
 
         $data = $request->validate([
@@ -67,7 +65,6 @@ class AccountController extends Controller
 
     public function orders()
     {
-        // rodomas prisijungusio vartotojo užsakymų sąrašas
         return view('account.orders', [
             'orders' => Order::where('user_id', Auth::id())->latest()->paginate(10),
         ]);
@@ -75,7 +72,6 @@ class AccountController extends Controller
 
     public function order(Order $uzsakymas)
     {
-        // vartotojas gali matyti tik savo užsakymą
         if ($uzsakymas->user_id !== Auth::id()) abort(403);
 
         $uzsakymas->load('items.product');
@@ -84,14 +80,12 @@ class AccountController extends Controller
 
     public function destroy(Request $request)
     {
-        // paskyra ištrinama tik patvirtinus slaptažodį
         $user = Auth::user();
 
         $request->validate([
             'password' => 'required|current_password',
         ]);
 
-        // po ištrynimo vartotojas atjungiamas ir sesija išvaloma
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

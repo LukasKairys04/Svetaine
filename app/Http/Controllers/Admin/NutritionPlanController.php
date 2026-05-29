@@ -12,7 +12,6 @@ class NutritionPlanController extends Controller
 {
     public function index()
     {
-        // rodomas mitybos planų sąrašas admin panelėje
         $plans = NutritionPlan::with('goal')->latest()->paginate(20);
 
         return view('admin.nutrition.index', compact('plans'));

@@ -57,16 +57,13 @@ class CheckoutController extends Controller
         }
 
         try {
-            // papildomai patikrinama ar krepšelis dar nėra tuščias
             if ($krepselis->count() === 0) {
                 return redirect()->route('shop.index')->with('error', 'Krepšelis tuščias.');
             }
 
-            // pasiimamos prekės ir sumų suvestinė
             $items = $krepselis->items();
             $summary = $krepselis->summary();
 
-            // užsakymas ir jo prekės sukuriami vienoje db transakcijoje
             $order = DB::transaction(function () use ($data, $items, $summary, $krepselis) {
                 $lockedProducts = Product::whereIn('id', $items->pluck('product_id'))
                     ->lockForUpdate()
@@ -96,7 +93,6 @@ class CheckoutController extends Controller
                     'paid_at' => now(),
                 ]));
 
-                // kiekviena krepšelio prekė įrašoma kaip užsakymo eilutė
                 foreach ($items as $item) {
                     $product = $lockedProducts->get($item->product_id);
 
@@ -112,7 +108,6 @@ class CheckoutController extends Controller
                     $product->decrement('stock', $item->qty);
                 }
 
-                // jei naudotas promo kodas, padidinamas jo panaudojimų skaičius
                 if ($summary['promo']) {
                     $summary['promo']->increment('used_count');
                 }
@@ -133,12 +128,10 @@ class CheckoutController extends Controller
 
     public function success(Order $order)
     {
-        // neleidžia vartotojui matyti svetimo užsakymo, nebent jis admin
         if (Auth::check() && $order->user_id && $order->user_id !== Auth::id() && !Auth::user()->is_admin) {
             abort(403);
         }
 
-        // įkeliamos užsakymo prekės ir parodomas sėkmės puslapis
         $order->load('items');
         return view('checkout.success', compact('order'));
     }

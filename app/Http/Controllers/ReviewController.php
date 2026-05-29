@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-    // paprastas netinkamų žodžių sąrašas atsiliepimų filtrui
     protected array $profanity = ['fuck','shit','ass','bitch','damn','dick','pussy','cunt','bastard','šūdas','pist','šikt','sūdas','debile','idiote','kvailys'];
 
     public function store(Request $request, OrderItem $orderItem)
@@ -26,30 +25,25 @@ class ReviewController extends Controller
 
         $product = $orderItem->product;
 
-        // patikrinami atsiliepimo duomenys
         $data = $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'title' => 'nullable|string|max:150',
             'comment' => 'required|string|min:5|max:2000',
         ]);
 
-        // komentaras ir pavadinimas paverčiami mažosiomis raidėmis tikrinimui
         $text = mb_strtolower($data['comment'] . ' ' . ($data['title'] ?? ''));
 
-        // tikrinama, ar atsiliepime nėra netinkamų žodžių
         foreach ($this->profanity as $word) {
             if (str_contains($text, $word)) {
                 return back()->withErrors(['comment' => 'Atsiliepime rastas netinkamas žodis.'])->withInput();
             }
         }
 
-        // sukuriamas arba atnaujinamas vartotojo atsiliepimas šiam produktui
         Review::updateOrCreate(
             ['product_id' => $product->id, 'user_id' => Auth::id()],
             array_merge($data, ['approved' => true])
         );
 
-        // perskaičiuojamas produkto reitingo vidurkis ir atsiliepimų kiekis
         $avg = $product->reviews()->avg('rating');
         $count = $product->reviews()->count();
         $product->update([

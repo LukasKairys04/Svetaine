@@ -10,13 +10,11 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        // pradinė produktų užklausa katalogui
         $query = Product::active()
             ->with('category.parent')
             ->withCount('reviews')
             ->withAvg('reviews', 'rating');
 
-        // filtras pagal pagrindinę kategoriją 
         if ($slug = $request->string('category')->toString()) {
             $cat = Category::where('slug', $slug)->first();
             if ($cat) {
@@ -30,7 +28,6 @@ class ShopController extends Controller
             if ($sub) $query->where('category_id', $sub->id);
         }
 
-        // paieška pagal pavadinimą, brand arba trumpą aprašymą
         if ($q = $request->string('q')->toString()) {
             $query->where(function ($w) use ($q) {
                 $w->where('name', 'like', "%{$q}%")
@@ -39,7 +36,6 @@ class ShopController extends Controller
             });
         }
 
-        // kiti filtrai: kaina, reitingas, likutis, akcija ir brands
         if ($min = $request->input('min_price')) $query->where('price', '>=', (float) $min);
         if ($max = $request->input('max_price')) $query->where('price', '<=', (float) $max);
 
@@ -54,7 +50,6 @@ class ShopController extends Controller
             $query->whereIn('brand', $selectedBrands);
         }
 
-        // rūšiavimas pagal pasirinktą kriterijų
         $sort = $request->input('sort', 'popular');
         match ($sort) {
             'price_asc' => $query->orderBy('price'),
@@ -66,7 +61,6 @@ class ShopController extends Controller
 
         $products = $query->paginate(12)->withQueryString();
 
-        // duomenys filtrų meniu šone
         $categories = Category::active()->type('product')
             ->whereNull('parent_id')
             ->with(['children' => fn ($q) => $q->active()->orderBy('sort_order')
@@ -99,7 +93,6 @@ class ShopController extends Controller
             return response()->json(['results' => []]);
         }
 
-        // greita paieška produktų pasiūlymams
         $products = Product::active()
             ->where(function ($w) use ($q) {
                 $w->where('name', 'like', "%{$q}%")
